@@ -14,6 +14,7 @@ default_view:
     - binary_sensor.motion_sensor_158d000120cce2
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
+    - sensor.cpu_used
 
     - group.lounge_lights
     - group.ten_forward_lights
@@ -36,6 +37,8 @@ tab_info:
     - binary_sensor.motion_sensor_158d000120cce2
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
+    - sensor.cpu_used
+
     - group.items_time
     - group.items_presence
     - group.items_bom_sydney
@@ -55,6 +58,7 @@ tab_lounge:
     - binary_sensor.motion_sensor_158d000120cce2
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
+    - sensor.cpu_used
 
     - group.items_entertainment
     - group.items_channel
@@ -74,6 +78,7 @@ tab_kitchen:
     - binary_sensor.motion_sensor_158d000120cce2
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
+    - sensor.cpu_used
 
     - group.kitchen_lights
     - media_player.kitchen_speaker
@@ -84,9 +89,18 @@ tab_kitchen:
 items_server:
   name: Server Status
   entities:
-    - sensor.cpu_temperature
+    - sensor.cpuspeed
     - sensor.cpu_used
+    - sensor.cpu_temperature
     - sensor.ram_available
+    - sensor.ram_free
+    - sensor.swap_available
+    - sensor.swap_free
+    - sensor.average_load_1m
+    - sensor.average_load_5m
+    - sensor.disk_used_
+    - sensor.disk_used_mntmediaa
+    - sensor.disk_used_mntmediab
 
 items_entertainment:
   name: Entertainment Power
