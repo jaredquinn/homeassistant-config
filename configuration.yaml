@@ -60,7 +60,7 @@ duckdns:
 config:
 
 influxdb:
-  host: 127.0.0.1
+  host: !secret mqtt_broker_host
   database: homeassistant
   default_measurement: state
 
@@ -95,7 +95,7 @@ mqtt:
   discovery: true
 
 xiaomi_aqara:
-  interface: !secret xiaomi_interface
+  interface: !secret iot_interface
   discovery_retry: 3
   gateways:
     - mac: !secret xiaomi_mac
@@ -118,12 +118,15 @@ keyboard_remote:
 tts:
   - platform: google
 
+device_tracker:
+  - platform: ping
+    hosts: !include secret/ping_hosts.yaml
+
 media_player: !include media_player.yaml
 sensor: !include sensor.yaml
 switch: !include switch.yaml
 light: !include light.yaml
 automation: !include automations.yaml
-device_tracker: !include device_tracker.yaml
 input_select: !include input_select.yaml
 group: !include groups.yaml
 script: !include scripts.yaml

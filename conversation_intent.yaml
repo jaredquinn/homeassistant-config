@@ -1,0 +1,17 @@
+AMAZON.HelpIntent:
+  - "help"
+  - "what can you do"
+
+TemperatureIntent:
+  - "temperature"
+
+StatusReportIntent:
+  - "status report"
+
+change_channel:
+  - "Channel {channel}"
+  - "Watch TV {channel}"
+  - "TV channel {channel}"
+  - "Watch channel {channel}"
+
+

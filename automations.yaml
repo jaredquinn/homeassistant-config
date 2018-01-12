@@ -1,0 +1,593 @@
+
+# MQTT Trigger for Feeding Fish
+#
+- alias: 'Fish Night Feed Light Off'
+  trigger:
+    - platform: mqtt
+      topic: fishmon/tank1/feeding
+      payload: 'FED'
+
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+
+  action:
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kitchen_speaker
+        message: Fish Light will be turned off in five minutes.
+    - service: notify.facebook_notifications
+      data:
+        message: "Fish Light will be turned off in five minutes"
+        target: !include secret/alarm_facebook_alerts.yaml
+    - delay: '00:05:00'
+    - service: switch.turn_off
+      entity_id: switch.fish_lamp
+    - service: notify.facebook_notifications
+      data:
+        message: "Fish Light has been turned off"
+        target: !include secret/alarm_facebook_alerts.yaml
+            
+# Used before I got CEC working the Chromecast
+# 
+#- alias: chromecast_playing
+#  trigger:
+#    - platform: state
+#      entity_id: media_player.laircast
+#      to: 'playing'
+#  action:
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.tv_source
+#        option: 'Chromecast'
+#
+- alias: change_tv_channel
+
+  trigger:
+    - platform: state
+      entity_id: input_select.tv_channel
+
+  action:
+
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.tv_source
+        option: 'Fetch TV'
+
+    - service: python_script.remote_control
+      data_template:
+        command: "channel"
+        selected: "{{ trigger.to_state.state }}"
+
+
+- alias: change_tv_source
+
+  trigger:
+    - platform: state
+      entity_id: input_select.tv_source
+
+  action:
+    - service: python_script.remote_control
+      data_template:
+        command: "source"
+        selected: "{{ trigger.to_state.state }}"
+
+#
+# Kitchen Lights
+#
+- alias: kitchen_auto_lights_off
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light
+      state: 'on'
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 60
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: single
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_light
+
+
+- alias: kitchen_auto_lights_on
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 60
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: single
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_light
+        brightness_pct: 100
+
+
+# Hallway Light
+- alias: hallway_auto_light_off
+  condition:
+    - condition: state
+      entity_id: light.hallway_light
+      state: 'on'
+
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 59
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: double
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: double
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_light
+
+
+- alias: hallway_auto_light_on
+  condition:
+    - condition: state
+      entity_id: light.hallway_light
+      state: 'off'
+
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 59
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: double
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: double
+
+  action:
+
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_light
+        color_name: white
+        brightness_pct: 100
+
+#
+# Dining Light
+# 
+- alias: dining_auto_light_off
+
+  condition:
+    - condition: state
+      entity_id: light.dining_light
+      state: 'on'
+
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 14
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: double
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: double
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.dining_light
+
+
+- alias: dining_auto_light_on
+
+  condition:
+    - condition: state
+      entity_id: light.dining_light
+      state: 'off'
+
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 14
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: double
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: double
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_light
+        color_name: white
+        brightness_pct: 100
+
+#
+# Lounge Lights
+#
+- alias: lounge_light_auto_off
+  condition:
+    - condition: state
+      entity_id: light.lounge_light
+      state: 'on'
+
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 28
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: single
+
+  action:
+
+    - service: light.turn_off
+      data:
+        entity_id: light.lounge_light
+
+    - service: light.turn_off
+      data:
+        entity_id: light.lounge_light_extra
+
+
+- alias: lounge_light_auto_on
+  condition:
+    - condition: state
+      entity_id: light.lounge_light
+      state: 'off'
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 28
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: single
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.lounge_light
+        color_name: 'yellow'
+        brightness_pct: 100
+
+
+# Kitchen Button Long Press
+#
+- alias: kitchen_button_long_click_off
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: 'disarmed'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: long_click_press
+
+  action:
+    service: alarm_control_panel.alarm_arm_home
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: !secrets alarm_control_code
+
+- alias: kitchen_button_long_click_on
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'armed_away'
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'armed_home'
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: long_click_press
+  action:
+    service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: !secrets alarm_control_code
+
+# Entry Button Long Press
+#
+- alias: entry_button_long_click_off
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: 'disarmed'
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: long_click_press
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: !secrets alarm_control_code
+
+- alias: entry_button_long_click_on
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'armed_away'
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'armed_home'
+
+  trigger:
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: long_click_press
+  action:
+    service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: !secrets alarm_control_code
+
+- alias: gateway_light_change_off
+  condition:
+    - condition: state
+      entity_id: light.gateway_light_286c07f0a0c6
+      state: 'on'
+  trigger:
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 61
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.gateway_light_286c07f0a0c6
+
+- alias: gateway_light_change_on
+  condition:
+    - condition: state
+      entity_id: light.gateway_light_286c07f0a0c6
+      state: 'off'
+  trigger:
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 61
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.gateway_light_286c07f0a0c6
+
+
+# ALARM 
+#
+- alias: alarm_home
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: 'armed_home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001d6360a
+    to: 'on'
+  action:
+    service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
+
+- alias: alarm_away
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: 'armed_away'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001d6360a
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d000120cce2
+      to: 'on'
+  action:
+    service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
+
+- alias: 'Alarm Home Armed'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'armed_home'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 11
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: pink
+        brightness_pct: 20
+    - service: notify.facebook_notifications
+      data:
+        message: "The alarm has been armed HOME"
+        target:
+        target: !include secret/alarm_facebook_alerts.yaml
+
+- alias: 'Alarm Away Armed'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'armed_away'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 12
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: red
+        brightness_pct: 100
+    - service: notify.facebook_notifications
+      data:
+        message: "The alarm has been armed AWAY"
+        target: !include secret/alarm_facebook_alerts.yaml
+
+- alias: 'Alarm Disarm'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'disarmed'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 10
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: green
+        brightness_pct: 100
+        transition: 2
+    - service: light.turn_off
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        transition: 2
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: green
+        brightness_pct: 100
+        transition: 2
+    - service: light.turn_off
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        transition: 2
+    - service: notify.facebook_notifications
+      data:
+        message: "The alarm has been disarmed"
+        target: !include secret/alarm_facebook_alerts.yaml
+
+- alias: 'Send notification when alarm triggered'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'triggered'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 3
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: red
+        brightness: 255
+    - service: light.turn_on
+      entity_id: light.lounge_light
+      data:
+        effect: Alarm
+        brightness: 255
+    - service: light.turn_on
+      entity_id: light.kitchen_light
+      data:
+        effect: Alarm
+        brightness: 255
+    - service: notify.facebook_notifications
+      data:
+        message: "The alarm has been triggered"
+        target: !include secret/alarm_facebook_alerts.yaml
+
+# START STOP
+#
+# StarDate comes from custom patch to sensor.time_date
+- alias: ha_startup
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: Ding Dong.  Home Assistant is online at stardate {{ states.sensor.stardate.state }} before federation.
+
+# Only ever gets partially runned, will fix this one day.
+- alias: ha_shutdown
+  trigger:
+    - platform: homeassistant
+      event: shutdown
+  action:
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kitchen_speaker
+        message: Goodbye.  Home Assistant is going offline.
+

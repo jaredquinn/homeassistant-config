@@ -1,0 +1,11 @@
+
+- platform: cast
+  host: !secret player_cast_kitchen_ip
+
+- platform: cast
+  host: !secret player_cast_lounge_ip
+
+- platform: roku
+  host: !secret player_roku_ip
+  name: Lounge Roku
+

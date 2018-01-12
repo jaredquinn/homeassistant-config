@@ -1,0 +1,227 @@
+# TABS
+default_view:
+  view: yes
+  name: CatsLair
+  icon: mdi:home
+  entities:
+    - sun.sun
+    - alarm_control_panel.ha_alarm
+    - device_tracker.jared_oppo
+    - device_tracker.chelsea_s4
+    - sensor.kitchen_temperature
+    - sensor.temperature_158d0001c15683  
+    - sensor.humidity_158d0001c15683
+    - binary_sensor.motion_sensor_158d000120cce2
+    - binary_sensor.door_window_sensor_158d0001d6360a
+    - sensor.illumination_286c07f0a0c6 
+
+    - group.lounge_lights
+    - group.ten_forward_lights
+    - group.kitchen_lights
+    - group.items_pets
+    - group.items_living
+    - group.items_laundry
+    - group.items_modes
+
+tab_info:
+  view: yes
+  name: Info
+  icon: mdi:image-multiple
+  entities:
+    - sun.sun
+    - alarm_control_panel.ha_alarm
+    - sensor.kitchen_temperature
+    - sensor.temperature_158d0001c15683  
+    - sensor.humidity_158d0001c15683
+    - binary_sensor.motion_sensor_158d000120cce2
+    - binary_sensor.door_window_sensor_158d0001d6360a
+    - sensor.illumination_286c07f0a0c6 
+    - group.items_time
+    - group.items_presence
+    - group.items_bom_sydney
+    - group.items_forecast
+    - group.items_server
+
+tab_lounge:
+  name: Lounge Room
+  icon: mdi:speaker-wireless
+  view: yes
+  entities:
+    - sun.sun
+    - alarm_control_panel.ha_alarm
+    - sensor.kitchen_temperature
+    - sensor.temperature_158d0001c15683  
+    - sensor.humidity_158d0001c15683
+    - binary_sensor.motion_sensor_158d000120cce2
+    - binary_sensor.door_window_sensor_158d0001d6360a
+    - sensor.illumination_286c07f0a0c6 
+
+    - group.items_entertainment
+    - group.items_channel
+    - group.lounge_lights
+    - group.other_lights_entertainment
+    - group.items_living
+
+tab_kitchen:
+  view: yes
+  name: Kitchen
+  icon: mdi:food-fork-drink
+  entities:
+    - alarm_control_panel.ha_alarm
+    - sensor.kitchen_temperature
+    - sensor.temperature_158d0001c15683  
+    - sensor.humidity_158d0001c15683
+    - binary_sensor.motion_sensor_158d000120cce2
+    - binary_sensor.door_window_sensor_158d0001d6360a
+    - sensor.illumination_286c07f0a0c6 
+
+    - group.kitchen_lights
+    - media_player.kitchen_speaker
+    - group.other_lights_kitchen
+    - group.items_pets
+    - group.items_laundry
+
+items_server:
+  name: Server Status
+  entities:
+    - sensor.cpu_temperature
+    - sensor.cpu_used
+    - sensor.ram_available
+
+items_entertainment:
+  name: Entertainment Power
+  entities:
+    - switch.tv
+    - switch.pioneer
+    - switch.fetchtv
+
+items_channel:
+  name: Entertainment Selection
+  entities:
+    - switch.audio
+    - input_select.tv_channel
+    - input_select.tv_source
+    - media_player.laircast
+    - media_player.lounge_roku
+
+items_time:
+  name: Time
+  entities:
+    - sensor.date
+    - sensor.time       
+    - sensor.time_utc
+    - sensor.internet_time    
+    - sensor.stardate
+
+items_living:
+  name: Living Room
+  entities:
+    - switch.fan
+
+items_pets:
+  name: Pets
+  entities:
+    - switch.fish_lamp
+    - automation.fish_night_feed_light_off
+
+items_laundry:
+  name: Laundry
+  entities:
+    - switch.washing_machine
+
+items_presence:
+  name: Who's Home
+  entities:
+    - device_tracker.jared_oppo
+    - device_tracker.chelsea_s4
+
+items_bom_sydney:
+  name: Sydney Weather
+  entities:
+    - sensor.bom_sydney_weather
+    - sensor.bom_sydney_air_temp_c
+    - sensor.bom_sydney_feels_like_c
+    - sensor.bom_sydney_relative_humidity
+    - sensor.bom_sydney_rain_today
+    - sensor.bom_sydney_delta_temp_c
+    - sensor.bom_sydney_dew_point_c
+    - sensor.bom_sydney_pressure_mb
+    - sensor.bom_sydney_pressure_msl
+    - sensor.bom_sydney_pressure_qnh
+    - sensor.bom_sydney_pressure_trend
+    - sensor.bom_sydney_wind_direction
+    - sensor.bom_sydney_wind_direction_kt
+    - sensor.bom_sydney_wind_gust_kmh
+    - sensor.bom_sydney_wind_gust_kt
+    - sensor.bom_sydney_wind_speed_kmh
+    - sensor.bom_sydney_cloud
+    - sensor.bom_sydney_cloud_base
+    - sensor.bom_sydney_cloud_oktas
+    - sensor.bom_sydney_cloud_type
+    - sensor.bom_sydney_cloud_type_id
+    - sensor.bom_sydney_sea_state
+    - sensor.bom_sydney_swell_direction
+    - sensor.bom_sydney_swell_height
+    - sensor.bom_sydney_swell_period
+    - sensor.bom_sydney_visability_km
+
+
+items_forecast:
+  name: Forecast
+  entities:
+    - sensor.forecast_temperature
+    - sensor.forecast_pressure
+    - sensor.forecast_humidity
+    - sensor.forecast_precipitation
+    - sensor.forecast_symbol
+    - sensor.forecast_wind_direction
+    - sensor.forecast_wind_speed
+    - sensor.forecast_cloudiness
+    - sensor.forecast_low_clouds
+    - sensor.forecast_medium_clouds
+    - sensor.forecast_high_clouds
+    - sensor.forecast_fog
+    - sensor.forecast_dewpoint
+    - sensor.forecast_dewpoint_temperature
+
+items_modes:
+  name: Modes
+  entities:
+    - scene.full_illumination
+    - scene.tv_time
+    - scene.nighthawk
+    - scene.red_alert
+    - scene.darkness
+    - scene.party
+
+other_lights_kitchen:
+  name: Other Light Groups
+  entities:
+    - group.lounge_lights
+    - group.ten_forward_lights
+
+other_lights_entertainment:
+  name: Other House Lights
+  entities:
+    - group.kitchen_lights
+    - group.ten_forward_lights
+
+# LIGHT GROUPS
+lounge_lights:
+  name: Lounge Room Lights
+  entities:
+    - light.lounge_light
+    - light.lounge_light_extra
+
+ten_forward_lights:
+  name: Ten Forward Lights
+  entities:
+    - light.dining_light
+    - light.hallway_light
+
+kitchen_lights:
+  name: Kitchen Lights
+  entities:
+    - light.kitchen_light_daylight
+    - light.kitchen_light
+    - light.gateway_light_286c07f0a0c6

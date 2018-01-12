@@ -1,0 +1,114 @@
+sensor.broadlink_sensor_temperature:
+  friendly_name: Kitchen Temperature
+media_player.kitchen_speaker:
+  google_assistant: false
+group.tab_lounge:
+  google_assistant: false
+group.tab_info:
+  google_assistant: false
+group.tab_kitchen:
+  google_assistant: false
+group.items_server:
+  google_assistant: false
+group.items_channel:
+  google_assistant: false
+group.items_living:
+  google_assistant: false
+group.items_pets:
+  google_assistant: false
+group.items_presence:
+  google_assistant: false
+group.items_bom_sydney:
+  google_assistant: false
+group.items_forecast:
+  google_assistant: false
+group.items_modes:
+  google_assistant: false
+group.other_lights_kitchen:
+  google_assistant: false
+group.other_lights_entertainment:
+  google_assistant: false
+group.lounge_lights:
+  google_assistant: false
+group.ten_forward_lights:
+  google_assistant: false
+group.kitchen_lights:
+  google_assistant: false
+group.items_laundry:
+  google_assistant: false
+group.kitchen_lights:
+  google_assistant: false
+group.entertainment_selection:
+  google_assistant: false
+group.all_switches:
+  google_assistant: false
+group.all_lights:
+  google_assistant: false
+group.all_devices:
+  google_assistant: false
+group.default_view:
+  google_assistant: false
+group.home_entertainment:
+  google_assistant: false
+group.entertainment:
+  google_assistant: true
+sensor.cpu_temperature:
+  unit_of_measurement: °C
+sensor.average_load_1m:
+  unit_of_measurement: Load
+sensor.average_load_5m:
+  unit_of_measurement: Load
+
+sensor.illumination_286c07f0a0c6:
+  friendly_name: Gateway Illumination
+  google_assistant: false
+sensor.humidity_158d0001c15683:
+  friendly_name: Bedroom Humidity
+  google_assistant: false
+media_player.laircast:
+  google_assistant: false
+
+switch.tv:
+  icon: mdi:television-classic
+switch.fetchtv:
+  icon: mdi:movie-roll
+switch.pioneer:
+  icon: mdi:surround-sound
+
+binary_sensor.door_window_sensor_158d0001d6360a:
+  friendly_name: Balcony Door
+  assistant_room_hint: Living Room
+binary_sensor.motion_sensor_158d000120cce2:
+  friendly_name: Lounge Motion
+  assistant_room_hint: Living Room
+binary_sensor.switch_158d0001243e26:
+  friendly_name: Kitchen Button
+  assistant_room_hint: Kitchen
+binary_sensor.switch_158d00019de7b4:
+  friendly_name: Entry Button
+  assistant_room_hint: Living Room
+light.gateway_light_286c07f0a0c6:
+  friendly_name: Gateway Light
+  assistant_room_hint: Kitchen
+light.lounge_light:
+  assistant_room_hint: Living Room
+light.lounge_light_extra:
+  assistant_room_hint: Living Room
+light.kitchen_light:
+  assistant_room_hint: Kitchen
+light.kitchen_light_extra:
+  assistant_room_hint: Kitchen
+light.hallway_light:
+  assistant_room_hint: Ten Forward
+light.dining_light:
+  assistant_room_hint: Ten Forward
+
+switch.fan:
+  google_assistant_type: fan
+  assistant_room_hint: Living Room
+
+sensor.temperature_158d0001c15683:
+  friendly_name: Bedroom Temperature
+  assistant_room_hint: Bedroom
+
+

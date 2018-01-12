@@ -1,0 +1,78 @@
+
+- platform: yr
+  name: Forecast
+  forecast: 24
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
+    - windSpeed
+    - pressure
+    - windDirection
+    - humidity
+    - fog
+    - cloudiness
+    - lowClouds
+    - mediumClouds
+    - highClouds
+    - dewpointTemperature
+
+- platform: bom
+  station: IDN60901.94767
+  name: Sydney
+  monitored_conditions:
+    - apparent_t
+    - cloud
+    - cloud_base_m
+    - cloud_oktas
+    - cloud_type_id
+    - cloud_type
+    - delta_t
+    - gust_kmh
+    - gust_kt
+    - air_temp
+    - dewpt
+    - press
+    - press_qnh
+    - press_msl
+    - press_tend
+    - rain_trace
+    - rel_hum
+    - sea_state
+    - swell_dir_worded
+    - swell_height
+    - swell_period
+    - vis_km
+    - weather
+    - wind_dir
+    - wind_spd_kmh
+    - wind_spd_kt
+
+- platform: broadlink
+  host: !secret ir_blaster_ip
+  mac: !secret ir_blaster_mac
+  name: kitchen
+  monitored_conditions:
+    - temperature
+
+- platform: command_line
+  name: CPU Temperature
+  command: 'cat /sys/class/thermal/thermal_zone0/temp'
+  unit_of_measurement: 'c'
+  value_template: '{{ value | multiply(0.001) }}'
+
+- platform: systemmonitor
+  resources:
+    - type: memory_free
+    - type: load_1m
+    - type: load_5m
+    - type: processor_use
+
+- platform: time_date
+  display_options:
+    - date
+    - time
+    - time_utc
+    - beat
+    - stardate
+

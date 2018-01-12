@@ -1,0 +1,102 @@
+
+AMAZON.HelpIntent:
+
+  speech:
+    type: plain
+    text: >
+             Welcome to the Cats Lair.   You can activate me on either Google Home or Amazon Echo with the magic words...  my name is Alexa, so Alexa ask the house.
+             You can use Turn On or Turn Off commands for these.
+             Both of us can control the lights which are {%- for state in states.light %} {{ state.name }}, {%- endfor %}.
+             Both of us can control power to {%- for state in states.switch %} {{ state.name }}, {%- endfor %}.
+             Example - hey Google turn on the lounge light . . . . .
+             There are some presets defined, you can use the keyword Activate to activate a preset.  They are {%- for state in states.scene %} {{ state.name }}, {%- endfor %}.
+             
+             I have an added skill; I can give you a status report, just say Hey Alexa, ask the house for a status report.
+
+             Just ask me to ask the house for help to hear this again.
+
+
+amzn1.ask.skill.26c589c5-8cff-470f-b71e-2392f4a36dd2#033:
+
+  speech:
+    text: Welcome to the Cats Lair.  What can I do for you?
+
+TemperatureIntent:
+
+  speech:
+    text: >
+            The alarm is currenly {{ states.alarm_control_panel.ha_alarm.state }}.
+            Kitchen is {{ states.sensor.kitchen_temperature.state }} degrees C, Bedroom is {{ states.sensor.temperature_158d0001c15683.state }} degres C with {{ states.sensor.humidity_158d0001c15683.state }} percent humidity.
+
+StatusReportIntent:
+
+  speech:
+    text: >
+            The alarm is currenly {{ states.alarm_control_panel.ha_alarm.state }}.
+
+            The Kitchen Temperature is currently {{ states.sensor.kitchen_temperature.state }} degrees C, 
+            The Bedroom Temperature is currently {{ states.sensor.temperature_158d0001c15683.state }} degres C with {{ states.sensor.humidity_158d0001c15683.state }} percent humidity.
+            The Bureau of Meteorology says Sydney Airport has an air temperature of {{ states.sensor.bom_sydney_air_temp_c.state }} degrees but feels like {{ states.sensor.bom_sydney_feels_like_c.state }}.
+            An outside forecast of {{ states.sensor.forecast_temperature.state }} is expected.
+
+            Miranda has a load average of {{ states.sensor.average_load_1m.state }} over one minute and {{ states.sensor.average_load_5m.state }} over five.
+
+            The fish tank light is {{ states.switch.fish_lamp.state }}.
+            Lighting status {%- for state in states.light %} {{ state.name }} is currently {{ state.state }}.{%- endfor %}
+            Fan is currently {{ states.switch.fan.state }}, Washing machine power is currently {{ states.switch.washing_machine.state }}.
+
+            End. of. Cats Lair. Status Report.
+
+StatusOfIntent:
+
+  speech:
+    text: >
+      {%- for state in states -%}
+      {%- if state.name == Thing -%}
+      {{ state.friendly_name }} is currently {{ state.state }}
+      {%- endif %}
+      {%- else %}
+      Cannot find {{ Thing }}, maybe you're looking for something else?
+      {%- endfor %}
+
+ActivateSceneIntent:
+
+  speech:
+    type: plain
+    text: >
+      {% if states("scene." ~ Scene | replace(" ", "_")) == 'scening' %}
+      OK, Activating {{ Scene }}
+      {% else %}
+      I could not find the {{ Scene }} mood.
+      {% endif %}
+
+  action:
+
+    - service: persistent_notification.create
+      data_template:
+        title: Home Assistant Calling
+        message: "Raw Scene is {{ Scene }}"
+
+    - service: scene.turn_on
+      data_template:
+        entity_id: scene.{{ Scene | replace(" ", "_") }}
+
+change_channel:
+  speech:
+    text: "Changing channel to {{ channel }}"
+
+  action:
+
+    - service: python_script.remote_control
+      data:
+        command: source
+        selected: "Fetch TV"
+        entity_id: input_select.tv_source
+
+    - service: python_script.remote_control
+      data_template:
+        command: word
+        selected: "{{ channel }}"
+        entity_id: input_select.tv_channel
+
+
