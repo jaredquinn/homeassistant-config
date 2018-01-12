@@ -1,0 +1,132 @@
+
+homeassistant:
+  name: !secret name
+  latitude: !secret longitude
+  longitude: !secret longitude
+  elevation: 0
+  unit_system: metric
+  time_zone: !secret timezone
+  customize: !include customize.yaml
+
+history:
+logbook:
+map:
+
+zone:
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 30
+    icon: mdi:home
+    
+sun:
+
+google_assistant:
+  project_id: !secert google_assistant_project
+  client_id: !secret google_assistant_client_id
+  access_token: !secret google_assistant_access_token
+  agent_user_id: !secret google_assistant_agent_user_id
+  api_key: !secret google_assistant_api_key
+
+cloud:
+
+#I prefer not autodiscovering things; they have to be manually added to DHCP first anyway
+#discovery:
+
+alexa:
+
+# Z-Wave USB Device Testing 
+#zwave:
+#  usb_path: /dev/ttyUSB0
+
+notify:
+  - name: Push Notifications
+    platform: html5
+    gcm_api_key: !secret gcm_api_key
+    gcm_sender_id: !secret gcm_sender_id
+  - name: Facebook Notifications
+    platform: facebook
+    page_access_token: !secret fb_page_access_token
+
+facebook_webhook:
+  verify_token: !secret fb_verify_token
+  access_token: !secret fb_page_access_token
+  allowed_ids: !include secret/trusted_facebook_ids.yaml
+
+duckdns:
+  domain: !secret domain
+  access_token: !secret duck_access_token
+
+config:
+
+influxdb:
+  host: 127.0.0.1
+  database: homeassistant
+  default_measurement: state
+
+http:
+  api_password: !secret api_password
+  use_x_forwarded_for: true
+  cors_allowed_origins:
+    - https://google.com
+    - https://home-assistant.io
+  trusted_networks: !include secret/trusted_networks.yaml
+  ip_ban_enabled: True
+  login_attempts_threshold: 5
+
+frontend:
+  themes:
+    day:
+      primary_color: orange
+    night:
+      primary_color: black
+
+
+updater:
+
+scene: !include scene.yaml
+intent_script: !include intent_script.yaml
+
+conversation:
+  intents: !include conversation_intent.yaml
+
+mqtt:
+  broker: !secret mqtt_broker_host
+  discovery: true
+
+xiaomi_aqara:
+  interface: !secret xiaomi_interface
+  discovery_retry: 3
+  gateways:
+    - mac: !secret xiaomi_mac
+      host: !secret xiaomi_ip
+      key: !secret xiaomi_key
+
+alarm_control_panel:
+  - platform: manual_mqtt
+    state_topic: homeassistant/alarm
+    command_topic: homeassistant/alarm/set
+    code: !secret alarm_control_code
+    pending_time: 1
+    delay_time: 1
+    trigger_time: 60
+
+keyboard_remote:
+  device_name: 'Remote control'
+  type: 'key_down'
+
+tts:
+  - platform: google
+
+media_player: !include media_player.yaml
+sensor: !include sensor.yaml
+switch: !include switch.yaml
+light: !include light.yaml
+automation: !include automations.yaml
+device_tracker: !include device_tracker.yaml
+input_select: !include input_select.yaml
+group: !include groups.yaml
+script: !include scripts.yaml
+
+python_script:
+
