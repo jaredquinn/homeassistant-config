@@ -9,6 +9,7 @@ secrets.yaml
 .uuid
 *.log
 *.db
+*.db*
 *.sqlite
 *.xml
 README
@@ -16,3 +17,4 @@ README
 *.swo
 *.swq
 __pycache__
+tts/
