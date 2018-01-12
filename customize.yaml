@@ -32,8 +32,6 @@ group.lounge_lights:
   google_assistant: false
 group.ten_forward_lights:
   google_assistant: false
-group.kitchen_lights:
-  google_assistant: false
 group.items_laundry:
   google_assistant: false
 group.kitchen_lights:

@@ -336,7 +336,7 @@
     service: alarm_control_panel.alarm_arm_home
     entity_id: alarm_control_panel.ha_alarm
     data:
-      code: !secrets alarm_control_code
+      code: !secret alarm_control_code
 
 - alias: kitchen_button_long_click_on
   condition:
@@ -358,7 +358,7 @@
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.ha_alarm
     data:
-      code: !secrets alarm_control_code
+      code: !secret alarm_control_code
 
 # Entry Button Long Press
 #
@@ -377,7 +377,7 @@
     service: alarm_control_panel.alarm_arm_away
     entity_id: alarm_control_panel.ha_alarm
     data:
-      code: !secrets alarm_control_code
+      code: !secret alarm_control_code
 
 - alias: entry_button_long_click_on
   condition:
@@ -401,7 +401,7 @@
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.ha_alarm
     data:
-      code: !secrets alarm_control_code
+      code: !secret alarm_control_code
 
 - alias: gateway_light_change_off
   condition:
@@ -482,7 +482,6 @@
     - service: notify.facebook_notifications
       data:
         message: "The alarm has been armed HOME"
-        target:
         target: !include secret/alarm_facebook_alerts.yaml
 
 - alias: 'Alarm Away Armed'
@@ -510,6 +509,12 @@
       entity_id: alarm_control_panel.ha_alarm
       to: 'disarmed'
   action:
+    - service: python_script.flash_light
+      data:
+        entity_id: light.lounge_light
+        rgb_color: [ 255, 0, 0 ]
+        flashes: 5
+        delay: 50
     - service: xiaomi_aqara.play_ringtone
       data:
         ringtone_id: 10

@@ -1,7 +1,7 @@
 
 homeassistant:
   name: !secret name
-  latitude: !secret longitude
+  latitude: !secret latitude
   longitude: !secret longitude
   elevation: 0
   unit_system: metric
@@ -22,7 +22,7 @@ zone:
 sun:
 
 google_assistant:
-  project_id: !secert google_assistant_project
+  project_id: !secret google_assistant_project
   client_id: !secret google_assistant_client_id
   access_token: !secret google_assistant_access_token
   agent_user_id: !secret google_assistant_agent_user_id
@@ -40,10 +40,10 @@ alexa:
 #  usb_path: /dev/ttyUSB0
 
 notify:
-  - name: Push Notifications
-    platform: html5
-    gcm_api_key: !secret gcm_api_key
-    gcm_sender_id: !secret gcm_sender_id
+#  - name: Push Notifications
+#    platform: html5
+#    gcm_api_key: !secret gcm_api_key
+#    gcm_sender_id: !secret gcm_sender_id
   - name: Facebook Notifications
     platform: facebook
     page_access_token: !secret fb_page_access_token

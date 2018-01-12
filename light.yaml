@@ -10,18 +10,18 @@
 - platform: yeelight
   devices:
 
-    - ip: !secret yee_dining_ip
+    !secret yee_dining_ip:
       name: Dining Light
       transition: 2000
 
-    - ip: !secret yet_kitchen_ip
+    !secret yee_kitchen_ip:
       name: Kitchen Light
       transition: 2000
 
-    - ip: !secret yee_lounge_ip
+    !secret yee_lounge_ip:
       name: Lounge Light
       transition: 2000
 
-    - ip: !secret yee_lounge_extra_ip
+    !secret yee_lounge_extra_ip:
       name: Lounge Light Extra
       transition: 2000
