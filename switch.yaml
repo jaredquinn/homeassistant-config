@@ -29,8 +29,8 @@
 
 - platform: broadlink
   type: 'spmini2'
-  host: !secret sp3mini2_1_ip
-  mac: !secret sp3mini2_1_mac
+  host: !secret sp3mini2_washing_ip
+  mac: !secret sp3mini2_washing_mac
   friendly_name: Washing Machine
 
 - platform: broadlink

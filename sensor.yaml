@@ -61,12 +61,26 @@
   unit_of_measurement: 'c'
   value_template: '{{ value | multiply(0.001) }}'
 
+- platform: cpuspeed
+
+- platform: cert_expiry
+  host: catslair39.duckdns.org
+
 - platform: systemmonitor
   resources:
     - type: memory_free
+    - type: memory_use
+    - type: swap_free
+    - type: swap_use
     - type: load_1m
     - type: load_5m
     - type: processor_use
+    - type: disk_use_percent
+      arg: /
+    - type: disk_use_percent
+      arg: /mnt/media-a
+    - type: disk_use_percent
+      arg: /mnt/media-b
 
 - platform: time_date
   display_options:
