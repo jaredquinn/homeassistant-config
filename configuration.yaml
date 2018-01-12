@@ -21,6 +21,62 @@ zone:
     
 sun:
 
+recorder:
+  purge_interval: 1
+  purge_keep_days: 7
+  exclude:
+    domains:
+      - group
+      - weblink
+      - updater
+      - automation
+    entities:
+      - sun.sun
+      - sensor.date
+      - sensor.time       
+      - sensor.time_utc
+      - sensor.internet_time    
+      - sensor.stardate
+      - sensor.forecast_cloudiness
+      - sensor.forecast_dewpoint_temperature
+      - sensor.forecast_high_clouds
+      - sensor.forecast_humidity
+      - sensor.forecast_low_clouds
+      - sensor.forecast_medium_clouds
+      - sensor.forecast_precipitation
+      - sensor.forecast_pressure
+      - sensor.forecast_symbol
+      - sensor.forecast_temperature
+      - sensor.forecast_wind_direction
+      - sensor.forecast_wind_speed
+      - sensor.bom_sydney_air_temp_c
+      - sensor.bom_sydney_cloud
+      - sensor.bom_sydney_cloud_base
+      - sensor.bom_sydney_cloud_oktas
+      - sensor.bom_sydney_cloud_type 
+      - sensor.bom_sydney_cloud_type_id
+      - sensor.bom_sydney_delta_temp_c 
+      - sensor.bom_sydney_dew_point_c 
+      - sensor.bom_sydney_feels_like_c
+      - sensor.bom_sydney_pressure_mb 
+      - sensor.bom_sydney_pressure_msl
+      - sensor.bom_sydney_pressure_qnh
+      - sensor.bom_sydney_pressure_tend
+      - sensor.bom_sydney_rain_today
+      - sensor.bom_sydney_relative_humidity
+      - sensor.bom_sydney_sea_state 
+      - sensor.bom_sydney_swell_direction
+      - sensor.bom_sydney_swell_height
+      - sensor.bom_sydney_swell_period
+      - sensor.bom_sydney_visability_km
+      - sensor.bom_sydney_weather
+      - sensor.bom_sydney_wind_direction
+      - sensor.bom_sydney_wind_direction_kt
+      - sensor.bom_sydney_wind_gust_kmh
+      - sensor.bom_sydney_wind_gust_kt
+      - sensor.bom_sydney_wind_speed_kmh
+
+
 google_assistant:
   project_id: !secret google_assistant_project
   client_id: !secret google_assistant_client_id
