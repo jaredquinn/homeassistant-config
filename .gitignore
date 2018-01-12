@@ -1,3 +1,10 @@
 known_devices.yaml
 secrets/*
 secrets.yaml
+.HA_VERSION
+cloud
+cloud/*
+.uuid
+*.log
+*.db
+*.xml
