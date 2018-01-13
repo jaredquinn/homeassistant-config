@@ -65,6 +65,13 @@
 
 - platform: cert_expiry
   host: catslair39.duckdns.org
+  name: CatsLair SSL Expiry
+
+- platform: speedtest
+  monitored_conditions:
+    - ping
+    - download
+    - upload
 
 - platform: systemmonitor
   resources:
