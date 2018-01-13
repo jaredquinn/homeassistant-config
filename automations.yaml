@@ -509,12 +509,12 @@
       entity_id: alarm_control_panel.ha_alarm
       to: 'disarmed'
   action:
-    - service: python_script.flash_light
-      data:
-        entity_id: light.lounge_light
-        rgb_color: [ 255, 0, 0 ]
-        flashes: 5
-        delay: 50
+  #- service: python_script.flash_light
+  #    data:
+  #      entity_id: light.lounge_light
+  #      rgb_color: [ 255, 0, 0 ]
+  #      flashes: 5
+  #      delay: 50
     - service: xiaomi_aqara.play_ringtone
       data:
         ringtone_id: 10
