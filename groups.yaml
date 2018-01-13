@@ -15,6 +15,9 @@ default_view:
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
     - sensor.cpu_used
+    - sensor.speedtest_download 
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
 
     - group.lounge_lights
     - group.ten_forward_lights
@@ -38,6 +41,9 @@ tab_info:
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
     - sensor.cpu_used
+    - sensor.speedtest_download 
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
 
     - group.items_time
     - group.items_presence
@@ -59,6 +65,9 @@ tab_lounge:
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
     - sensor.cpu_used
+    - sensor.speedtest_download 
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
 
     - group.items_entertainment
     - group.items_channel
@@ -79,6 +88,9 @@ tab_kitchen:
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
     - sensor.cpu_used
+    - sensor.speedtest_download 
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
 
     - group.kitchen_lights
     - media_player.kitchen_speaker
@@ -89,7 +101,7 @@ tab_kitchen:
 items_server:
   name: Server Status
   entities:
-    - sensor.cpuspeed
+    - sensor.cpu_speed
     - sensor.cpu_used
     - sensor.cpu_temperature
     - sensor.ram_available
@@ -98,9 +110,13 @@ items_server:
     - sensor.swap_free
     - sensor.average_load_1m
     - sensor.average_load_5m
+    - sensor.speedtest_download 
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
     - sensor.disk_used_
     - sensor.disk_used_mntmediaa
     - sensor.disk_used_mntmediab
+    - sensor.catslair_ssl_expiry        
 
 items_entertainment:
   name: Entertainment Power
@@ -112,11 +128,12 @@ items_entertainment:
 items_channel:
   name: Entertainment Selection
   entities:
+    - media_player.laircast
+    - media_player.lounge_roku
+    - media_player.kitchen_speaker
     - switch.audio
     - input_select.tv_channel
     - input_select.tv_source
-    - media_player.laircast
-    - media_player.lounge_roku
 
 items_time:
   name: Time
