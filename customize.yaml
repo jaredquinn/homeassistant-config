@@ -50,12 +50,12 @@ group.home_entertainment:
   google_assistant: false
 group.entertainment:
   google_assistant: true
-sensor.cpu_temperature:
-  unit_of_measurement: °C
 sensor.average_load_1m:
   unit_of_measurement: Load
 sensor.average_load_5m:
   unit_of_measurement: Load
+sensor.cpu_temperature:
+  unit_of_measurement: °C
 
 sensor.illumination_286c07f0a0c6:
   friendly_name: Gateway Illumination
