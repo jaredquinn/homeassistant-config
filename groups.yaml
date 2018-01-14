@@ -44,6 +44,7 @@ tab_info:
     - sensor.speedtest_download 
     - sensor.speedtest_upload
     - sensor.speedtest_ping
+    - sensor.aquarium_temperature
 
     - group.items_time
     - group.items_presence
@@ -152,6 +153,7 @@ items_living:
 items_pets:
   name: Pets
   entities:
+    - sensor.aquarium_temperature
     - switch.fish_lamp
     - automation.fish_night_feed_light_off
 
