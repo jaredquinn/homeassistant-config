@@ -575,24 +575,24 @@
 # START STOP
 #
 # StarDate comes from custom patch to sensor.time_date
-#- alias: ha_startup
-#  trigger:
-#    - platform: homeassistant
-#      event: start
-#  action:
-#    - service: tts.google_say
-#      data_template:
-#        entity_id: media_player.kitchen_speaker
-#        message: Ding Dong.  Home Assistant is online at stardate {{ states.sensor.stardate.state }} before federation.
-#
-## Only ever gets partially runned, will fix this one day.
-#- alias: ha_shutdown
-#  trigger:
-#    - platform: homeassistant
-#      event: shutdown
-#  action:
-#    - service: tts.google_say
-#      data:
-#        entity_id: media_player.kitchen_speaker
-#        message: Goodbye.  Home Assistant is going offline.
+- alias: ha_startup
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: Ding Dong.  Home Assistant is online at stardate {{ states.sensor.stardate.state }} before federation.
+
+# Only ever gets partially runned, will fix this one day.
+- alias: ha_shutdown
+  trigger:
+    - platform: homeassistant
+      event: shutdown
+  action:
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kitchen_speaker
+        message: Goodbye.  Home Assistant is going offline.
 
