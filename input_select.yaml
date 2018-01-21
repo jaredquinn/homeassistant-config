@@ -1,5 +1,14 @@
 
-
+lighting_mode:
+  name: Lighting Mode
+  initial: Morning
+  options:
+    - Morning
+    - Afternoon
+    - Evening
+    - Night
+  icon: mdi:gift
+    
 tv_source:
   name: TV Source
   options:

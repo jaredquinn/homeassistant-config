@@ -1,0 +1,32 @@
+- id: change_tv_channel
+  alias: Change TV Channel
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: input_select.tv_channel
+
+  action:
+
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.tv_source
+        option: 'Fetch TV'
+
+    - service: python_script.remote_control
+      data_template:
+        command: "channel"
+        selected: "{{ trigger.to_state.state }}"
+
+
+- id: change_tv_source
+  alias: Change Pioneer Source
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: input_select.tv_source
+
+  action:
+    - service: python_script.remote_control
+      data_template:
+        command: "source"
+        selected: "{{ trigger.to_state.state }}"

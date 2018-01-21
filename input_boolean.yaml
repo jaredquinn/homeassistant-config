@@ -1,0 +1,4 @@
+announcements:
+  name: House Announcements
+  initial: off
+  icon: mdi:phone

@@ -1,0 +1,63 @@
+#
+# Lounge Lights
+#
+- id: lounge_light_auto_off
+  alias: Lounge Lights OFF
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.lounge_light
+      state: 'on'
+
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 28
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: single
+
+  action:
+
+    - service: light.turn_off
+      data:
+        entity_id: light.lounge_light
+
+    - service: light.turn_off
+      data:
+        entity_id: light.lounge_light_extra
+
+
+- id: lounge_light_auto_on
+  alias: Lounge Lights OFF
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.lounge_light
+      state: 'off'
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 28
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: single
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.lounge_light
+        color_name: 'yellow'
+        brightness_pct: 100
+
+

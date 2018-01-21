@@ -19,13 +19,16 @@ default_view:
     - sensor.speedtest_upload
     - sensor.speedtest_ping
 
+    - group.global
+    - group.items_modes
+
     - group.lounge_lights
     - group.ten_forward_lights
     - group.kitchen_lights
+
     - group.items_pets
     - group.items_living
     - group.items_laundry
-    - group.items_modes
 
 tab_info:
   view: yes
@@ -46,6 +49,7 @@ tab_info:
     - sensor.speedtest_ping
     - sensor.aquarium_temperature
 
+    - group.global
     - group.items_time
     - group.items_presence
     - group.items_bom_sydney
@@ -70,6 +74,7 @@ tab_lounge:
     - sensor.speedtest_upload
     - sensor.speedtest_ping
 
+    - group.global
     - group.items_entertainment
     - group.items_channel
     - group.lounge_lights
@@ -93,6 +98,7 @@ tab_kitchen:
     - sensor.speedtest_upload
     - sensor.speedtest_ping
 
+    - group.global
     - group.kitchen_lights
     - media_player.kitchen_speaker
     - group.other_lights_kitchen
@@ -258,3 +264,11 @@ kitchen_lights:
     - light.kitchen_light_daylight
     - light.kitchen_light
     - light.gateway_light_286c07f0a0c6
+
+global:
+  name: House Wide
+  entities:
+    - input_select.lighting_mode
+    - input_boolean.announcements
+    - alarm_control_panel.ha_alarm
+

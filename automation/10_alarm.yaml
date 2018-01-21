@@ -1,0 +1,242 @@
+# Kitchen Button Long Press
+#
+- id: kitchen_button_long_click_off
+  alias: Kitchen Button Long Click OFF
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: 'disarmed'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: long_click_press
+
+  action:
+    service: alarm_control_panel.alarm_arm_home
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: !secret alarm_control_code
+
+- id: kitchen_button_long_click_on
+  alias: Kitchen Button Long Click ON
+  hide_entity: true
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'armed_away'
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'armed_home'
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: long_click_press
+  action:
+    service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: !secret alarm_control_code
+
+# Entry Button Long Press
+#
+- id: entry_button_long_click_off
+  alias: Entry Button Long Click OFF
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: 'disarmed'
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: long_click_press
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: !secret alarm_control_code
+
+- id: entry_button_long_click_on
+  alias: Entry Button Long Click ON
+  hide_entity: true
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'armed_away'
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'armed_home'
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: long_click_press
+  action:
+    service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: !secret alarm_control_code
+
+# ALARM 
+#
+- id: alarm_home
+  alias: 'Alarm Trigger: Home'
+  hide_entity: true
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: 'armed_home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001d6360a
+    to: 'on'
+  action:
+    service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
+
+- id: alarm_away
+  alias: 'Alarm Trigger: Away'
+  hide_entity: true
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: 'armed_away'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001d6360a
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d000120cce2
+      to: 'on'
+  action:
+    service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
+
+
+
+- id: alarm_home_armed
+  alias: 'Alarm Armed: Home'
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'armed_home'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 11
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: pink
+        brightness_pct: 20
+    - service: notify.facebook_notifications
+      data:
+        message: "The alarm has been armed HOME"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+
+
+- id: alarm_away_armed
+  alias: 'Alarm Armed: Away'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'armed_away'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 12
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: red
+        brightness_pct: 100
+    - service: notify.facebook_notifications
+      data:
+        message: "The alarm has been armed AWAY"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+
+
+- id: alawm_disarm
+  alias: 'Alarm Armed: Disarm'
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'disarmed'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 10
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: green
+        brightness_pct: 100
+        transition: 2
+    - service: light.turn_off
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        transition: 2
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: green
+        brightness_pct: 100
+        transition: 2
+    - service: light.turn_off
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        transition: 2
+    - service: notify.facebook_notifications
+      data:
+        message: "The alarm has been disarmed"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+
+
+- id: alarm_notify
+  alias: 'Alarm Notifications'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'triggered'
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 3
+    - service: light.turn_on
+      entity_id: light.gateway_light_286c07f0a0c6
+      data:
+        color_name: red
+        brightness: 255
+    - service: light.turn_on
+      entity_id: light.lounge_light
+      data:
+        effect: Alarm
+        brightness: 255
+    - service: light.turn_on
+      entity_id: light.kitchen_light
+      data:
+        effect: Alarm
+        brightness: 255
+    - service: notify.facebook_notifications
+      data:
+        message: "The alarm has been triggered"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+

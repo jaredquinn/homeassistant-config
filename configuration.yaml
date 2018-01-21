@@ -10,6 +10,11 @@ homeassistant:
 
 history:
 logbook:
+  exclude:
+    entities:
+      - binary_sensor.motion_sensor_158d000120cce2
+      - sensor.illumination_286c07f0a0c6
+     
 map:
 
 zone:
@@ -131,6 +136,7 @@ switch: !include switch.yaml
 light: !include light.yaml
 automation: !include automations.yaml
 input_select: !include input_select.yaml
+input_boolean: !include input_boolean.yaml
 group: !include groups.yaml
 script: !include scripts.yaml
 

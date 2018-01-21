@@ -1,0 +1,54 @@
+#
+# Kitchen Lights
+#
+- id: kitchen_auto_lights_off
+  alias: Kitchen Lights OFF
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light
+      state: 'on'
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 60
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: single
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_light
+
+
+- id: kitchen_auto_lights_on
+  alias: Kitchen Lights ON
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 60
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: single
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_light
+        brightness_pct: 100

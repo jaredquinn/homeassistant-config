@@ -1,0 +1,70 @@
+
+# Hallway Light
+- id: hallway_auto_light_off
+  alias: Hallway Lights OFF
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: group.ten_forward
+      state: 'on'
+
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 59
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: double
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: double
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_light
+
+
+- id: hallway_auto_light_on
+  alias: Hallway Lights ON
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: group.ten_forward
+      state: 'off'
+
+  trigger:
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 59
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: double
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: double
+
+  action:
+
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_light
+        color_name: white
+        brightness_pct: 100
+
