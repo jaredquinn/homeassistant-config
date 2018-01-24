@@ -1,0 +1,7 @@
+- id: operahouse
+  name: Opera House
+  latitude: -33.8567844
+  longitude: 151.2152967
+  radius: 100
+  icon: mdi:music
+

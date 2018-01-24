@@ -1,0 +1,21 @@
+- id: loaded
+  name: Loaded by BL
+  latitude: -33.893155
+  longitude: 151.183546
+  radius: 20
+  icon: mdi:food
+
+- id: dendy_newtown
+  name: Dendy Newtown
+  latitude: -33.895976
+  longitude: 151.1804288
+  radius: 50
+  icon: mdi:movie
+
+- id: camperdown_park
+  name: Camperdown Park
+  latitude: -33.894491
+  longitude: 151.179106
+  radius: 100
+  icon: mdi:park
+

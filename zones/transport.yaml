@@ -1,0 +1,37 @@
+- id: centralstation
+  name: Central Station
+  latitude: -33.883809
+  longitude: 151.206196
+  radius: 200
+  icon: mdi:train
+
+- id: townhall
+  name: Town Hall Station
+  latitude: -33.8735656
+  longitude: 151.2070838
+  radius: 70
+  icon: mdi:train
+
+- id: railwaysquare
+  name: Railway Square
+  latitude: -33.8838369
+  longitude: 151.2030932
+  radius: 30
+  icon: mdi:bus
+
+- id: wynyard
+  name: Wynyard Station
+  latitude: -33.8657431
+  longitude: 151.2061885
+  radius: 70
+  icon: mdi:train
+
+- id: circularquay
+  name: Circular Quay
+  latitude: -33.8613065
+  longitude: 151.2108207
+  radius: 70
+  icon: mdi:train
+
+
+

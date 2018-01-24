@@ -1,0 +1,42 @@
+- id: thechippo
+  name: Chippo
+  latitude: -33.887429
+  longitude: 151.198655
+  radius: 30
+  icon: mdi:glass-flute
+
+- id: chippendalecellars
+  name: Bottle-O
+  latitude: -33.8878548
+  longitude: 151.1989527
+  radius: 6 
+  icon: mdi:glass-flute
+
+- id: broadway
+  name: Broadway
+  latitude: -33.8833616
+  longitude: 151.1936342
+  radius: 100
+  icon: mdi:cart
+
+- id: centralpark
+  name: Central Park
+  latitude: -33.8845761
+  longitude: 151.2006142
+  radius: 60
+  icon: mdi:cart
+
+- id: paddysmarket
+  name: Paddys Market
+  latitude: -33.8797842
+  longitude: 151.2042814
+  radius: 80
+  icon: mdi:cart
+
+- id: sydney_uni
+  name: Sydney Uni
+  latitude: -33.8880313
+  longitude: 151.1861544
+  radius: 800
+  icon: mdi:school
+
