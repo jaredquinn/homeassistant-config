@@ -26,7 +26,10 @@ for SSL certificate generation.
 * Broadlink RM2 Pro WiFi Infra-Red Blaster
 * Broadlink SP3Mini WiFi A/C Switch (x2)
 * TP-Link HS100 WiFi A/C Switch
+* Dangerous Prototypes USB IRToy (Infrared Recevier/Sender)
 * NodeMCU w/Submersible Temperature Sensor
+* Bluetooth Remote Control (for Lights)
+* Sonic Screwdriver (coming soon)
 
 ## Weather
 
@@ -43,7 +46,9 @@ for SSL certificate generation.
 
 * HA Alarm
 * Floorplan
+* lirc IR Remote (using IRToy)
 * MQTT
+* Bluetooth Keyboard Remote
 * InfluxDB
 * Facebook Messanger
 
@@ -57,6 +62,15 @@ for SSL certificate generation.
 
 pkozul's ha-floorplan is configured, as per his instructions at https://github.com/pkozul/ha-floorplan.
 
+I generated my floorplan.svg using InkScape on Linux.
+
+* Trace the basic wall layout of the house from an existing format.
+* Paste SVG objects from other floorplans, such as couches
+* Find relevant icons on Material Design Icons
+* Assign HA IDs to the relevant SVG Objects
+
+You will find a default floorplan at floorplan.svg.dist,  please contact me privately if you require 
+a copy of my floorplan SVG.
 
 # SECRETS
 
