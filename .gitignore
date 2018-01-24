@@ -18,3 +18,4 @@ README
 *.swq
 __pycache__
 tts/
+zones/secret_*.yaml
