@@ -1,11 +1,20 @@
 
+# Home Assitant Configuration
+
 Welcome to my Home Assistant Configuration
 
+You can find my Home Assistant fork with patches, updates and enhancements, as used
+by me at https://github.com/jaredquinn/home-assistant.
 
-Current Devices:
+Additionally I run Home Assistant behind an nginx reverse proxy using Lets Encrypt
+for SSL certificate generation.
+
+# My Configuration
+
+## Smart Home Devices
 
 * Google Home
-* Amazon Echo Dot
+* Amazon Echo Dot (via Home Assistant Cloud)
 * Xiaomi Aqara Gateway Night Light
 * Xiaomi Aqara Smart Button (x2)
 * Xiaomi Aqara Temperature & Humidity Sensor
@@ -19,18 +28,18 @@ Current Devices:
 * TP-Link HS100 WiFi A/C Switch
 * NodeMCU w/Submersible Temperature Sensor
 
-Weather
+## Weather
 
 * BOM Australia
 * Forecast (NDK)
 * Sun
 
-Presence
+## Presence
 
 * GPSLogger
 * Ping
 
-Additional Features
+## Additional Features
 
 * HA Alarm
 * Floorplan
@@ -38,13 +47,18 @@ Additional Features
 * InfluxDB
 * Facebook Messanger
 
-
-Custom Components
+## Custom Components
 
 * Remote Control
 * Flash Lights
 
-SECRETS
+
+# FLOOR PLAN
+
+pkozul's ha-floorplan is configured, as per his instructions at https://github.com/pkozul/ha-floorplan.
+
+
+# SECRETS
 
 The secrets.yaml.dist file is generated on updates of my secrets file and does
 not contain any values, only the keys.  This can be used as a starting point
@@ -53,7 +67,7 @@ for using HA Secrets.
 Additionally some files are included from a 'secret' directory; these will
 ultimately be migrated to the secrets.yaml file.
 
-ZONES
+# ZONES
 
 Configuration includes some sample zones for nearby places that are frequented,
 if you wish to override your 'home' and 'work' zones, create files in the 
