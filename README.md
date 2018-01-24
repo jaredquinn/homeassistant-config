@@ -54,6 +54,10 @@ for SSL certificate generation.
 
 ## Custom Components
 
+* Facebook Webhooks
+
+## Python Scripts
+
 * Remote Control
 * Flash Lights
 
