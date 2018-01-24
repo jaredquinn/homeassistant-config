@@ -161,7 +161,7 @@ items_pets:
   entities:
     - sensor.aquarium_temperature
     - switch.fish_lamp
-    - automation.fish_night_feed_light_off
+    - automation.fed_fish
 
 items_laundry:
   name: Laundry
@@ -268,7 +268,8 @@ kitchen_lights:
 global:
   name: House Wide
   entities:
-    - input_select.lighting_mode
-    - input_boolean.announcements
     - alarm_control_panel.ha_alarm
+    - input_boolean.announcements
+    - switch.flux
+
 

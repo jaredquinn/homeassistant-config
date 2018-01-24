@@ -1,3 +1,4 @@
+
 - id: gateway_light_change_off
   alias: Gateway Light OFF
   hide_entity: true
@@ -5,11 +6,17 @@
     - condition: state
       entity_id: light.gateway_light_286c07f0a0c6
       state: 'on'
+
   trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: GATEWAY
     - platform: event
       event_type: keyboard_remote_command_received
       event_data:
         key_code: 61
+
   action:
     - service: light.turn_off
       data:
@@ -18,15 +25,22 @@
 - id: gateway_light_change_on
   hide_entity: true
   alias: Gateway Light ON
+
   condition:
     - condition: state
       entity_id: light.gateway_light_286c07f0a0c6
       state: 'off'
+
   trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: GATEWAY
     - platform: event
       event_type: keyboard_remote_command_received
       event_data:
         key_code: 61
+
   action:
     - service: light.turn_on
       data:

@@ -1,0 +1,6 @@
+
+#- platform: mqtt
+#  state_topic: homeassistant/sensor/floorplan/state
+#  name: "Floor Plan"
+
+

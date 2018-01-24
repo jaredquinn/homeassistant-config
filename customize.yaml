@@ -107,4 +107,7 @@ sensor.temperature_158d0001c15683:
   friendly_name: Bedroom Temperature
   assistant_room_hint: Bedroom
 
+#binary_sensor.floorplan:
+#  custom_ui_state_card: state-card-floorplan
+#  config: !include floorplan.yaml
 

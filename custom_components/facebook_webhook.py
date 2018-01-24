@@ -100,7 +100,7 @@ class WebhookIntentsView(http.HomeAssistantView):
                     hass.async_add_job(self.process_command(token, hass, sender, text))
                     return web.Response(text='OK', status=200)
                 else:
-                    _LOGGER.notice('Sender ID %s is not in allowed list' % sender)
+                    _LOGGER.error('Sender ID %s is not in allowed list' % sender)
                     hass.async_add_job(self.send_response(token, hass, sender, 'Sorry, I have not been authorised to accept commands from you.'))
                     return web.Response(text='OK', status=200)
 

@@ -1,20 +1,14 @@
-#
-# Kitchen Lights
-#
-- id: kitchen_auto_lights_off
-  alias: Kitchen Lights OFF
-  hide_entity: true
+
+#########################################################
+- id: kitchen_lights_group_off
+  alias: Kitchen Lights Group OFF
+#########################################################
   condition:
     - condition: state
-      entity_id: light.kitchen_light
+      entity_id: group.kitchen_lights
       state: 'on'
+
   trigger:
-
-    - platform: event
-      event_type: keyboard_remote_command_received
-      event_data:
-        key_code: 60
-
     - platform: event
       event_type: click
       event_data:
@@ -26,9 +20,38 @@
       data:
         entity_id: light.kitchen_light
 
+ 
+#########################################################
+- id: kitchen_auto_light_off
+  alias: Kitchen Light OFF
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light
+      state: 'on'
 
-- id: kitchen_auto_lights_on
-  alias: Kitchen Lights ON
+  trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: KITCHEN
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 60
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_light
+
+
+#########################################################
+- id: kitchen_auto_light_on
+  alias: Kitchen Light ON
+#########################################################
   hide_entity: true
   condition:
     - condition: state
@@ -36,6 +59,12 @@
       state: 'off'
 
   trigger:
+
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: KITCHEN
+
     - platform: event
       event_type: keyboard_remote_command_received
       event_data:
@@ -52,3 +81,50 @@
       data:
         entity_id: light.kitchen_light
         brightness_pct: 100
+
+
+#########################################################
+- id: kitchen_daylight_auto_lights_on
+  alias: Kitchen Daylight Lights ON
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light_daylight
+      state: 'off'
+
+  trigger:
+
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: KITCHEN_DAYLIGHT
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_light_daylight
+        brightness_pct: 100
+
+#########################################################
+- id: kitchen_daylight_auto_lights_off
+  alias: Kitchen Daylight Lights OFF
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light_daylight
+      state: 'on'
+
+  trigger:
+
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: KITCHEN_DAYLIGHT
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_light_daylight
+

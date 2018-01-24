@@ -1,0 +1,157 @@
+
+#########################################################
+- id: ten_forwards_group_off
+  alias: Ten Forward Group Off
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: group.ten_forward_lights
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: 'double'
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: 'double'
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: group.ten_forward_lights
+
+#########################################################
+- id: dining_auto_light_off
+  alias: Dining Light Controls OFF
+#########################################################
+
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.dining_light
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 14
+
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: DINING
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.dining_light
+
+#########################################################
+- id: hallway_auto_light_off
+  alias: Hallway Light Controls OFF
+#########################################################
+
+  hide_entity: true
+
+  condition:
+    - condition: state
+      entity_id: light.hallway_light
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: HALLWAY
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 59
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_light
+
+
+#########################################################
+- id: dining_auto_light_on
+  alias: Dining Light Controls ON
+#########################################################
+
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.dining_light
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: DINING
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 14
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: double
+
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_light
+        color_name: 'white'
+        brightness_pct: 100
+
+
+#########################################################
+- id: hallway_auto_light_on
+  alias: Hallway Light Controls ON
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.hallway_light
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: HALLWAY
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 59
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: 'double'
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_light
+        color_name: white
+        brightness_pct: 100
+
+

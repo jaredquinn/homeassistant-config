@@ -3,7 +3,7 @@ homeassistant:
   name: !secret name
   latitude: !secret latitude
   longitude: !secret longitude
-  elevation: 0
+  elevation: !secret elevation
   unit_system: metric
   time_zone: !secret timezone
   customize: !include customize.yaml
@@ -17,12 +17,6 @@ logbook:
      
 map:
 
-zone:
-  - name: Home
-    latitude: !secret latitude
-    longitude: !secret longitude
-    radius: 21
-    icon: mdi:home
     
 sun:
 
@@ -82,6 +76,9 @@ http:
   login_attempts_threshold: 5
 
 frontend:
+#  extra_html_url:
+#    - /home/homeassistant/.homeassistant/www/custom_ui/state-card-floorplan.html
+  javascript_version: latest
   themes:
     day:
       primary_color: orange
@@ -119,6 +116,8 @@ alarm_control_panel:
     delay_time: 1
     trigger_time: 60
 
+lirc:
+
 keyboard_remote:
   device_name: 'Remote control'
   type: 'key_down'
@@ -127,10 +126,14 @@ tts:
   - platform: google
 
 device_tracker:
+  - platform: gpslogger
+    max_gps_accuracy: 20
+
   - platform: ping
     hosts: !include secret/ping_hosts.yaml
 
 media_player: !include media_player.yaml
+binary_sensor: !include binary_sensor.yaml
 sensor: !include sensor.yaml
 switch: !include switch.yaml
 light: !include light.yaml
@@ -139,6 +142,10 @@ input_select: !include input_select.yaml
 input_boolean: !include input_boolean.yaml
 group: !include groups.yaml
 script: !include scripts.yaml
+panel_custom: !include panel_custom.yaml
 
+zone: 
+  !include_dir_merge_list zones
+        
 python_script:
 

@@ -1,0 +1,86 @@
+      
+name: Cats Lair Floorplan
+image: /local/custom_ui/floorplan/floorplan.svg
+stylesheet: /local/custom_ui/floorplan/floorplan.css
+warnings:
+
+groups:
+  - name: Lights
+    entities:
+      - light.dining_light
+      - light.hallway_light
+      - light.kitchen_light
+      - light.kitchen_light_daylight
+      - light.lounge_light
+      - light.lounge_light_extra
+      - light.gateway_light_286c07f0a0c6
+      - switch.fish_lamp
+      - switch.audio
+      - switch.tv
+      - switch.fetchtv
+      - switch.audio
+      - switch.fan
+    states:
+      - state: 'on'
+        class: 'light-on'
+      - state: 'off'
+        class: 'light-off'
+    action:
+      domain: homeassistant
+      service: toggle
+
+
+  - name: Binary sensors
+    entities:
+      - binary_sensor.motion_sensor_158d000120cce2
+    states:
+      - state: 'off'
+        class: 'sensor-off'
+      - state: 'on'
+        class: 'sensor-on'
+
+
+  - name: Door sensors
+    entities:
+      - binary_sensor.door_window_sensor_158d0001d6360a
+    states:
+      - state: 'off'
+        class: 'door-closed'
+      - state: 'on'
+        class: 'door-open'
+
+
+  - name: Media Players
+    entities:
+      - media_player.laircast
+      - media_player.kitchen_speaker
+      - media_player.lounge_roku
+    states:
+      - state: 'playing'
+        class: 'media-player-playing'
+      - state: 'paused'
+        class: 'media-player-paused'
+      - state: 'on'
+        class: 'media-player-on'
+      - state: 'off'
+        class: 'media-player-off'
+
+
+  - name: Alarm
+    entities:
+      - alarm_control_panel.ha_alarm
+    states:
+      - state: 'armed_away'
+        class: 'alarm-armed-away'
+      - state: 'armed_home'
+        class: 'alarm-armed-home'
+      - state: 'disarmed'
+        class: 'alarm-disarmed'
+
+
+  - name: text_states
+    entities:
+      - sensor.kitchen_temperature
+      - sensor.temperature_158d0001c15683
+    text_template: '${entity.state ? entity.state.replace(/\s{2,}/g,"") : "undefined"}'
+

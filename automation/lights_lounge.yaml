@@ -1,7 +1,28 @@
-#
-# Lounge Lights
-#
-- id: lounge_light_auto_off
+
+#########################################################
+- id: lounge_lights_group_off
+  alias: Lounge Lights Group Off
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: group.lounge_lights
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: single
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: group.lounge_lights
+
+
+- id: lounge_light_off
   alias: Lounge Lights OFF
   hide_entity: true
   condition:
@@ -10,37 +31,35 @@
       state: 'on'
 
   trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: LOUNGE
 
     - platform: event
       event_type: keyboard_remote_command_received
       event_data:
         key_code: 28
 
-    - platform: event
-      event_type: click
-      event_data:
-        entity_id: binary_sensor.switch_158d00019de7b4 
-        click_type: single
-
   action:
-
     - service: light.turn_off
       data:
         entity_id: light.lounge_light
 
-    - service: light.turn_off
-      data:
-        entity_id: light.lounge_light_extra
 
-
-- id: lounge_light_auto_on
+- id: lounge_light_on
   alias: Lounge Lights OFF
   hide_entity: true
   condition:
     - condition: state
       entity_id: light.lounge_light
       state: 'off'
+
   trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: LOUNGE
 
     - platform: event
       event_type: keyboard_remote_command_received
@@ -60,4 +79,43 @@
         color_name: 'yellow'
         brightness_pct: 100
 
+
+- id: lounge_light_extra_off
+  alias: Lounge Lights Extra OFF
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.lounge_light_extra
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: LOUNGE_EXTRA
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.lounge_light_extra
+
+
+- id: lounge_light_extra_on
+  alias: Lounge Lights Extra ON
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.lounge_light_extra
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: LOUNGE_EXTRA
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.lounge_light_extra
 

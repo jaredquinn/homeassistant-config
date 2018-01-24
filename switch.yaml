@@ -39,3 +39,11 @@
   mac: !secret sp3mini2_fan_mac
   friendly_name: Fan
 
+- platform: flux
+  name: Flux Lights
+  lights:
+    - lights.hallway
+    - lights.lounge_light_extra
+    - lights.kitchen_light_daylight
+
+

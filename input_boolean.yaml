@@ -1,3 +1,7 @@
+timeofday:
+  name: Time of Day Automation
+  initial: on
+  icon: mdi:access-point
 announcements:
   name: House Announcements
   initial: off

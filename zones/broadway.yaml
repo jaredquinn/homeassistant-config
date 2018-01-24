@@ -1,0 +1,6 @@
+- id: broadway
+  name: Broadway
+  latitude: -33.8833616
+  longitude: 151.1936342
+  radius: 100
+  icon: mdi:cart

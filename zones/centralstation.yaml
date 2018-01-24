@@ -1,0 +1,6 @@
+- id: centralstation
+  name: Central Station
+  latitude: -33.883809
+  longitude: 151.206196
+  radius: 200
+  icon: mdi:train

@@ -19,3 +19,4 @@ README
 __pycache__
 tts/
 zones/secret_*.yaml
+floorplan.svg

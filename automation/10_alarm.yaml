@@ -135,6 +135,10 @@
       entity_id: alarm_control_panel.ha_alarm
       to: 'armed_home'
   action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: Alarm is being armed in HOME mode.
     - service: xiaomi_aqara.play_ringtone
       data:
         ringtone_id: 11
@@ -157,6 +161,11 @@
       entity_id: alarm_control_panel.ha_alarm
       to: 'armed_away'
   action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: Alarm is being armed in AWAY MODE.  You have 15 seconds to leave.
+    - delay: 15
     - service: xiaomi_aqara.play_ringtone
       data:
         ringtone_id: 12
@@ -207,8 +216,10 @@
       data:
         message: "The alarm has been disarmed"
         target: !include ../secret/alarm_facebook_alerts.yaml
-
-
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: Alarm Status is Disarmed.
 
 - id: alarm_notify
   alias: 'Alarm Notifications'
