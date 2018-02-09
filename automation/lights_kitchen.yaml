@@ -5,7 +5,7 @@
 #########################################################
   condition:
     - condition: state
-      entity_id: group.kitchen_lights
+      entity_id: light.kitchen_light
       state: 'on'
 
   trigger:

@@ -1,0 +1,8 @@
+
+- id: metcalf_park
+  name: Metcalf Park
+  latitude: -33.8658495
+  longitude: 151.1958561
+  radius: 40
+  icon: mdi:pine-tree
+

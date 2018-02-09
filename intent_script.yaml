@@ -8,36 +8,44 @@ AMAZON.HelpIntent:
              You can use Turn On or Turn Off commands for these.
              Both of us can control the lights which are {%- for state in states.light %} {{ state.name }}, {%- endfor %}.
              Both of us can control power to {%- for state in states.switch %} {{ state.name }}, {%- endfor %}.
-             Example - hey Google turn on the lounge light . . . . .
              There are some presets defined, you can use the keyword Activate to activate a preset.  They are {%- for state in states.scene %} {{ state.name }}, {%- endfor %}.
              
-             I have an added skill; I can give you a status report, just say Hey Alexa, ask the house for a status report.
+             I have an added skill; I can give you a status report, just say Hey Alexa, ask the house for a status report or the temperature or for alerts.
 
              Just ask me to ask the house for help to hear this again.
 
 
-amzn1.ask.skill.26c589c5-8cff-470f-b71e-2392f4a36dd2#033:
+amzn1.ask.skill.26c589c5-8cff-470f-b71e-2392f4a36dd2:
 
   speech:
-    text: Welcome to the Cats Lair.  What can I do for you?
+    text: Welcome to the Cats Lair.  What can I do for you?  You can talk to me by asking me to talk to the cats lair.
+
+AlertIntent:
+
+  speech:
+    text: >
+            New South Wales Rural Fire Service reports 
+            {{ states.sensor.nsw_rfs_major_incidents_emergency_warning.state }} emergency warnings and
+            {{ states.sensor.nsw_rfs_major_incidents_watch_and_act.state }} watch and act advisories within 100km.
+
+            The USGS reports {{ states.sensor.usgs_all_earthquakes_past_hour.state }} earthquakes with a magnitude of 1 or greater in the last hour.
+
 
 TemperatureIntent:
 
   speech:
     text: >
-            The alarm is currenly {{ states.alarm_control_panel.ha_alarm.state }}.
-            Kitchen is {{ states.sensor.kitchen_temperature.state }} degrees C, Bedroom is {{ states.sensor.temperature_158d0001c15683.state }} degres C with {{ states.sensor.humidity_158d0001c15683.state }} percent humidity.
+            The Kitchen Temperature is currently {{ states.sensor.kitchen_temperature.state }} degrees C, 
+            The Bedroom Temperature is currently {{ states.sensor.temperature_158d0001c15683.state }} degrees C with {{ states.sensor.humidity_158d0001c15683.state }} percent relative humidity.
+            The Bureau of Meteorology says Sydney Airport has an air temperature of {{ states.sensor.bom_sydney_air_temp_c.state }} degrees but feels like {{ states.sensor.bom_sydney_feels_like_c.state }}.
+            An outside forecast of {{ states.sensor.forecast_temperature.state }} is expected.
+
 
 StatusReportIntent:
 
   speech:
     text: >
             The alarm is currenly {{ states.alarm_control_panel.ha_alarm.state }}.
-
-            The Kitchen Temperature is currently {{ states.sensor.kitchen_temperature.state }} degrees C, 
-            The Bedroom Temperature is currently {{ states.sensor.temperature_158d0001c15683.state }} degres C with {{ states.sensor.humidity_158d0001c15683.state }} percent humidity.
-            The Bureau of Meteorology says Sydney Airport has an air temperature of {{ states.sensor.bom_sydney_air_temp_c.state }} degrees but feels like {{ states.sensor.bom_sydney_feels_like_c.state }}.
-            An outside forecast of {{ states.sensor.forecast_temperature.state }} is expected.
 
             Miranda has a load average of {{ states.sensor.average_load_1m.state }} over one minute and {{ states.sensor.average_load_5m.state }} over five.
 

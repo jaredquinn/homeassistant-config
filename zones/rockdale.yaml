@@ -1,0 +1,24 @@
+- id: stgeorge
+  name: St George Hospital
+  latitude: -33.9668497
+  longitude: 151.1340961
+  radius: 60
+  icon: mdi:medical-bag
+
+- id: grandroxy
+  name: The Grand Roxy
+  latitude: -33.9654193
+  longitude: 151.1540356
+  radius: 30
+  icon: mdi:glass-flute
+
+- id: snowboardwarehouse
+  name: Snowboard Warehouse
+  latitude: -33.9496313
+  longitude: 151.1394592
+  radius: 40
+  icon: mdi:snowflake
+
+
+
+ 

@@ -16,7 +16,7 @@
   name: Broadway
   latitude: -33.8833616
   longitude: 151.1936342
-  radius: 100
+  radius: 120
   icon: mdi:cart
 
 - id: centralpark
@@ -37,6 +37,6 @@
   name: Sydney Uni
   latitude: -33.8880313
   longitude: 151.1861544
-  radius: 800
+  radius: 400
   icon: mdi:school
 

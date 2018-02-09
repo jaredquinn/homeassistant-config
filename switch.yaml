@@ -44,6 +44,6 @@
   lights:
     - lights.hallway
     - lights.lounge_light_extra
-    - lights.kitchen_light_daylight
+    - lights.kitchen_light
 
 

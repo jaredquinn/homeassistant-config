@@ -1,4 +1,4 @@
-
+---
 - platform: yr
   name: Forecast
   forecast: 24
@@ -98,9 +98,36 @@
     - stardate
 
 - platform: mqtt
-  state_topic: homeassistant/sensor/fishmondev/aquarium_temperature/state
-  name: "Aquarium Temperature"
+  state_topic: 'homeassistant/sensor/fishmondev/aquarium_temperature/state'
+  name: Aquarium Temperature
   unit_of_measurement: '°C'
   value_template: '{{ value_json.temperature }}'
 
+- platform: geo_rss_events
+  name: NSW RFS Major Incidents
+  url: http://www.rfs.nsw.gov.au/feeds/majorIncidents.xml
+  radius: 100
+  publish_events: true
+  categories:
+    - Emergency Warning
+    - Watch and Act
+    - Advice
+
+- platform: geo_rss_events
+  name: USGS All Earthquakes
+  url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.atom'
+  radius: 300000
+  publish_events: true
+  categories:
+    - Past Hour
+  custom_attributes:
+    - name: magnitude
+      source: title
+      regexp: '^M (?P<custom_attribute>\d+.\d+) -.*'
+
+- platform: geo_rss_events
+  name: Geoscience Australia
+  url: 'http://www.ga.gov.au/earthquakes/all_recent.rss'
+  radius: 500
+  publish_events: true
 

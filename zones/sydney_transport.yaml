@@ -1,0 +1,134 @@
+- id: sydneyairportdomestic
+  name: Domestic Airport
+  latitude: -33.9337446
+  longitude: 151.1807531
+  radius: 100
+  icon: mdi:plane
+
+- id: sydneyairportinternational
+  name: International Airport
+  latitude: -33.9352668
+  longitude: 151.1667627
+  radius: 100
+  icon: mdi:plane
+
+- id: railwaysquare
+  name: Railway Square
+  latitude: -33.8837102
+  longitude: 151.2033949
+  radius: 40
+  icon: mdi:bus
+
+- id: centralstation
+  name: Central Station
+  latitude: -33.883809
+  longitude: 151.206196
+  radius: 200
+  icon: mdi:train
+
+- id: townhall
+  name: Town Hall Station
+  latitude: -33.8735656
+  longitude: 151.2070838
+  radius: 70
+  icon: mdi:train
+
+- id: wynyard
+  name: Wynyard Station
+  latitude: -33.8657431
+  longitude: 151.2061885
+  radius: 70
+  icon: mdi:train
+
+- id: circularquay
+  name: Circular Quay
+  latitude: -33.8613065
+  longitude: 151.2108207
+  radius: 70
+  icon: mdi:train
+
+
+- id: kogarah
+  name: Kogarah Station
+  latitude: -33.9627275
+  longitude: 151.1324438
+  radius: 40
+  icon: mdi:train
+
+- id: rockdale
+  name: Rockdale Station
+  latitude: -33.9522622
+  longitude: 151.1367139
+  radius: 30
+  icon: mdi:train
+
+- id: banksia
+  name: Banksia Station
+  latitude: -33.9453069
+  longitude: 151.1404127
+  radius: 30
+  icon: mdi:train
+
+- id: arncliffe
+  name: Arncliffe Station
+  latitude: -33.9362414
+  longitude: 151.1472926
+  radius: 30
+  icon: mdi:train
+
+- id: wollicreek
+  name: Wolli Creek Station
+  latitude: -33.9285671
+  longitude: 151.1540101
+  radius: 30
+  icon: mdi:train
+
+- id: tempe
+  name: Tempe Station
+  latitude: -33.9245243
+  longitude: 151.1564134
+  radius: 30
+  icon: mdi:train
+
+- id: sydenham
+  name: Sydenham Station
+  latitude: -33.9147822
+  longitude: 151.1660063
+  radius: 30
+  icon: mdi:train
+
+- id: marrickville
+  name: Marrickville Station
+  latitude: -33.9137772
+  longitude: 151.1531679
+  radius: 30
+  icon: mdi:train
+
+- id: stpeters
+  name: St Peters Station
+  latitude: -33.9074933
+  longitude: 151.180336
+  radius: 30
+  icon: mdi:train
+
+- id: macdonaldtown
+  name: Macdonaldtown Station
+  latitude: -33.8967618
+  longitude: 151.1863402
+  radius: 30
+  icon: mdi:train
+
+- id: newtown
+  name: Newtown Station
+  latitude: -33.8979941
+  longitude: 151.1795461
+  radius: 30
+  icon: mdi:train
+
+- id: redfern
+  name: Redfern Station
+  latitude: -33.8916355
+  longitude: 151.1987695
+  radius: 30
+  icon: mdi:train
+

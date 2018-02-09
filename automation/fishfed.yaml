@@ -16,12 +16,12 @@
     - service: tts.google_say
       data:
         entity_id: media_player.kitchen_speaker
-        message: Fish Light will be turned off in five minutes.
+        message: Fish Light will be turned off in thirty minutes.
     - service: notify.facebook_notifications
       data:
-        message: "Fish Light will be turned off in five minutes"
+        message: "Fish Light will be turned off in 30 minutes"
         target: !include ../secret/alarm_facebook_alerts.yaml
-    - delay: '00:05:00'
+    - delay: '00:30:00'
     - service: switch.turn_off
       entity_id: switch.fish_lamp
     - service: notify.facebook_notifications

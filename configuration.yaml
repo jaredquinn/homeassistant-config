@@ -14,10 +14,10 @@ logbook:
     entities:
       - binary_sensor.motion_sensor_158d000120cce2
       - sensor.illumination_286c07f0a0c6
+      - sensor.geoscience_australia
+      - sensor.usgs_all_earthquakes
      
 map:
-
-    
 sun:
 
 recorder: !include recorder.yaml
@@ -30,13 +30,8 @@ google_assistant:
   api_key: !secret google_assistant_api_key
 
 cloud:
-
-#I prefer not autodiscovering things; they have to be manually added to DHCP first anyway
-#discovery:
-
 alexa:
 
-# Z-Wave USB Device Testing 
 #zwave:
 #  usb_path: /dev/ttyUSB0
 
@@ -54,9 +49,9 @@ facebook_webhook:
   access_token: !secret fb_page_access_token
   allowed_ids: !include secret/trusted_facebook_ids.yaml
 
-duckdns:
-  domain: !secret domain
-  access_token: !secret duck_access_token
+#duckdns:
+#  domain: !secret domain
+#  access_token: !secret duck_access_token
 
 config:
 
@@ -131,6 +126,10 @@ device_tracker:
 
   - platform: ping
     hosts: !include secret/ping_hosts.yaml
+
+  - platform: bluetooth_tracker
+
+# - platform: bluetooth_le_tracker
 
 media_player: !include media_player.yaml
 binary_sensor: !include binary_sensor.yaml

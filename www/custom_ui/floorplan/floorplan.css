@@ -104,12 +104,16 @@ svg, svg * {
   stroke: red !important;
 }
 
-.door-closed,
+.door-open,
 .sensor-off {
-  opacity: 0 !important;
+  fill: red !important;
+  opacity: 1 !important;
 }
 
-.door-open,
+.door-closed {
+  fill-opacity: 1 !important;
+}
+
 .sensor-on { 
   fill: red !important;
   fill-opacity: 1 !important;

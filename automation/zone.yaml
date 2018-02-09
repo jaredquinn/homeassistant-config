@@ -1,0 +1,126 @@
+- id: person_zone_enter_home
+  alias: Person Enters Zone
+  hide_entity: true
+  trigger: 
+    - platform: zone
+      event: enter
+      entity_id:
+        - device_tracker.jared_oppo
+      zone: zone.home
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Jared entered zone - Home"
+
+- id: person_zone_leave_home
+  alias: Person Leave Zone
+  hide_entity: true
+  trigger: 
+    - platform: zone
+      event: enter
+      entity_id:
+        - device_tracker.jared_oppo
+      zone: zone.home
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Jared left zone - Home"
+       
+
+# BROADWAY
+#
+- id: person_zone_enter_broadway
+  alias: Person Enters Zone Broadway
+  hide_entity: true
+  trigger: 
+    - platform: zone
+      event: enter
+      entity_id:
+        - device_tracker.jared_oppo
+      zone: zone.broadway
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Jared arrived at Broadway"
+
+- id: person_zone_leave_broadway
+  alias: Person Leave Zone Broadway
+  hide_entity: true
+  trigger: 
+    - platform: zone
+      event: enter
+      entity_id:
+        - device_tracker.jared_oppo
+      zone: zone.broadway
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Jared left at Broadway"
+
+# CENTRAL PARK
+#
+- id: person_zone_enter_centralpark
+  alias: Person Enters Zone Central PArk
+  hide_entity: true
+  trigger: 
+    - platform: zone
+      event: enter
+      entity_id:
+        - device_tracker.jared_oppo
+      zone: zone.centralpark
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Jared has entered zone - Central Park"
+
+- id: person_zone_leave_centralpark
+  alias: Person Leave Zone Central Park
+  hide_entity: true
+  trigger: 
+    - platform: zone
+      event: enter
+      entity_id:
+        - device_tracker.jared_oppo
+      zone: zone.centralpark
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Jared has left zone - Central Park"
+
+# CHIPPO
+#
+- id: person_zone_enter_chippo
+  alias: Person Enters Zone Chippo
+  hide_entity: true
+  trigger: 
+    - platform: zone
+      event: enter
+      entity_id:
+        - device_tracker.jared_oppo
+      zone: zone.thechippo
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Jared has entered zone - The Chippo Hotel"
+
+- id: person_zone_leave_chippo
+  alias: Person Leave Zone Chippo
+  hide_entity: true
+  trigger: 
+    - platform: zone
+      event: enter
+      entity_id:
+        - device_tracker.jared_oppo
+      zone: zone.thechippo
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Jared has left zone - The Chippo Hotel"

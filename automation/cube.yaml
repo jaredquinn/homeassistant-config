@@ -1,0 +1,30 @@
+- id: cube_mute_tv
+  alias: Cube - Mute TV 
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001035c90
+      action_type: tap_twice
+
+  action:
+    - service: python_script.remote_control
+      data_template:
+        command: "mute"
+
+
+- id: cube_shake
+  alias: Cube - Toggle Lounge Lights
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001035c90
+      action_type: shake_air
+  action:
+    - service: light.toggle
+      data:
+        entity_id: light.lounge_light
+

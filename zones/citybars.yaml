@@ -1,0 +1,16 @@
+
+- id: sg
+  name: The SG
+  latitude: -33.8689538
+  longitude: 151.2062276
+  radius: 30
+  icon: mdi:glass-flute
+
+- id: frankies
+  name: Frankies
+  latitude: -33.8658689
+  longitude: 151.2093927
+  radius: 30
+  icon: mdi:glass-flute
+
+

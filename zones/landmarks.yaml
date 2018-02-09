@@ -2,6 +2,28 @@
   name: Opera House
   latitude: -33.8567844
   longitude: 151.2152967
-  radius: 100
+  radius: 140
   icon: mdi:music
+
+- id: scg
+  name: Sydney Cricket Ground
+  latitude: -33.891655
+  longitude: 151.224846
+  radius: 140
+  icon: mdi:soccer
+
+- id: allianz
+  name: Allianz Stadium
+  latitude: -33.8890672
+  longitude: 151.2253643
+  radius: 140
+  icon: mdi:soccer
+
+- id: sydneyfishmarket
+  name: Sydney Fish Markets
+  latitude: -33.8731013
+  longitude: 151.1925951
+  radius: 50
+  icon: mdi:fish
+
 

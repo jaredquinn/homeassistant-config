@@ -50,6 +50,8 @@ tab_info:
     - sensor.aquarium_temperature
 
     - group.global
+    - group.alerts
+
     - group.items_time
     - group.items_presence
     - group.items_bom_sydney
@@ -78,7 +80,6 @@ tab_lounge:
     - group.items_entertainment
     - group.items_channel
     - group.lounge_lights
-    - group.other_lights_entertainment
     - group.items_living
 
 tab_kitchen:
@@ -101,7 +102,6 @@ tab_kitchen:
     - group.global
     - group.kitchen_lights
     - media_player.kitchen_speaker
-    - group.other_lights_kitchen
     - group.items_pets
     - group.items_laundry
 
@@ -134,6 +134,7 @@ items_entertainment:
 
 items_channel:
   name: Entertainment Selection
+  control: hidden
   entities:
     - media_player.laircast
     - media_player.lounge_roku
@@ -158,6 +159,7 @@ items_living:
 
 items_pets:
   name: Pets
+  control: hidden
   entities:
     - sensor.aquarium_temperature
     - switch.fish_lamp
@@ -165,17 +167,20 @@ items_pets:
 
 items_laundry:
   name: Laundry
+  control: hidden
   entities:
     - switch.washing_machine
 
 items_presence:
   name: Who's Home
+  control: hidden
   entities:
     - device_tracker.jared_oppo
     - device_tracker.chelsea_s4
 
 items_bom_sydney:
   name: Sydney Weather
+  control: hidden
   entities:
     - sensor.bom_sydney_weather
     - sensor.bom_sydney_air_temp_c
@@ -233,18 +238,6 @@ items_modes:
     - scene.darkness
     - scene.party
 
-other_lights_kitchen:
-  name: Other Light Groups
-  entities:
-    - group.lounge_lights
-    - group.ten_forward_lights
-
-other_lights_entertainment:
-  name: Other House Lights
-  entities:
-    - group.kitchen_lights
-    - group.ten_forward_lights
-
 # LIGHT GROUPS
 lounge_lights:
   name: Lounge Room Lights
@@ -257,19 +250,29 @@ ten_forward_lights:
   entities:
     - light.dining_light
     - light.hallway_light
+    - light.bathroom_light
 
 kitchen_lights:
   name: Kitchen Lights
   entities:
-    - light.kitchen_light_daylight
     - light.kitchen_light
     - light.gateway_light_286c07f0a0c6
 
+alerts:
+  name: Alerts
+  entities:
+    - sensor.nsw_rfs_major_incidents_emergency_warning
+    - sensor.nsw_rfs_major_incidents_advice
+    - sensor.nsw_rfs_major_incidents_watch_and_act
+    - sensor.geoscience_australia_any
+    - sensor.usgs_all_earthquakes_past_hour
+    - sensor.usgs_all_earthquakes_past_day
+
 global:
   name: House Wide
+  control: hidden
   entities:
     - alarm_control_panel.ha_alarm
     - input_boolean.announcements
-    - switch.flux
-
+    - switch.flux_lights
 
