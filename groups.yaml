@@ -24,6 +24,7 @@ default_view:
 
     - group.lounge_lights
     - group.ten_forward_lights
+    - group.bathroom_lights
     - group.kitchen_lights
 
     - group.items_pets
@@ -250,6 +251,10 @@ ten_forward_lights:
   entities:
     - light.dining_light
     - light.hallway_light
+
+bathroom_lights:
+  name: Bathroom Lights
+  entities:
     - light.bathroom_light
 
 kitchen_lights:
