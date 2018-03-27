@@ -83,6 +83,9 @@ binary_sensor.switch_158d0001243e26:
 binary_sensor.switch_158d00019de7b4:
   friendly_name: Entry Button
   assistant_room_hint: Living Room
+binary_sensor.switch_158d00019c9688:
+  friendly_name: Bathroom Button
+  assistant_room_hint: Bathroom
 light.gateway_light_286c07f0a0c6:
   friendly_name: Gateway Light
   assistant_room_hint: Kitchen
