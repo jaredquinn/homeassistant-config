@@ -82,5 +82,5 @@ groups:
     entities:
       - sensor.kitchen_temperature
       - sensor.temperature_158d0001c15683
-    text_template: '${entity.state ? entity.state.replace(/\s{2,}/g,"") : "undefined"}'
+    #text_template: '${entity.state ? entity.state.replace(/\s{2,}/g,"") : "undefined"}'
 
