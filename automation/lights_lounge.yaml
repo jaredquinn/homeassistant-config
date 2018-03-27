@@ -76,7 +76,7 @@
     - service: light.turn_on
       data:
         entity_id: light.lounge_light
-        color_name: 'yellow'
+        rgb_color: [ 255, 146, 146 ]
         brightness_pct: 100
 
 

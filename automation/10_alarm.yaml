@@ -33,6 +33,9 @@
       - condition: state
         entity_id: alarm_control_panel.ha_alarm
         state: 'armed_home'
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: 'triggered'
   trigger:
     - platform: event
       event_type: click

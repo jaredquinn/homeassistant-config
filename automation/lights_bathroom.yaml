@@ -1,0 +1,98 @@
+ 
+#########################################################
+- id: bathroom_light_group_off
+  alias: Bathroom Light OFF
+  hide_entity: true
+#########################################################
+  condition:
+    - condition: state
+      entity_id: group.bathroom_lights
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        transition: 3
+        entity_id: binary_sensor.switch_158d00019c9688
+        click_type: 'single'
+
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.bathroom_light
+
+
+#########################################################
+- id: bathroom_auto_light_on
+  alias: Bathroom Light ON
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.bathroom_light
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 60
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019c9688
+        click_type: 'single'
+
+  action:
+    - service: light.turn_on
+      data:
+        transition: 2
+        entity_id: light.bathroom_light
+        brightness_pct: 20
+        rgb_color: [ 255, 182, 109 ]
+
+
+#########################################################
+- id: bathroom_auto_light_bright
+  alias: Bathroom Light Bright
+#########################################################
+  hide_entity: true
+  trigger:
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019c9688
+        click_type: 'long_click_press'
+
+  action:
+    - service: light.turn_on
+      data:
+        transition: 3
+        entity_id: light.bathroom_light
+        brightness_pct: 100
+        rgb_color: [ 255, 200, 182 ]
+
+
+#########################################################
+#- id: bathroom_auto_light_party
+#  alias: Bathroom Light Party
+#########################################################
+#  hide_entity: true
+#  trigger:
+#
+#    - platform: event
+#      event_type: click
+#      event_data:
+#        entity_id: binary_sensor.switch_158d00019c9688
+#        click_type: 'hold'
+#
+#  action:
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.bathroom_light
+#        effect: Slowdown
+#

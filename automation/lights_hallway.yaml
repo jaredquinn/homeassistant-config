@@ -1,0 +1,72 @@
+
+#########################################################
+- id: hallway_auto_light_off
+  alias: Hallway Light Controls OFF
+#########################################################
+
+  hide_entity: true
+
+  condition:
+    - condition: state
+      entity_id: light.hallway_light
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: HALLWAY
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 59
+
+    # Bathroom Button
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019c9688
+        click_type: 'double'
+
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_light
+
+#########################################################
+- id: hallway_auto_light_on
+  alias: Hallway Light Controls ON
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.hallway_light
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: HALLWAY
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 59
+
+    # Bathroom Button
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019c9688
+        click_type: 'double'
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_light
+        color_name: white
+        brightness_pct: 100
+
+

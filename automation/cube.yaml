@@ -13,6 +13,20 @@
       data_template:
         command: "mute"
 
+- id: cube_volume_up
+  alias: Cube - Volume
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001035c90
+      action_type: rotate
+  action:
+    - service: python_script.remote_control
+      data_template:
+        command: volume
+        adjustment: "{{ trigger.event.data.action_value }}"
 
 - id: cube_shake
   alias: Cube - Toggle Lounge Lights

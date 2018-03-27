@@ -1,85 +1,81 @@
 
 #########################################################
-- id: kitchen_lights_group_off
-  alias: Kitchen Lights Group OFF
+- id: dining_auto_light_off
+  alias: Dining Light Controls OFF
 #########################################################
+
+  hide_entity: true
   condition:
     - condition: state
-      entity_id: light.kitchen_light
+      entity_id: light.dining_light
       state: 'on'
 
   trigger:
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 14
+
+    - platform: event
+      event_type: ir_command_received
+      event_data:
+        button_name: DINING
+
+    # Kitchen Button
     - platform: event
       event_type: click
       event_data:
         entity_id: binary_sensor.switch_158d0001243e26
-        click_type: single
+        click_type: 'double'
 
   action:
     - service: light.turn_off
       data:
-        entity_id: light.kitchen_light
+        entity_id: light.dining_light
 
- 
+
 #########################################################
-- id: kitchen_auto_light_off
-  alias: Kitchen Light OFF
+- id: dining_auto_light_on
+  alias: Dining Light Controls ON
 #########################################################
+
   hide_entity: true
   condition:
     - condition: state
-      entity_id: light.kitchen_light
-      state: 'on'
-
-  trigger:
-    - platform: event
-      event_type: ir_command_received
-      event_data:
-        button_name: KITCHEN
-
-    - platform: event
-      event_type: keyboard_remote_command_received
-      event_data:
-        key_code: 60
-
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: light.kitchen_light
-
-
-#########################################################
-- id: kitchen_auto_light_on
-  alias: Kitchen Light ON
-#########################################################
-  hide_entity: true
-  condition:
-    - condition: state
-      entity_id: light.kitchen_light
+      entity_id: light.dining_light
       state: 'off'
 
   trigger:
-
     - platform: event
       event_type: ir_command_received
       event_data:
-        button_name: KITCHEN
+        button_name: DINING
 
     - platform: event
       event_type: keyboard_remote_command_received
       event_data:
-        key_code: 60
+        key_code: 14
 
+    # Entry Button
+    #- platform: event
+    #  event_type: click
+    #  event_data:
+    #    entity_id: binary_sensor.switch_158d00019de7b4 
+    #    click_type: 'double'
+    
+    # Kitchen Button
     - platform: event
       event_type: click
       event_data:
         entity_id: binary_sensor.switch_158d0001243e26
-        click_type: single
+        click_type: 'double'
+
 
   action:
     - service: light.turn_on
       data:
-        entity_id: light.kitchen_light
+        entity_id: light.dining_light
+        color_name: 'white'
         brightness_pct: 100
 
 
