@@ -42,7 +42,9 @@
 - platform: flux
   name: Flux Lights
   lights:
-    - lights.hallway
+    - lights.dining_light
+    - lights.hallway_light
+    - lights.lounge_light
     - lights.lounge_light_extra
     - lights.kitchen_light
 
