@@ -111,7 +111,7 @@ alarm_control_panel:
     delay_time: 1
     trigger_time: 60
 
-lirc:
+#lirc:
 
 keyboard_remote:
   device_name: 'Remote control'
