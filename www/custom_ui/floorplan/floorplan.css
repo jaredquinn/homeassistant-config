@@ -41,6 +41,8 @@ svg, svg * {
 
 /* Bootstrap warning */
 
+div#warnings { margin-left: -9999em; float: left; }
+
 .warning-text {
   fill: #8a6d3b !important;
 }
