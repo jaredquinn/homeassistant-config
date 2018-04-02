@@ -1,0 +1,92 @@
+- id: tokens_come_go_in
+  alias: Token Scan In
+
+  trigger:
+    - platform: state
+      entity_id: device_tracker.token_chelsea, device_tracker.token_jared, device_tracker.token_flaps
+      to: 'home'
+
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: Welcome home, {{ trigger.to_state.attributes.friendly_name }}
+    - service: notify.facebook_notifications
+      data_template:
+        message: "{{ trigger.to_state.attributes.friendly_name }} has entered the Lair (Active Token)"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+- id: tokens_come_go_in_guest
+  alias: Token Scan In Guest
+
+  trigger:
+    - platform: state
+      entity_id: device_tracker.token_guest1, device_tracker.token_guest2, device_tracker.token_guest3, device_tracker.guest4, device_tracker.guest5, device_tracker.guest6
+      to: 'home'
+
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: Welcome back, {{ trigger.to_state.attributes.friendly_name }}
+    - service: notify.facebook_notifications
+      data_template:
+        message: "{{ trigger.to_state.attributes.friendly_name }} has entered the Lair (Guest Token)"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+
+- id: tokens_come_go_in
+  alias: Token Scan Out
+
+  trigger:
+    - platform: state
+      entity_id: device_tracker.token_chelsea, device_tracker.token_jared, device_tracker.token_flaps, device_tracker.token_guest1, device_tracker.token_guest2, device_tracker.token_guest3, device_tracker.guest4, device_tracker.guest5, device_tracker.guest6
+      from: 'home'
+
+  action:
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Goodbye for now {{ trigger.to_state.attributes.friendly_name }}"
+    - service: notify.facebook_notifications
+      data_template:
+        message: "{{ trigger.to_state.attributes.friendly_name }} has left Lair"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+
+- id: security_token_home_disarm
+  alias: Token Disarm Alarm
+
+  trigger:
+    - platform: state
+      entity_id: group.active_security_tokens
+      to: 'home'
+
+  action:
+    - service: notify.facebook_notifications
+      data:
+        message: "Active User Home.  Disarming the Alarm"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm
+      data:
+        code: !secret alarm_control_code
+
+- id: security_token_home_away
+  alias: Token Alarm Arm Away 
+
+  trigger:
+    - platform: state
+      entity_id: group.active_security_tokens
+      to: 'not_home'
+
+  action:
+    - service: notify.facebook_notifications
+      data:
+        message: "Everyone Left.  Arming the alarm for Away Mode"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+    - service: alarm_control_panel.alarm_arm_away
+      entity_id: alarm_control_panel.ha_alarm
+      data:
+        code: !secret alarm_control_code
+

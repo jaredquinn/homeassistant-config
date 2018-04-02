@@ -22,7 +22,7 @@
         entity_id: group.lounge_lights
 
 
-- id: lounge_light_off
+- id: lounge_light_auto_off
   alias: Lounge Lights OFF
   hide_entity: true
   condition:
@@ -47,7 +47,7 @@
         entity_id: light.lounge_light
 
 
-- id: lounge_light_on
+- id: lounge_light_auto_on
   alias: Lounge Lights OFF
   hide_entity: true
   condition:

@@ -1,0 +1,69 @@
+
+house_wakeup:
+  sequence:
+    - service: media_player.volume_set
+      alias: Wake Up Setting Volume
+      data:
+         entity_id: media_player.kitchen_speaker
+         volume_level: .95
+    - service: tts.google_say
+      alias: Tell Everyone Were Waking Up
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "The Cats Lair is waking up.  Good Morning."
+    - service: input_boolean.turn_on
+      alias: Wake Up Turn On Annoucncements
+      data:
+        entity_id: input_boolean.announcements
+    - service: light.turn_on
+      alias: Wake Up Turn On Hallway
+      data:
+        entity_id: light.hallway_light
+        brightness_pct: 20
+    - service: light.turn_on
+      alias: Wake Up Turn On Kitchen
+      data:
+        entity_id: light.kitchen_light
+        brightness_pct: 20
+    - service: switch.turn_on
+      alias: Wake Up Turn On Flux 
+      data:
+        entity_id: switch.flux_lights
+    - delay: '00:00:10'
+    - alias: Wake Up Disarm
+      service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.ha_alarm
+        code: !secret alarm_control_code
+
+
+house_goodnight:
+  sequence:
+    - service: media_player.volume_set
+      alias: Set Volume
+      data:
+         entity_id: media_player.kitchen_speaker
+         volume_level: .45
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kitchen_speaker
+        message: "The Cats Lair is going to sleep.  Good night"
+    - alias: Turn off Announcements
+      service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.announcements
+    - alias: Turn off Flux Lights
+      service: switch.turn_off
+      data:
+        entity_id: switch.flux_lights
+    - alias: Turn off House Lights
+      service: light.turn_off
+      data:
+        entity_id: light.house_lights
+    - delay: '00:00:15'
+    - alias: Arm Alarm
+      service: alarm_control_panel.alarm_arm_home
+      data:
+        entity_id: alarm_control_panel.ha_alarm
+        code: !secret alarm_control_code
+

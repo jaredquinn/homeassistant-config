@@ -4,5 +4,10 @@ timeofday:
   icon: mdi:access-point
 announcements:
   name: House Announcements
-  initial: off
+  initial: on
   icon: mdi:phone
+awake:
+  name: House Awake
+  initial: on
+  icon: mdi:creation
+

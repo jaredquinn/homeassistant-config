@@ -95,7 +95,7 @@
     - time
     - time_utc
     - beat
-    - stardate
+#    - stardate
 
 - platform: mqtt
   state_topic: 'homeassistant/sensor/fishmondev/aquarium_temperature/state'
@@ -128,6 +128,6 @@
 - platform: geo_rss_events
   name: Geoscience Australia
   url: 'http://www.ga.gov.au/earthquakes/all_recent.rss'
-  radius: 500
+  radius: 1000
   publish_events: true
 

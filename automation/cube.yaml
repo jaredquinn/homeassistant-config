@@ -28,8 +28,56 @@
         command: volume
         adjustment: "{{ trigger.event.data.action_value }}"
 
-- id: cube_shake
-  alias: Cube - Toggle Lounge Lights
+- id: cube_input_change
+  alias: Cube - Input Change
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001035c90
+      action_type: flip90
+  action:
+    - service: input_select.select_next
+      entity_id: input_select.tv_source
+
+
+- id: cube_tap_on
+  alias: Cube - Tap Lights On
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001035c90
+      action_type: tap_twice
+  condition:
+    - condition: state
+      entity_id: light.lounge_light
+      state: 'on'
+  action:
+    - service: light.turn_off
+      entity_id: light.lounge_light
+
+- id: cube_tap_off
+  alias: Cube - Tap Lights Off
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001035c90
+      action_type: tap_twice
+  condition:
+    - condition: state
+      entity_id: light.lounge_light
+      state: 'off'
+  action:
+    - service: light.turn_on
+      entity_id: light.lounge_light
+
+- id: cube_shake_awake
+  alias: Cube - Shake Awake
   hide_entity: true
   trigger:
     platform: event
@@ -37,8 +85,33 @@
     event_data:
       entity_id: binary_sensor.cube_158d0001035c90
       action_type: shake_air
+  condition:
+    - condition: state
+      entity_id: input_boolean.awake
+      state: 'off'
+    - condition: time
+      after: '04:00:00'
+      before: '20:00:00'
   action:
-    - service: light.toggle
-      data:
-        entity_id: light.lounge_light
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.awake
 
+- id: cube_shake_sleep
+  alias: Cube - Shake Sleep
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001035c90
+      action_type: shake_air
+  condition:
+    - condition: state
+      entity_id: input_boolean.awake
+      state: 'on'
+    - condition: time
+      after: '20:00:00'
+      before: '04:00:00'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.awake

@@ -1,5 +1,36 @@
 # MQTT Trigger for Feeding Fish
 #
+- id: fish_temp_critical
+  alias: 'Fish Critical'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.aquarium_temperature       
+      above: 29.0
+      below: 25.0
+      for:
+        hours: 0
+        minutes: 1
+        seconds: 0
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.gateway_light_286c07f0a0c6
+        rgb_color: [ 0, 0, 255 ]
+        brightness_pct: 100
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: "Fish Temperate is alerting at {{ states.sensor.aquarium_temperature.state }}"
+    - service: xiaomi_aqara.play_ringtone
+      data: 
+        ringtone_id: 7
+        gw_mac: !secret xiaomi_mac
+    - service: notify.facebook_notifications
+      data_template:
+        message: "Fish Temperature is outside acceptable range at {{ states.sensor.aquarium_temperature.state }}"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+
 - id: fish_fed_light_off
   alias: 'Fed Fish'
   trigger:

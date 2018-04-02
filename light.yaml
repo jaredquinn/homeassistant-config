@@ -26,6 +26,21 @@
       name: Lounge Light Extra
       transition: 2000
 
+- platform: group
+  name: House Lights
+  entities:
+    - light.dining_light
+    - light.hallway_light
+    - light.bathroom_light
+    - light.kitchen_light
+    - light.gateway_light_286c07f0a0c6
+
+- platform: group
+  name: Lounge Lights
+  entities:
+    - light.lounge_light
+    - light.lounge_light_extra
+    
 # Good white
 #
 #brightness: 255
@@ -37,3 +52,4 @@
 #effect_list: Disco,Slow Temp,Strobe epilepsy!,Strobe color,Alarm,Police,Police2,Christmas,RGB,Random Loop,Fast Random Loop,Slowdown,WhatsApp,Facebook,Twitter,Stop
 #friendly_name: Bathroom Light
 #supported_features: 127
+#

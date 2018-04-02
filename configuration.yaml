@@ -96,7 +96,7 @@ mqtt:
 
 xiaomi_aqara:
   interface: !secret iot_interface
-  discovery_retry: 3
+  discovery_retry: 4
   gateways:
     - mac: !secret xiaomi_mac
       host: !secret xiaomi_ip
@@ -119,6 +119,9 @@ keyboard_remote:
 
 tts:
   - platform: google
+    cache: true
+    time_memory: 57600
+  - platform: picotts
 
 device_tracker:
   - platform: gpslogger
@@ -129,7 +132,19 @@ device_tracker:
 
   - platform: bluetooth_tracker
 
-# - platform: bluetooth_le_tracker
+  - platform: mqtt
+    devices:
+      token_chelsea: 'homeassistant/location/token_chelsea'
+      token_jared: 'homeassistant/location/token_jared'
+      token_flaps: 'homeassistant/location/token_flaps'
+      token_daisy: 'homeassistant/location/token_daisy'
+      token_guest1: 'homeassistant/location/token_guest1'
+      token_guest2: 'homeassistant/location/token_guest2'
+      token_guest3: 'homeassistant/location/token_guest3'
+      token_guest4: 'homeassistant/location/token_guest4'
+      token_guest5: 'homeassistant/location/token_guest5'
+      token_guest6: 'homeassistant/location/token_guest6'
+
 
 media_player: !include media_player.yaml
 binary_sensor: !include binary_sensor.yaml

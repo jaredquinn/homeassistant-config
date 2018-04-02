@@ -34,8 +34,6 @@ group.ten_forward_lights:
   google_assistant: false
 group.items_laundry:
   google_assistant: false
-group.kitchen_lights:
-  google_assistant: false
 group.entertainment_selection:
   google_assistant: false
 group.all_switches:
@@ -54,7 +52,6 @@ sensor.average_load_1m:
   unit_of_measurement: Load
 sensor.average_load_5m:
   unit_of_measurement: Load
-
 sensor.illumination_286c07f0a0c6:
   friendly_name: Gateway Illumination
   google_assistant: false
@@ -63,14 +60,12 @@ sensor.humidity_158d0001c15683:
   google_assistant: false
 media_player.laircast:
   google_assistant: false
-
 switch.tv:
   icon: mdi:television-classic
 switch.fetchtv:
   icon: mdi:movie-roll
 switch.pioneer:
   icon: mdi:surround-sound
-
 binary_sensor.door_window_sensor_158d0001d6360a:
   friendly_name: Balcony Door
   assistant_room_hint: Living Room
@@ -101,16 +96,15 @@ light.hallway_light:
   assistant_room_hint: Ten Forward
 light.dining_light:
   assistant_room_hint: Ten Forward
-
 switch.fan:
   google_assistant_type: fan
   assistant_room_hint: Living Room
-
 sensor.temperature_158d0001c15683:
   friendly_name: Bedroom Temperature
   assistant_room_hint: Bedroom
-
-#binary_sensor.floorplan:
-#  custom_ui_state_card: state-card-floorplan
-#  config: !include floorplan.yaml
-
+device_tracker.token_chelsea:
+  friendly_name: V Cat
+  source_type: gps
+device_tracker.token_jared:
+  friendly_name: Jared
+device_tracker.token_guest1: {}

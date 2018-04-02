@@ -6,8 +6,9 @@ default_view:
   entities:
     - sun.sun
     - alarm_control_panel.ha_alarm
-    - device_tracker.jared_oppo
-    - device_tracker.chelsea_s4
+    - device_tracker.token_jared
+    - device_tracker.token_chelsea
+    - device_tracker.token_flaps
     - sensor.kitchen_temperature
     - sensor.temperature_158d0001c15683  
     - sensor.humidity_158d0001c15683
@@ -20,14 +21,13 @@ default_view:
     - sensor.speedtest_ping
 
     - group.global
-    - group.items_modes
 
-    - group.lounge_lights
-    - group.ten_forward_lights
-    - group.bathroom_lights
-    - group.kitchen_lights
+    - group.house_lights
+    - group.other_lights
 
     - group.items_pets
+    - group.items_modes
+
     - group.items_living
     - group.items_laundry
 
@@ -80,7 +80,7 @@ tab_lounge:
     - group.global
     - group.items_entertainment
     - group.items_channel
-    - group.lounge_lights
+    - light.lounge_lights
     - group.items_living
 
 tab_kitchen:
@@ -101,7 +101,6 @@ tab_kitchen:
     - sensor.speedtest_ping
 
     - group.global
-    - group.kitchen_lights
     - media_player.kitchen_speaker
     - group.items_pets
     - group.items_laundry
@@ -239,28 +238,21 @@ items_modes:
     - scene.darkness
     - scene.party
 
-# LIGHT GROUPS
-lounge_lights:
-  name: Lounge Room Lights
-  entities:
-    - light.lounge_light
-    - light.lounge_light_extra
-
-ten_forward_lights:
-  name: Ten Forward Lights
+house_lights:
+  name: House Lights
+  control: hidden
   entities:
     - light.dining_light
     - light.hallway_light
+    - light.kitchen_light
+    - light.lounge_light
+    - light.lounge_light_extra
 
-bathroom_lights:
-  name: Bathroom Lights
+other_lights:
+  name: Other Lights
+  control: hidden
   entities:
     - light.bathroom_light
-
-kitchen_lights:
-  name: Kitchen Lights
-  entities:
-    - light.kitchen_light
     - light.gateway_light_286c07f0a0c6
 
 alerts:
@@ -273,11 +265,33 @@ alerts:
     - sensor.usgs_all_earthquakes_past_hour
     - sensor.usgs_all_earthquakes_past_day
 
+active_security_tokens:
+  name: Active Security Tokens
+  entities:
+    - device_tracker.token_jared
+    - device_tracker.token_chelsea
+    - device_tracker.token_flaps
+
+security_tokens:
+  name: Security Tokens
+  control: hidden
+  entities:
+    - device_tracker.token_jared
+    - device_tracker.token_chelsea
+    - device_tracker.token_flaps
+    - device_tracker.token_guest1
+    - device_tracker.token_guest2
+    - device_tracker.token_guest3
+    - device_tracker.token_guest4
+    - device_tracker.token_guest5
+    - device_tracker.token_guest6
+
 global:
   name: House Wide
   control: hidden
   entities:
     - alarm_control_panel.ha_alarm
+    - input_boolean.awake
     - input_boolean.announcements
     - switch.flux_lights
 

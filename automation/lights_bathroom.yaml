@@ -6,7 +6,7 @@
 #########################################################
   condition:
     - condition: state
-      entity_id: group.bathroom_lights
+      entity_id: light.bathroom_light
       state: 'on'
 
   trigger:

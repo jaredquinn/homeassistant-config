@@ -1,0 +1,10 @@
+- id: neo_geoscience_alert
+  alias: Geoscience Australia Alert
+  trigger:
+    - platform: event
+      event_type: geoscience_australia
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        ringtone_id: 14
+

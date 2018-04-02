@@ -48,50 +48,52 @@
     data:
       code: !secret alarm_control_code
 
+
+
 # Entry Button Long Press
 #
-- id: entry_button_long_click_off
-  alias: Entry Button Long Click OFF
-  hide_entity: true
-  condition:
-    - condition: state
-      entity_id: alarm_control_panel.ha_alarm
-      state: 'disarmed'
-  trigger:
-    - platform: event
-      event_type: click
-      event_data:
-        entity_id: binary_sensor.switch_158d00019de7b4 
-        click_type: long_click_press
-  action:
-    service: alarm_control_panel.alarm_arm_away
-    entity_id: alarm_control_panel.ha_alarm
-    data:
-      code: !secret alarm_control_code
-
-- id: entry_button_long_click_on
-  alias: Entry Button Long Click ON
-  hide_entity: true
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: 'armed_away'
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: 'armed_home'
-  trigger:
-    - platform: event
-      event_type: click
-      event_data:
-        entity_id: binary_sensor.switch_158d00019de7b4 
-        click_type: long_click_press
-  action:
-    service: alarm_control_panel.alarm_disarm
-    entity_id: alarm_control_panel.ha_alarm
-    data:
-      code: !secret alarm_control_code
+#- id: entry_button_long_click_off
+#  alias: Entry Button Long Click OFF
+#  hide_entity: true
+#  condition:
+#    - condition: state
+#      entity_id: alarm_control_panel.ha_alarm
+#      state: 'disarmed'
+#  trigger:
+#    - platform: event
+#      event_type: click
+#      event_data:
+#        entity_id: binary_sensor.switch_158d00019de7b4 
+#        click_type: long_click_press
+#  action:
+#    service: alarm_control_panel.alarm_arm_away
+#    entity_id: alarm_control_panel.ha_alarm
+#    data:
+#      code: !secret alarm_control_code
+#
+#- id: entry_button_long_click_on
+#  alias: Entry Button Long Click ON
+#  hide_entity: true
+#  condition:
+#    condition: or
+#    conditions:
+#      - condition: state
+#        entity_id: alarm_control_panel.ha_alarm
+#        state: 'armed_away'
+#      - condition: state
+#        entity_id: alarm_control_panel.ha_alarm
+#        state: 'armed_home'
+#  trigger:
+#    - platform: event
+#      event_type: click
+#      event_data:
+#        entity_id: binary_sensor.switch_158d00019de7b4 
+#        click_type: long_click_press
+#  action:
+#    service: alarm_control_panel.alarm_disarm
+#    entity_id: alarm_control_panel.ha_alarm
+#    data:
+#      code: !secret alarm_control_code
 
 # ALARM 
 #
@@ -184,7 +186,7 @@
 
 
 
-- id: alawm_disarm
+- id: alarm_disarm
   alias: 'Alarm Armed: Disarm'
   hide_entity: true
   trigger:
@@ -195,34 +197,32 @@
     - service: xiaomi_aqara.play_ringtone
       data:
         ringtone_id: 10
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kitchen_speaker
+        message: Alarm Status is Disarmed.
     - service: light.turn_on
       entity_id: light.gateway_light_286c07f0a0c6
       data:
         color_name: green
         brightness_pct: 100
-        transition: 2
-    - service: light.turn_off
-      entity_id: light.gateway_light_286c07f0a0c6
-      data:
-        transition: 2
-    - service: light.turn_on
-      entity_id: light.gateway_light_286c07f0a0c6
-      data:
-        color_name: green
-        brightness_pct: 100
-        transition: 2
-    - service: light.turn_off
-      entity_id: light.gateway_light_286c07f0a0c6
-      data:
         transition: 2
     - service: notify.facebook_notifications
       data:
         message: "The alarm has been disarmed"
         target: !include ../secret/alarm_facebook_alerts.yaml
-    - service: tts.google_say
-      data_template:
-        entity_id: media_player.kitchen_speaker
-        message: Alarm Status is Disarmed.
+    - service: light.turn_off
+      entity_id: light.lounge_light
+    - service: light.turn_off
+      entity_id: light.hallway_light
+    - service: light.turn_off
+      entity_id: light.dining_light
+    - service: light.turn_on
+      entity_id: light.kitchen_light
+    - service: light.turn_off
+      entity_id: light.lounge_light_extra
+    - service: light.turn_off
+      entity_id: light.gateway_light_286c07f0a0c6
 
 - id: alarm_notify
   alias: 'Alarm Notifications'
@@ -245,7 +245,7 @@
         effect: Alarm
         brightness: 255
     - service: light.turn_on
-      entity_id: light.kitchen_light
+      entity_id: light.hallway_light
       data:
         effect: Alarm
         brightness: 255
