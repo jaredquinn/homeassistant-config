@@ -19,7 +19,7 @@
         brightness_pct: 100
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Fish Temperate is alerting at {{ states.sensor.aquarium_temperature.state }}"
     - service: xiaomi_aqara.play_ringtone
       data: 
@@ -33,6 +33,7 @@
 
 - id: fish_fed_light_off
   alias: 'Fed Fish'
+  hide_entity: true
   trigger:
     - platform: mqtt
       topic: fishmon/tank1/feeding
@@ -46,7 +47,7 @@
   action:
     - service: tts.google_say
       data:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: Fish Light will be turned off in thirty minutes.
     - service: notify.facebook_notifications
       data:

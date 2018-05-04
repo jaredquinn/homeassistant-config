@@ -1,10 +1,82 @@
-- id: neo_geoscience_alert
+- id: geoscience_australia_alert
   alias: Geoscience Australia Alert
   trigger:
     - platform: event
       event_type: geoscience_australia
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.house_announcements
+      state: 'on'
+
   action:
     - service: xiaomi_aqara.play_ringtone
       data:
-        ringtone_id: 14
+        gw_mac: !secret xiaomi_mac
+        ringtone_id: 7
+
+    - service: light.turn_on
+      data:
+        entity_id: light.gateway_light_286c07f0a0c6
+        rgb_color: [ 255, 145,36 ]
+        brightness_pct: 100
+
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.speaker
+        message: "Geoscience Australia reporting {% if trigger.event %}{{ trigger.event.data.title }}{% endif %}"
+
+
+- id: nsw_rfs_alert_trigger
+  alias: NSW RFS Alert Announcement
+  trigger:
+
+    - platform: event
+      event_type: nsw_rfs_major_incidents
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.house_announcements
+      state: 'on'
+
+  action:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: !secret xiaomi_mac
+        ringtone_id: 7
+
+    - service: light.turn_on
+      data:
+        entity_id: light.gateway_light_286c07f0a0c6
+        rgb_color: [ 255, 0, 0]
+        brightness_pct: 100
+
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.speaker
+        message: "New South Wales Rural Fire Service issued a {{ trigger.event.data.category }} for {{ trigger.event.data.title }} located {{ trigger.event.data.distance }} kilometers away"
+
+
+# Apr 12 14:11:05 miranda homeassistant[18782]: #033[32m2018-04-12 14:11:05 INFO (MainThread) [homeassistant.core] Bus:Handling <Event usgs_all_earthquakes[L]: category=Past Hour, title=M 0.9 - 6km NW of The Geysers, CA, date_published=None, date_updated=time.struct_time(tm_year=2018, tm_mon=4, tm_mday=12, tm_hour=4, tm_min=7, tm_sec=28, tm_wday=3, tm_yday=102, tm_isdst=0), distance=11978.472815800014, id=urn:earthquake-usgs-gov:nc:72998546, magnitude=0.9>#033[0m
+
+- id: usgs_alert_announcement
+  alias: USGS Alert Announcement
+  trigger:
+
+    - platform: event
+      event_type: usgs_all_earthquakes
+
+  condition:
+    - condition: template
+      value_template: '{{ trigger.event.data.magnitude|float > 4 }}'
+    - condition: state
+      entity_id: input_boolean.house_announcements
+      state: 'on'
+
+  action:
+
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.speaker
+        message: "USGS Reporting new Earthquake {{ trigger.event.data.title }}"
 

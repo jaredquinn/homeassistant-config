@@ -1,13 +1,31 @@
 
 purge_interval: 1
-purge_keep_days: 7
+purge_keep_days: 3
+db_url: !secret db_url
 exclude:
   domains:
+    - yr
+    - bom
+    - wunderground
+    - moon
     - group
     - weblink
     - updater
     - automation
+    - scene
+    - zone
   entities:
+    - media_player.kitchen_speaker
+    - input_boolean.awake
+    - input_boolean.house_announcements
+    - input_boolean.time_of_day_automation
+    - input_select.tv_channel
+    - input_select.tv_source
+    - media_player.speaker
+    - binary_sensor.switch_158d00019c9688
+    - binary_sensor.switch_158d0001243e26
+    - binary_sensor.switch_158d00019de7b4 
+    - binary_sensor.cube_158d0001035c90
     - sun.sun
     - sensor.date
     - sensor.time       
@@ -53,5 +71,4 @@ exclude:
     - sensor.bom_sydney_wind_gust_kt
     - sensor.bom_sydney_wind_speed_kmh
     - sensor.catslair_ssl_expiry
-
 

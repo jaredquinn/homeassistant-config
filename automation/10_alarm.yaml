@@ -1,100 +1,3 @@
-# Kitchen Button Long Press
-#
-- id: kitchen_button_long_click_off
-  alias: Kitchen Button Long Click OFF
-  hide_entity: true
-  condition:
-    - condition: state
-      entity_id: alarm_control_panel.ha_alarm
-      state: 'disarmed'
-
-  trigger:
-    - platform: event
-      event_type: click
-      event_data:
-        entity_id: binary_sensor.switch_158d0001243e26
-        click_type: long_click_press
-
-  action:
-    service: alarm_control_panel.alarm_arm_home
-    entity_id: alarm_control_panel.ha_alarm
-    data:
-      code: !secret alarm_control_code
-
-- id: kitchen_button_long_click_on
-  alias: Kitchen Button Long Click ON
-  hide_entity: true
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: 'armed_away'
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: 'armed_home'
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: 'triggered'
-  trigger:
-    - platform: event
-      event_type: click
-      event_data:
-        entity_id: binary_sensor.switch_158d0001243e26
-        click_type: long_click_press
-  action:
-    service: alarm_control_panel.alarm_disarm
-    entity_id: alarm_control_panel.ha_alarm
-    data:
-      code: !secret alarm_control_code
-
-
-
-# Entry Button Long Press
-#
-#- id: entry_button_long_click_off
-#  alias: Entry Button Long Click OFF
-#  hide_entity: true
-#  condition:
-#    - condition: state
-#      entity_id: alarm_control_panel.ha_alarm
-#      state: 'disarmed'
-#  trigger:
-#    - platform: event
-#      event_type: click
-#      event_data:
-#        entity_id: binary_sensor.switch_158d00019de7b4 
-#        click_type: long_click_press
-#  action:
-#    service: alarm_control_panel.alarm_arm_away
-#    entity_id: alarm_control_panel.ha_alarm
-#    data:
-#      code: !secret alarm_control_code
-#
-#- id: entry_button_long_click_on
-#  alias: Entry Button Long Click ON
-#  hide_entity: true
-#  condition:
-#    condition: or
-#    conditions:
-#      - condition: state
-#        entity_id: alarm_control_panel.ha_alarm
-#        state: 'armed_away'
-#      - condition: state
-#        entity_id: alarm_control_panel.ha_alarm
-#        state: 'armed_home'
-#  trigger:
-#    - platform: event
-#      event_type: click
-#      event_data:
-#        entity_id: binary_sensor.switch_158d00019de7b4 
-#        click_type: long_click_press
-#  action:
-#    service: alarm_control_panel.alarm_disarm
-#    entity_id: alarm_control_panel.ha_alarm
-#    data:
-#      code: !secret alarm_control_code
-
 # ALARM 
 #
 - id: alarm_home
@@ -142,7 +45,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: Alarm is being armed in HOME mode.
     - service: xiaomi_aqara.play_ringtone
       data:
@@ -161,6 +64,7 @@
 
 - id: alarm_away_armed
   alias: 'Alarm Armed: Away'
+  hide_entity: true
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
@@ -168,7 +72,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: Alarm is being armed in AWAY MODE.  You have 15 seconds to leave.
     - delay: 15
     - service: xiaomi_aqara.play_ringtone
@@ -199,7 +103,7 @@
         ringtone_id: 10
     - service: tts.google_say
       data:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: Alarm Status is Disarmed.
     - service: light.turn_on
       entity_id: light.gateway_light_286c07f0a0c6
@@ -226,6 +130,7 @@
 
 - id: alarm_notify
   alias: 'Alarm Notifications'
+  hide_entity: true
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm

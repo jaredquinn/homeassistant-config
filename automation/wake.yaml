@@ -1,0 +1,20 @@
+- id: mode_change_wakeup
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.awake
+      to: 'on'
+  action:
+    - service: script.house_wakeup
+
+
+- id: mode_change_sleep
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.awake
+      to: 'off'
+  action:
+    - service: script.house_goodnight
+
+

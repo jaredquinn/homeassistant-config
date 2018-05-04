@@ -7,17 +7,118 @@ homeassistant:
   unit_system: metric
   time_zone: !secret timezone
   customize: !include customize.yaml
+  
+logger:
+  default: warning
+
+#system_log:
+#max_entries: 250
 
 history:
+  exclude:
+    domains:
+      - yr
+      - bom
+      - wunderground
+      - moon
+      - group
+      - weblink
+      - updater
+      - automation
+      - scene
+      - zone
+    entities:
+      - media_player.kitchen_speaker
+      - input_boolean.awake
+      - input_boolean.house_announcements
+      - input_boolean.time_of_day_automation
+      - input_select.tv_channel
+      - input_select.tv_source
+      - media_player.speaker
+      - binary_sensor.switch_158d00019c9688
+      - binary_sensor.switch_158d0001243e26
+      - binary_sensor.switch_158d00019de7b4 
+      - binary_sensor.cube_158d0001035c90
+      - sun.sun
+      - sensor.date
+      - sensor.time       
+      - sensor.time_utc
+      - sensor.internet_time    
+      - sensor.stardate
+      - sensor.forecast_cloudiness
+      - sensor.forecast_dewpoint_temperature
+      - sensor.forecast_high_clouds
+      - sensor.forecast_humidity
+      - sensor.forecast_low_clouds
+      - sensor.forecast_medium_clouds
+      - sensor.forecast_precipitation
+      - sensor.forecast_pressure
+      - sensor.forecast_symbol
+      - sensor.forecast_temperature
+      - sensor.forecast_wind_direction
+      - sensor.forecast_wind_speed
+      - sensor.bom_sydney_air_temp_c
+      - sensor.bom_sydney_cloud
+      - sensor.bom_sydney_cloud_base
+      - sensor.bom_sydney_cloud_oktas
+      - sensor.bom_sydney_cloud_type 
+      - sensor.bom_sydney_cloud_type_id
+      - sensor.bom_sydney_delta_temp_c 
+      - sensor.bom_sydney_dew_point_c 
+      - sensor.bom_sydney_feels_like_c
+      - sensor.bom_sydney_pressure_mb 
+      - sensor.bom_sydney_pressure_msl
+      - sensor.bom_sydney_pressure_qnh
+      - sensor.bom_sydney_pressure_tend
+      - sensor.bom_sydney_rain_today
+      - sensor.bom_sydney_relative_humidity
+      - sensor.bom_sydney_sea_state 
+      - sensor.bom_sydney_swell_direction
+      - sensor.bom_sydney_swell_height
+      - sensor.bom_sydney_swell_period
+      - sensor.bom_sydney_visability_km
+      - sensor.bom_sydney_weather
+      - sensor.bom_sydney_wind_direction
+      - sensor.bom_sydney_wind_direction_kt
+      - sensor.bom_sydney_wind_gust_kmh
+      - sensor.bom_sydney_wind_gust_kt
+      - sensor.bom_sydney_wind_speed_kmh
+      - sensor.catslair_ssl_expiry
+
+
 logbook:
   exclude:
+    domains:
+      - yr
+      - bom
+      - wunderground
+      - moon
+      - group
+      - weblink
+      - updater
+      - automation
+      - scene
+      - zone
     entities:
+      - media_player.kitchen_speaker
+      - media_player.speaker
+      - input_select.tv_source
+      - input_select.tv_channel
+      - input_boolean.awake
+      - input_boolean.house_announcements
+      - input_boolean.time_of_day_automation
       - binary_sensor.motion_sensor_158d000120cce2
+      - binary_sensor.motion_sensor_158d0001ae9379
+      - binary_sensor.cube_158d0001035c90
+      - light.living_room_lights
+      - light.house_lights
       - sensor.illumination_286c07f0a0c6
       - sensor.geoscience_australia
       - sensor.usgs_all_earthquakes
+      - media_player.speaker
      
 map:
+
 sun:
 
 recorder: !include recorder.yaml
@@ -30,10 +131,18 @@ google_assistant:
   api_key: !secret google_assistant_api_key
 
 cloud:
+  alexa:
+    filter:
+      exclude_domains:
+        - automation
+        - sensor
+        - group
+        - media_player
+
 alexa:
 
-#zwave:
-#  usb_path: /dev/ttyUSB0
+zwave:
+  usb_path: /dev/ttyUSB0
 
 notify:
 #  - name: Push Notifications
@@ -55,10 +164,10 @@ facebook_webhook:
 
 config:
 
-influxdb:
-  host: !secret mqtt_broker_host
-  database: homeassistant
-  default_measurement: state
+#influxdb:
+#  host: !secret mqtt_broker_host
+#  database: homeassistant
+#  default_measurement: state
 
 http:
   api_password: !secret api_password
@@ -92,15 +201,43 @@ conversation:
 mqtt:
   broker: !secret mqtt_broker_host
   discovery: true
-  discovery_prefix: homeassistant
+  discovery_prefix: 'homedisco'
+  birth_message:
+    topic: 'homeassistant/status'
+    payload: 'online'
+    retain: true
+  will_message:
+    topic: 'homeassistant/status'
+    payload: 'offline'
+    retain: true
+
+mqtt_statestream:
+  base_topic: 'statestream'
+  publish_attributes: false
+  publish_timestamps: false
+  exclude:
+    domains:
+      - automation
+      - group
+      - scene
+      - zone
+      - zwave
+      - sun
+
+    entities:
+      - sensor.time
+      - sensor.time_utc
+      - sensor.internet_time
+      - sensor.cpu_temperature
+
 
 xiaomi_aqara:
   interface: !secret iot_interface
-  discovery_retry: 4
+  discovery_retry: 10
   gateways:
     - mac: !secret xiaomi_mac
-      host: !secret xiaomi_ip
       key: !secret xiaomi_key
+      host: !secret xiaomi_ip
 
 alarm_control_panel:
   - platform: manual_mqtt
@@ -119,8 +256,6 @@ keyboard_remote:
 
 tts:
   - platform: google
-    cache: true
-    time_memory: 57600
   - platform: picotts
 
 device_tracker:
@@ -131,12 +266,14 @@ device_tracker:
     hosts: !include secret/ping_hosts.yaml
 
   - platform: bluetooth_tracker
+#  - platform: bluetooth_le_tracker
 
   - platform: mqtt
     devices:
       token_chelsea: 'homeassistant/location/token_chelsea'
       token_jared: 'homeassistant/location/token_jared'
       token_flaps: 'homeassistant/location/token_flaps'
+      token_tenille: 'homeassistant/location/token_tenille'
       token_daisy: 'homeassistant/location/token_daisy'
       token_guest1: 'homeassistant/location/token_guest1'
       token_guest2: 'homeassistant/location/token_guest2'

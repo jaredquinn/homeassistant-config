@@ -21,6 +21,10 @@
       event_data:
         button_name: DINING
 
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "dining_light"
+
     # Kitchen Button
     - platform: event
       event_type: click
@@ -56,13 +60,10 @@
       event_data:
         key_code: 14
 
-    # Entry Button
-    #- platform: event
-    #  event_type: click
-    #  event_data:
-    #    entity_id: binary_sensor.switch_158d00019de7b4 
-    #    click_type: 'double'
-    
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "dining_light"
+
     # Kitchen Button
     - platform: event
       event_type: click
@@ -74,8 +75,42 @@
   action:
     - service: light.turn_on
       data:
+        transition: 2
         entity_id: light.dining_light
-        color_name: 'white'
+        brightness_pct: 10
+        rgb_color: [  255, 173, 145 ]
+
+
+#########################################################
+- id: dining_light_bright
+  alias: Dining Light Bright
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.dining_light
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: 'long_click_press'
+
+  action:
+    - service: light.turn_on
+      data:
+        transition: 2
+        entity_id: light.dining_light
         brightness_pct: 100
+        rgb_color: [  255, 173, 145 ]
 
-
+# Chelsea Preferred
+# min_mireds: 153
+# max_mireds: 588
+# brightness: 216.75
+# color_temp: 481
+# hs_color: 15.273,43.137
+# rgb_color: 255,173,145
+# xy_color: 0.458,0.359

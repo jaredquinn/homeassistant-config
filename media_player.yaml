@@ -1,4 +1,7 @@
 
+- platform: vlc
+  name: speaker
+
 - platform: cast
   host: !secret player_cast_kitchen_ip
 

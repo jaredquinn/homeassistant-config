@@ -108,3 +108,4 @@ device_tracker.token_chelsea:
 device_tracker.token_jared:
   friendly_name: Jared
 device_tracker.token_guest1: {}
+

@@ -1,27 +1,5 @@
 
 #########################################################
-- id: kitchen_lights_group_off
-  alias: Kitchen Lights Group OFF
-#########################################################
-  condition:
-    - condition: state
-      entity_id: light.kitchen_light
-      state: 'on'
-
-  trigger:
-    - platform: event
-      event_type: click
-      event_data:
-        entity_id: binary_sensor.switch_158d0001243e26
-        click_type: single
-
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: light.kitchen_light
-
- 
-#########################################################
 - id: kitchen_auto_light_off
   alias: Kitchen Light OFF
 #########################################################
@@ -41,6 +19,16 @@
       event_type: keyboard_remote_command_received
       event_data:
         key_code: 60
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: single
+
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "kitchen_light"
 
   action:
     - service: light.turn_off
@@ -76,10 +64,75 @@
         entity_id: binary_sensor.switch_158d0001243e26
         click_type: single
 
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "kitchen_light"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_light
+        brightness_pct: 10
+        rgb_color: [  255, 226, 145 ]
+
+
+#########################################################
+- id: kitchen_light_bright
+  alias: Kitchen Light Bright
+#########################################################
+  hide_entity: true
+
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: 'long_click_press'
+
   action:
     - service: light.turn_on
       data:
         entity_id: light.kitchen_light
         brightness_pct: 100
+        rgb_color: [  255, 226, 145 ]
 
+
+#########################################################
+- id: kitching_dining_combo_bright
+  alias: Kitchen Dining Bright
+#########################################################
+  hide_entity: true
+
+  condition:
+    - condition: state
+      entity_id: light.kitchen_light
+      state: 'off'
+    - condition: state
+      entity_id: light.dining_light
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: 'long_click_press'
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_light
+        brightness_pct: 100
+        rgb_color: [  255, 226, 145 ]
+
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_light
+        brightness_pct: 100
+        rgb_color: [  255, 226, 145 ]
 

@@ -1,5 +1,5 @@
 # TABS
-default_view:
+default_view2:
   view: yes
   name: CatsLair
   icon: mdi:home
@@ -9,9 +9,11 @@ default_view:
     - device_tracker.token_jared
     - device_tracker.token_chelsea
     - device_tracker.token_flaps
+    - sensor.aquarium_temperature
     - sensor.kitchen_temperature
     - sensor.temperature_158d0001c15683  
     - sensor.humidity_158d0001c15683
+    - binary_sensor.motion_sensor_158d0001ae9379
     - binary_sensor.motion_sensor_158d000120cce2
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
@@ -38,9 +40,14 @@ tab_info:
   entities:
     - sun.sun
     - alarm_control_panel.ha_alarm
+    - device_tracker.token_jared
+    - device_tracker.token_chelsea
+    - device_tracker.token_flaps
+    - sensor.aquarium_temperature
     - sensor.kitchen_temperature
     - sensor.temperature_158d0001c15683  
     - sensor.humidity_158d0001c15683
+    - binary_sensor.motion_sensor_158d0001ae9379
     - binary_sensor.motion_sensor_158d000120cce2
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
@@ -48,7 +55,6 @@ tab_info:
     - sensor.speedtest_download 
     - sensor.speedtest_upload
     - sensor.speedtest_ping
-    - sensor.aquarium_temperature
 
     - group.global
     - group.alerts
@@ -66,10 +72,15 @@ tab_lounge:
   entities:
     - sun.sun
     - alarm_control_panel.ha_alarm
+    - device_tracker.token_jared
+    - device_tracker.token_chelsea
+    - device_tracker.token_flaps
+    - sensor.aquarium_temperature
     - sensor.kitchen_temperature
     - sensor.temperature_158d0001c15683  
     - sensor.humidity_158d0001c15683
     - binary_sensor.motion_sensor_158d000120cce2
+    - binary_sensor.motion_sensor_158d0001ae9379
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
     - sensor.cpu_used
@@ -78,9 +89,14 @@ tab_lounge:
     - sensor.speedtest_ping
 
     - group.global
+
     - group.items_entertainment
     - group.items_channel
-    - light.lounge_lights
+    - light.living_room_lights
+
+    - media_player.laircast
+    - media_player.lounge_roku
+
     - group.items_living
 
 tab_kitchen:
@@ -88,10 +104,16 @@ tab_kitchen:
   name: Kitchen
   icon: mdi:food-fork-drink
   entities:
+    - sun.sun
     - alarm_control_panel.ha_alarm
+    - device_tracker.token_jared
+    - device_tracker.token_chelsea
+    - device_tracker.token_flaps
+    - sensor.aquarium_temperature
     - sensor.kitchen_temperature
     - sensor.temperature_158d0001c15683  
     - sensor.humidity_158d0001c15683
+    - binary_sensor.motion_sensor_158d0001ae9379
     - binary_sensor.motion_sensor_158d000120cce2
     - binary_sensor.door_window_sensor_158d0001d6360a
     - sensor.illumination_286c07f0a0c6 
@@ -136,9 +158,6 @@ items_channel:
   name: Entertainment Selection
   control: hidden
   entities:
-    - media_player.laircast
-    - media_player.lounge_roku
-    - media_player.kitchen_speaker
     - switch.audio
     - input_select.tv_channel
     - input_select.tv_source

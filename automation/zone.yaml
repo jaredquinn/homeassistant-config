@@ -10,7 +10,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Jared entered zone - Home"
 
 - id: person_zone_leave_home
@@ -25,7 +25,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Jared left zone - Home"
        
 
@@ -43,7 +43,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Jared arrived at Broadway"
 
 - id: person_zone_leave_broadway
@@ -58,7 +58,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Jared left at Broadway"
 
 # CENTRAL PARK
@@ -75,7 +75,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Jared has entered zone - Central Park"
 
 - id: person_zone_leave_centralpark
@@ -90,7 +90,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Jared has left zone - Central Park"
 
 # CHIPPO
@@ -107,7 +107,7 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Jared has entered zone - The Chippo Hotel"
 
 - id: person_zone_leave_chippo
@@ -122,5 +122,5 @@
   action:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.kitchen_speaker
+        entity_id: media_player.speaker
         message: "Jared has left zone - The Chippo Hotel"

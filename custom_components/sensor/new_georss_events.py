@@ -56,7 +56,7 @@ DEFAULT_NAME = "Event Service"
 DEFAULT_RADIUS_IN_KM = 20.0
 DEFAULT_UNIT_OF_MEASUREMENT = 'Events'
 
-DOMAIN = 'geo_rss_events'
+DOMAIN = 'new_georss_events'
 
 # Minimum time between updates from the source.
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=1)
@@ -110,7 +110,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     custom_filters_definition = config.get(CONF_CUSTOM_FILTERS)
     publish_events = config.get(CONF_PUBLISH_EVENTS)
 
-    _LOGGER.error("latitude=%s, longitude=%s, url=%s, radius=%s",
+    _LOGGER.debug("latitude=%s, longitude=%s, url=%s, radius=%s",
                   home_latitude, home_longitude, url, radius_in_km)
 
     # Initialise update service.
@@ -194,7 +194,7 @@ class GeoRssServiceSensor(Entity):
 
     def update(self):
         """Update this sensor from the GeoRSS service."""
-        _LOGGER.error("About to update sensor %s", self.entity_id)
+        _LOGGER.debug("About to update sensor %s", self.entity_id)
         self._data.update()
         # If no events were found due to an error then just set state to zero.
         if self._data.events is None:
@@ -208,7 +208,7 @@ class GeoRssServiceSensor(Entity):
                 # Only keep events that belong to sensor's category.
                 my_events = [event for event in self._data.events if
                              event[ATTR_CATEGORY] == self._category]
-            _LOGGER.error("Adding events to sensor %s: %s", self.entity_id,
+            _LOGGER.debug("Adding events to sensor %s: %s", self.entity_id,
                           my_events)
             self._state = len(my_events)
             # Sort events if configured to do so.
@@ -229,7 +229,7 @@ class GeoRssServiceSensor(Entity):
             # Finally publish new events to the bus.
             if self._publish_events:
                 events_to_publish = self.filter_events_to_publish(my_events)
-                _LOGGER.error("New events to publish: %s", events_to_publish)
+                _LOGGER.info("New events to publish: %s", events_to_publish)
                 self.publish_events(events_to_publish)
             self._previous_events = my_events
 
@@ -293,7 +293,7 @@ class GeoRssServiceData(object):
     def filter_entries(self, feed_data):
         """Filter entries by distance from home coordinates."""
         events = []
-        _LOGGER.error("%s entri(es) available in feed %s",
+        _LOGGER.info("%s entri(es) available in feed %s",
                       len(feed_data.entries), self._url)
         for entry in feed_data.entries:
             geometry = None
@@ -309,7 +309,7 @@ class GeoRssServiceData(object):
                     event = self.create_event(entry, distance)
                     if event:
                         events.append(event)
-        _LOGGER.error("%s events found nearby", len(events))
+        _LOGGER.info("%s events found nearby", len(events))
         return events
 
     def create_event(self, entry, distance):
@@ -352,10 +352,10 @@ class GeoRssServiceData(object):
                     # None value to eliminate entry, otherwise continue with
                     # the filter loop.
                     if not match:
-                        _LOGGER.error("Event %s does not match filter %s",
+                        _LOGGER.debug("Event %s does not match filter %s",
                                       event, definition)
                         return None
-        _LOGGER.error("Keeping event %s", event)
+        _LOGGER.debug("Keeping event %s", event)
         return event
 
     def calculate_distance_to_geometry(self, geometry):
@@ -381,7 +381,7 @@ class GeoRssServiceData(object):
         # Expecting coordinates in format: (lat, lon).
         from haversine import haversine
         distance = haversine(coordinates, self._home_coordinates)
-        _LOGGER.error("Distance from %s to %s: %s km", self._home_coordinates,
+        _LOGGER.info("Distance from %s to %s: %s km", self._home_coordinates,
                       coordinates, distance)
         return distance
 
@@ -395,6 +395,6 @@ class GeoRssServiceData(object):
             coordinates = (polygon_point[1], polygon_point[0])
             distance = min(distance,
                            self.calculate_distance_to_coords(coordinates))
-        _LOGGER.error("Distance from %s to %s: %s km", self._home_coordinates,
+        _LOGGER.debug("Distance from %s to %s: %s km", self._home_coordinates,
                       polygon, distance)
         return distance

@@ -22,6 +22,10 @@
       event_data:
         key_code: 59
 
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "hallway_light"
+
     # Bathroom Button
     - platform: event
       event_type: click
@@ -61,6 +65,10 @@
       event_data:
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'double'
+
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "hallway_light"
 
   action:
     - service: light.turn_on

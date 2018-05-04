@@ -36,7 +36,7 @@
     - light.gateway_light_286c07f0a0c6
 
 - platform: group
-  name: Lounge Lights
+  name: Living Room Lights
   entities:
     - light.lounge_light
     - light.lounge_light_extra

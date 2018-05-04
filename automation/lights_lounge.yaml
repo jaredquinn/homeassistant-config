@@ -1,32 +1,11 @@
 
 #########################################################
 - id: lounge_lights_group_off
-  alias: Lounge Lights Group Off
+  alias: Lounge Light OFF
 #########################################################
   hide_entity: true
   condition:
     - condition: state
-      entity_id: group.lounge_lights
-      state: 'on'
-
-  trigger:
-    - platform: event
-      event_type: click
-      event_data:
-        entity_id: binary_sensor.switch_158d00019de7b4 
-        click_type: single
-
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: group.lounge_lights
-
-
-- id: lounge_light_auto_off
-  alias: Lounge Lights OFF
-  hide_entity: true
-  condition:
-    - condition: state
       entity_id: light.lounge_light
       state: 'on'
 
@@ -41,14 +20,26 @@
       event_data:
         key_code: 28
 
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: single
+
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "lounge_light"
+
   action:
     - service: light.turn_off
       data:
         entity_id: light.lounge_light
 
 
+#########################################################
 - id: lounge_light_auto_on
-  alias: Lounge Lights OFF
+  alias: Lounge Light ON
+#########################################################
   hide_entity: true
   condition:
     - condition: state
@@ -56,6 +47,7 @@
       state: 'off'
 
   trigger:
+
     - platform: event
       event_type: ir_command_received
       event_data:
@@ -72,16 +64,24 @@
         entity_id: binary_sensor.switch_158d00019de7b4 
         click_type: single
 
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "lounge_light"
+
   action:
     - service: light.turn_on
       data:
         entity_id: light.lounge_light
-        rgb_color: [ 255, 146, 146 ]
-        brightness_pct: 100
+        brightness_pct: 30
+        rgb_color: [ 255, 200, 145 ]
 
 
+
+
+#########################################################
 - id: lounge_light_extra_off
   alias: Lounge Lights Extra OFF
+#########################################################
   hide_entity: true
   condition:
     - condition: state
@@ -94,14 +94,26 @@
       event_data:
         button_name: LOUNGE_EXTRA
 
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: 'double'
+
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "lounge_light_extra"
+
   action:
     - service: light.turn_off
       data:
         entity_id: light.lounge_light_extra
 
 
+#########################################################
 - id: lounge_light_extra_on
   alias: Lounge Lights Extra ON
+#########################################################
   hide_entity: true
   condition:
     - condition: state
@@ -114,8 +126,100 @@
       event_data:
         button_name: LOUNGE_EXTRA
 
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: 'double'
+
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "lounge_light_extra"
+
   action:
     - service: light.turn_on
       data:
         entity_id: light.lounge_light_extra
+        rgb_color: [ 255, 145, 108 ]
+        brightness_pct: 30
+
+
+
+#########################################################
+- id: lounge_light_bright
+  alias: Lounge Light Bright
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.lounge_light
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: 'long_click_press'
+
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.lounge_light
+        brightness_pct: 100
+        #rgb_color: [  255, 226, 145 ]
+        rgb_color: [ 255, 200, 145 ]
+
+
+#########################################################
+- id: lounge_light_extra_bright
+  alias: Lounge Lights Extra Bright
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.lounge_light_extra
+      state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: 'long_click_press'
+
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.lounge_light_extra
+        brightness_pct: 100
+        rgb_color: [  255, 226, 145 ]
+
+
+#########################################################
+- id: living_room_lights_bright
+  alias: Living Room Lights Bright
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.living_room_lights
+      state: 'off'
+
+  trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00019de7b4 
+        click_type: 'long_click_press'
+
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lights
+        brightness_pct: 100
+        rgb_color: [ 255, 200, 145 ]
 
