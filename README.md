@@ -1,53 +1,73 @@
 
 # Home Assitant Configuration
 
-Welcome to my Home Assistant Configuration
+Welcome to my Home Assistant Configuration.   If you haven't come across Home Assistant before, you really should check it out first.
+You can find it at https://www.home-assistant.io/.
 
-You can find my Home Assistant fork with patches, updates and enhancements, as used
-by me at https://github.com/jaredquinn/home-assistant.
+My Home Assistant Configuration is a work in progress and is subject to change on a whim.  It's here for your inspiration or for use
+as an example. 
 
-Additionally I run Home Assistant behind an nginx reverse proxy using Lets Encrypt
-for SSL certificate generation.
+## Software Ecosystem
 
-# My Configuration
+* Ubuntu 18.04 running on an Intel NUC
+* Mosquitto MQTT Broker
+* MariaDB (mysql) Database
+* VLC
+
+* Token Authentication (MQTT RFID Validator)
+
+* Facebook Messenger Notifications
 
 ## Smart Home Devices
 
 * Google Home
 * Amazon Echo Dot (via Home Assistant Cloud)
 * Xiaomi Aqara Gateway Night Light
-* Xiaomi Aqara Smart Button (x2)
+* Xiaomi Aqara Smart Button (x3)
 * Xiaomi Aqara Temperature & Humidity Sensor
 * Xiaomi Aqara Door/Window Switch
-* Xiaomi Aqara Motion Detection
+* Xiaomi Aqara Motion Detection (x2)
 * YeeLight Color LED Light Bulb (x4)
 * TP-Link Color LED Light Bulb
 * TP-Link White LED Light Bulb
 * Broadlink RM2 Pro WiFi Infra-Red Blaster
 * Broadlink SP3Mini WiFi A/C Switch (x2)
+* Google Chromecast
+* Roku
 * TP-Link HS100 WiFi A/C Switch
-* Dangerous Prototypes USB IRToy (Infrared Recevier/Sender)
 * NodeMCU w/Submersible Temperature Sensor
+* NodeMCU Outdoor Temperator Sensor (coming soon)
+* NodeMCU RFID Scanner
+* Dangerous Prototypes USB IRToy (Infrared Recevier/Sender)
+* ESP32 based MQTT Display Panel
 * Bluetooth Remote Control (for Lights)
 * Sonic Screwdriver (coming soon)
+
+## TTS and Extras
+
+* PicoTTS
+* Google TTS
+* VLC Media Player
+
+## Device Tracking
+
+* GPSLogger
+* Network Ping
+* MQTT Device Tracker (RFID Scanner)
 
 ## Weather
 
 * BOM Australia
 * Forecast (NDK)
+* Weatherunderground
 * Sun
 
-## Presence
-
-* GPSLogger
-* Ping
 
 ## Additional Features
 
-* HA Alarm
+* MQTT HA Alarm Panel
 * Floorplan
 * lirc IR Remote (using IRToy)
-* MQTT
 * Bluetooth Keyboard Remote
 * InfluxDB
 * Facebook Messanger
@@ -56,11 +76,14 @@ for SSL certificate generation.
 
 * Facebook Webhooks
 
+## Modified Core Components
+
+* myvlc - VLC Media Player with bugfixes
+* new_georss_feed - geo_rss_feed with publish event features
+
 ## Python Scripts
 
-* Remote Control
-* Flash Lights
-
+* Remote Control (channel to IR mapping, key sequence support)
 
 # FLOOR PLAN
 
