@@ -283,6 +283,7 @@ alerts:
     - sensor.geoscience_australia_any
     - sensor.usgs_all_earthquakes_past_hour
     - sensor.usgs_all_earthquakes_past_day
+    - sensor.bgs_worlwide_earthquakes_eqmh
 
 active_security_tokens:
   name: Active Security Tokens

@@ -116,7 +116,8 @@
     - beat
 
 - platform: mqtt
-  state_topic: 'display/kitchen/sensor/temperature_3ffc9f74/state'
+  #state_topic: 'display/kitchen/sensor/temperature_3ffc9f74/state'
+  state_topic: 'display/kitchen/sensor/temperature_3ffcaf94/state'
   name: Display Temperature
   unit_of_measurement: '°C'
 
@@ -133,14 +134,15 @@
 
 - platform: new_georss_events
   name: NSW RFS Major Incidents
-  url: http://www.rfs.nsw.gov.au/feeds/majorIncidents.xml
+  url: 'http://www.rfs.nsw.gov.au/feeds/majorIncidents.xml'
+  unit_of_measurement: 'Incidents'
   radius: 100
   publish_events: true
   sort_by: 'date_published'
   categories:
-    - Emergency Warning
-    - Watch and Act
-    - Advice
+    - 'Emergency Warning'
+    - 'Watch and Act'
+    - 'Advice'
 
 - platform: new_georss_events
   name: USGS All Earthquakes
@@ -148,17 +150,35 @@
   radius: 300000    
   publish_events: true
   sort_by: 'date_published'
+  unit_of_measurement: 'Earthquakes'
   categories:
-    - Past Hour
+    - 'Past Hour'
+    - 'Past Day'
   custom_attributes:
     - name: magnitude
       source: title
       regexp: '^M (?P<custom_attribute>\d+.\d+) -.*'
+    - name: location 
+      source: title
+      regexp: '^M \d+\.\d+ - (?P<custom_attribute>.*)'
+
+- platform: new_georss_events
+  name: BGS Worlwide Earthquakes
+  url: 'http://www.bgs.ac.uk/feeds/worldSeismology.xml'
+  sort_by: 'date_published'
+  unit_of_measurement: 'Earthquakes'
+  categories:
+    - 'EQMH'
+  custom_attributes:
+    - name: magnitude
+      source: title
+      regexp: 'World Earthquake alert: M (?P<custom_attribute>\d+.\d+):.*'
 
 - platform: new_georss_events
   name: Geoscience Australia
   url: 'http://www.ga.gov.au/earthquakes/all_recent.rss'
   sort_by: 'date_published'
+  unit_of_measurement: 'Earthquakes'
   radius: 1000
   publish_events: true
   custom_attributes:

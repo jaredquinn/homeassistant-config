@@ -22,3 +22,5 @@ zones/secret_*.yaml
 floorplan.svg
 all_recent.atom
 entity_registry.yaml
+OZW_Log.txt
+get-pip.py

@@ -12,24 +12,15 @@
         minutes: 1
         seconds: 0
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.gateway_light_286c07f0a0c6
-        rgb_color: [ 0, 0, 255 ]
-        brightness_pct: 100
-    - service: tts.google_say
+    - service: script.announce
       data_template:
-        entity_id: media_player.speaker
+        color: blue
+        brightness: 100
+        flash: short
+        light: true
         message: "Fish Temperate is alerting at {{ states.sensor.aquarium_temperature.state }}"
-    - service: xiaomi_aqara.play_ringtone
-      data: 
-        ringtone_id: 7
-        gw_mac: !secret xiaomi_mac
-    - service: notify.facebook_notifications
-      data_template:
-        message: "Fish Temperature is outside acceptable range at {{ states.sensor.aquarium_temperature.state }}"
-        target: !include ../secret/alarm_facebook_alerts.yaml
-
+        ringtone: 7
+        siren: true
 
 - id: fish_fed_light_off
   alias: 'Fed Fish'
@@ -45,19 +36,19 @@
     state: 'below_horizon'
 
   action:
-    - service: tts.google_say
+    - service: script.announce
       data:
-        entity_id: media_player.speaker
-        message: Fish Light will be turned off in thirty minutes.
-    - service: notify.facebook_notifications
-      data:
-        message: "Fish Light will be turned off in 30 minutes"
-        target: !include ../secret/alarm_facebook_alerts.yaml
+        light: false
+        message: "Fish Light will be turned off in thirty minutes."
+
     - delay: '00:30:00'
+
     - service: switch.turn_off
       entity_id: switch.fish_lamp
-    - service: notify.facebook_notifications
+
+    - service: script.announce
       data:
+        light: false
+        speak: false
         message: "Fish Light has been turned off"
-        target: !include ../secret/alarm_facebook_alerts.yaml
-      
+

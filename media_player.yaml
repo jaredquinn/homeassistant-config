@@ -1,5 +1,5 @@
 
-- platform: vlc
+- platform: myvlc
   name: speaker
 
 - platform: cast

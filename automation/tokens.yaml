@@ -7,14 +7,11 @@
       to: 'home'
 
   action:
-    - service: tts.google_say
+    - service: script.announce
       data_template:
-        entity_id: media_player.speaker
-        message: Welcome home, {{ trigger.to_state.attributes.friendly_name }}
-    - service: notify.facebook_notifications
-      data_template:
-        message: "{{ trigger.to_state.attributes.friendly_name }} has entered the Lair (Active Token)"
-        target: !include ../secret/alarm_facebook_alerts.yaml
+        spoken: "Welcome home, {{ trigger.to_state.attributes.friendly_name }}"
+        message: "{{ trigger.to_state.attributes.friendly_name }} is now home"
+
 
 - id: tokens_come_go_in_guest
   alias: Token Scan In Guest
@@ -25,14 +22,10 @@
       to: 'home'
 
   action:
-    - service: tts.google_say
+    - service: script.announce
       data_template:
-        entity_id: media_player.speaker
-        message: Welcome back, {{ trigger.to_state.attributes.friendly_name }}
-    - service: notify.facebook_notifications
-      data_template:
-        message: "{{ trigger.to_state.attributes.friendly_name }} has entered the Lair (Guest Token)"
-        target: !include ../secret/alarm_facebook_alerts.yaml
+        spoken: "Welcome back, {{ trigger.to_state.attributes.friendly_name }}"
+        message: "Guest Token has entered the lair: {{ trigger.to_state.attributes.friendly_name }}"
 
 
 - id: tokens_come_go_in
@@ -44,14 +37,10 @@
       from: 'home'
 
   action:
-    - service: tts.google_say
+    - service: script.announce
       data_template:
-        entity_id: media_player.speaker
-        message: "Goodbye for now {{ trigger.to_state.attributes.friendly_name }}"
-    - service: notify.facebook_notifications
-      data_template:
+        spoken: "Goodbye for now {{ trigger.to_state.attributes.friendly_name }}"
         message: "{{ trigger.to_state.attributes.friendly_name }} has left Lair"
-        target: !include ../secret/alarm_facebook_alerts.yaml
 
 
 - id: security_token_home_disarm
@@ -64,10 +53,12 @@
       to: 'home'
 
   action:
-    - service: notify.facebook_notifications
-      data:
+
+    - service: script.announce
+      data_template:
         message: "Active User Home.  Disarming the Alarm"
-        target: !include ../secret/alarm_facebook_alerts.yaml
+        speak: false
+
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
       data:
@@ -83,12 +74,12 @@
       to: 'not_home'
 
   action:
-    - service: notify.facebook_notifications
-      data:
-        message: "Everyone Left.  Arming the alarm for Away Mode"
-        target: !include ../secret/alarm_facebook_alerts.yaml
+    - service: script.announce
+      data_template:
+        message: "No Active Users Home.  Arming the alarm in Away Mode"
+        speak: false
+
     - service: alarm_control_panel.alarm_arm_away
       entity_id: alarm_control_panel.ha_alarm
       data:
         code: !secret alarm_control_code
-

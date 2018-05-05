@@ -11,9 +11,6 @@ homeassistant:
 logger:
   default: warning
 
-#system_log:
-#max_entries: 250
-
 history:
   exclude:
     domains:
@@ -91,7 +88,6 @@ logbook:
     domains:
       - yr
       - bom
-      - wunderground
       - moon
       - group
       - weblink
@@ -99,23 +95,25 @@ logbook:
       - automation
       - scene
       - zone
+      - zwave
+      - media_player
+      - input_select
+      - input_boolean
+      - flux
+      - binary_sensor
+      - sensor
+      - light
+      - switch
     entities:
-      - media_player.kitchen_speaker
-      - media_player.speaker
-      - input_select.tv_source
-      - input_select.tv_channel
-      - input_boolean.awake
-      - input_boolean.house_announcements
-      - input_boolean.time_of_day_automation
       - binary_sensor.motion_sensor_158d000120cce2
       - binary_sensor.motion_sensor_158d0001ae9379
       - binary_sensor.cube_158d0001035c90
+      - sensor.illumination_286c07f0a0c6
       - light.living_room_lights
       - light.house_lights
-      - sensor.illumination_286c07f0a0c6
+      - sensor.nsw_rfs_major_incidents
       - sensor.geoscience_australia
       - sensor.usgs_all_earthquakes
-      - media_player.speaker
      
 map:
 
@@ -145,10 +143,6 @@ zwave:
   usb_path: /dev/ttyUSB0
 
 notify:
-#  - name: Push Notifications
-#    platform: html5
-#    gcm_api_key: !secret gcm_api_key
-#    gcm_sender_id: !secret gcm_sender_id
   - name: Facebook Notifications
     platform: facebook
     page_access_token: !secret fb_page_access_token
@@ -235,8 +229,8 @@ xiaomi_aqara:
   interface: !secret iot_interface
   discovery_retry: 10
   gateways:
-    - mac: !secret xiaomi_mac
-      key: !secret xiaomi_key
+    - key: !secret xiaomi_key
+      mac: !secret xiaomi_mac
       host: !secret xiaomi_ip
 
 alarm_control_panel:

@@ -1,27 +1,35 @@
-# ALARM 
-#
-- id: alarm_home
+
+- id: alarm_trigger_home
   alias: 'Alarm Trigger: Home'
   hide_entity: true
   condition:
     condition: state
     entity_id: alarm_control_panel.ha_alarm
     state: 'armed_home'
+
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001d6360a
     to: 'on'
-  action:
-    service: alarm_control_panel.alarm_trigger
-    entity_id: alarm_control_panel.ha_alarm
 
-- id: alarm_away
+  action:
+    - service: script.announce
+      data_template:
+        message: "HOME Alarm Trigged by {{ trigger.to_state.attributes.friendly_name }}"
+        speak: false
+
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.ha_alarm
+
+
+- id: alarm_trigger_away
   alias: 'Alarm Trigger: Away'
   hide_entity: true
   condition:
     condition: state
     entity_id: alarm_control_panel.ha_alarm
     state: 'armed_away'
+
   trigger:
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d0001d6360a
@@ -29,10 +37,15 @@
     - platform: state
       entity_id: binary_sensor.motion_sensor_158d000120cce2
       to: 'on'
-  action:
-    service: alarm_control_panel.alarm_trigger
-    entity_id: alarm_control_panel.ha_alarm
 
+  action:
+    - service: script.announce
+      data_template:
+        speak: false
+        message: "AWAY Alarm Trigged by {{ trigger.to_state.attributes.friendly_name }}"
+
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.ha_alarm
 
 
 - id: alarm_home_armed
@@ -43,23 +56,14 @@
       entity_id: alarm_control_panel.ha_alarm
       to: 'armed_home'
   action:
-    - service: tts.google_say
-      data_template:
-        entity_id: media_player.speaker
+    - service: script.announce
+      data:
         message: Alarm is being armed in HOME mode.
-    - service: xiaomi_aqara.play_ringtone
-      data:
-        ringtone_id: 11
-    - service: light.turn_on
-      entity_id: light.gateway_light_286c07f0a0c6
-      data:
-        color_name: pink
-        brightness_pct: 20
-    - service: notify.facebook_notifications
-      data:
-        message: "The alarm has been armed HOME"
-        target: !include ../secret/alarm_facebook_alerts.yaml
-
+        ringtone: 11
+        siren: true
+        light: true
+        color: 'pink'
+        brightness: 20
 
 
 - id: alarm_away_armed
@@ -70,24 +74,14 @@
       entity_id: alarm_control_panel.ha_alarm
       to: 'armed_away'
   action:
-    - service: tts.google_say
+    - service: script.announce
       data_template:
-        entity_id: media_player.speaker
         message: Alarm is being armed in AWAY MODE.  You have 15 seconds to leave.
-    - delay: 15
-    - service: xiaomi_aqara.play_ringtone
-      data:
-        ringtone_id: 12
-    - service: light.turn_on
-      entity_id: light.gateway_light_286c07f0a0c6
-      data:
-        color_name: red
-        brightness_pct: 100
-    - service: notify.facebook_notifications
-      data:
-        message: "The alarm has been armed AWAY"
-        target: !include ../secret/alarm_facebook_alerts.yaml
-
+        ringtone: 12
+        siren: true
+        color: red
+        brightness: 50
+        flash: short
 
 
 - id: alarm_disarm
@@ -98,23 +92,14 @@
       entity_id: alarm_control_panel.ha_alarm
       to: 'disarmed'
   action:
-    - service: xiaomi_aqara.play_ringtone
+    - service: script.announce
       data:
-        ringtone_id: 10
-    - service: tts.google_say
-      data:
-        entity_id: media_player.speaker
-        message: Alarm Status is Disarmed.
-    - service: light.turn_on
-      entity_id: light.gateway_light_286c07f0a0c6
-      data:
-        color_name: green
-        brightness_pct: 100
-        transition: 2
-    - service: notify.facebook_notifications
-      data:
-        message: "The alarm has been disarmed"
-        target: !include ../secret/alarm_facebook_alerts.yaml
+        light: true
+        color: "green"
+        message: "The Alarm has been disarmed."
+        ringtone: 10
+        siren: true
+
     - service: light.turn_off
       entity_id: light.lounge_light
     - service: light.turn_off
@@ -135,27 +120,25 @@
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
       to: 'triggered'
+
   action:
-    - service: xiaomi_aqara.play_ringtone
+    - service: script.announce
       data:
-        ringtone_id: 3
-    - service: light.turn_on
-      entity_id: light.gateway_light_286c07f0a0c6
-      data:
-        color_name: red
-        brightness: 255
+        ringtone: 3
+        siren: true
+        color: "red"
+        light: true
+        message: "INTRUDER ALERT!  INTRUDER ALERT!"
+
     - service: light.turn_on
       entity_id: light.lounge_light
       data:
         effect: Alarm
         brightness: 255
+
     - service: light.turn_on
       entity_id: light.hallway_light
       data:
         effect: Alarm
         brightness: 255
-    - service: notify.facebook_notifications
-      data:
-        message: "The alarm has been triggered"
-        target: !include ../secret/alarm_facebook_alerts.yaml
 

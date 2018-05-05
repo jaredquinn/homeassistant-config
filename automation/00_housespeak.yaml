@@ -1,0 +1,119 @@
+
+
+- id: speak_event_fb
+  alias: House Speak Event FB
+
+  condition:
+    - condition: template
+      value_template: '{{ trigger.event.data.facebook|default(True) }}'
+
+  trigger:
+    - platform: event
+      event_type: HOUSE_SPEAK
+
+  action:
+    - service: notify.facebook_notifications
+      data_template:
+        message: "{{ trigger.event.data.message }}"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+
+- id: speak_event_siren
+  alias: House Speak Event Siren
+
+  condition:
+    condition: or
+    conditions:
+
+      - condition: template
+        value_template: "{{ trigger.event.data.critical|default(False) }}"
+
+      - condition: state
+        entity_id: input_boolean.announcements
+        state: 'on'
+
+  trigger:
+
+    - platform: event
+      event_type: HOUSE_SPEAK
+
+  action:
+
+    - condition: template
+      value_template: "{{ trigger.event.data.siren }}"
+
+    - service: xiaomi_aqara.play_ringtone
+      data_template:
+        gw_mac: !secret xiaomi_mac
+        ringtone_id: "{{ trigger.event.data.ringtone|int }}"
+        ringtone_vol: "{{ trigger.event.data.siren_volume|default(50)|int }}"
+
+
+- id: speak_event_light
+  alias: House Speak Event Light
+
+  condition: 
+    condition: or
+    conditions:
+
+      - condition: template
+        value_template: "{{ trigger.event.data.critical }}"
+
+      - condition: state
+        entity_id: input_boolean.announcements
+        state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: HOUSE_SPEAK
+
+  action:
+    - condition: template
+      value_template: "{{ trigger.event.data.light|default(False) }}"
+
+    - service: light.turn_on
+      data_template: 
+        entity_id: light.gateway_light_286c07f0a0c6
+        color_name: "{{ trigger.event.data.color }}"
+        brightness_pct: "{{ trigger.event.data.brightness|default(50)|int }}"
+        #flash: "{{ trigger.event.data.flash|default(None) }}"
+
+
+- id: speak_event_say
+  alias: House Speak Event Speaker
+
+  condition: 
+    condition: or
+    conditions:
+
+      - condition: template
+        value_template: "{{ trigger.event.data.critical }}"
+
+      - condition: state
+        entity_id: input_boolean.announcements
+        state: 'on'
+
+  trigger:
+    - platform: event
+      event_type: HOUSE_SPEAK
+
+  action:
+
+    - condition: template
+      value_template: "{{ trigger.event.data.speak }}"
+
+    - wait_template: "{{ is_state('media_player.speaker', 'idle') }}"
+      timeout: '00:02:00'
+
+    - delay: 00:00:02
+
+    - service: media_player.volume_set
+      entity_id: media_player.speaker
+      data_template:
+        volume_level: "{{ trigger.event.data.speak_volume|default(0.80)|float }}"
+
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.speaker
+        message: "{% if trigger.event.data.spoken %}{{ trigger.event.data.spoken }}{% else %}{{ trigger.event.data.message }}{% endif %}"
+
