@@ -1,4 +1,3 @@
-
 homeassistant:
   name: !secret name
   latitude: !secret latitude
@@ -7,119 +6,34 @@ homeassistant:
   unit_system: metric
   time_zone: !secret timezone
   customize: !include customize.yaml
+  customize_glob: !include customize_glob.yaml
   
-logger:
-  default: warning
+#logger:
+#  default: info
 
-history:
-  exclude:
-    domains:
-      - yr
-      - bom
-      - wunderground
-      - moon
-      - group
-      - weblink
-      - updater
-      - automation
-      - scene
-      - zone
-    entities:
-      - media_player.kitchen_speaker
-      - input_boolean.awake
-      - input_boolean.house_announcements
-      - input_boolean.time_of_day_automation
-      - input_select.tv_channel
-      - input_select.tv_source
-      - media_player.speaker
-      - binary_sensor.switch_158d00019c9688
-      - binary_sensor.switch_158d0001243e26
-      - binary_sensor.switch_158d00019de7b4 
-      - binary_sensor.cube_158d0001035c90
-      - sun.sun
-      - sensor.date
-      - sensor.time       
-      - sensor.time_utc
-      - sensor.internet_time    
-      - sensor.stardate
-      - sensor.forecast_cloudiness
-      - sensor.forecast_dewpoint_temperature
-      - sensor.forecast_high_clouds
-      - sensor.forecast_humidity
-      - sensor.forecast_low_clouds
-      - sensor.forecast_medium_clouds
-      - sensor.forecast_precipitation
-      - sensor.forecast_pressure
-      - sensor.forecast_symbol
-      - sensor.forecast_temperature
-      - sensor.forecast_wind_direction
-      - sensor.forecast_wind_speed
-      - sensor.bom_sydney_air_temp_c
-      - sensor.bom_sydney_cloud
-      - sensor.bom_sydney_cloud_base
-      - sensor.bom_sydney_cloud_oktas
-      - sensor.bom_sydney_cloud_type 
-      - sensor.bom_sydney_cloud_type_id
-      - sensor.bom_sydney_delta_temp_c 
-      - sensor.bom_sydney_dew_point_c 
-      - sensor.bom_sydney_feels_like_c
-      - sensor.bom_sydney_pressure_mb 
-      - sensor.bom_sydney_pressure_msl
-      - sensor.bom_sydney_pressure_qnh
-      - sensor.bom_sydney_pressure_tend
-      - sensor.bom_sydney_rain_today
-      - sensor.bom_sydney_relative_humidity
-      - sensor.bom_sydney_sea_state 
-      - sensor.bom_sydney_swell_direction
-      - sensor.bom_sydney_swell_height
-      - sensor.bom_sydney_swell_period
-      - sensor.bom_sydney_visability_km
-      - sensor.bom_sydney_weather
-      - sensor.bom_sydney_wind_direction
-      - sensor.bom_sydney_wind_direction_kt
-      - sensor.bom_sydney_wind_gust_kmh
-      - sensor.bom_sydney_wind_gust_kt
-      - sensor.bom_sydney_wind_speed_kmh
-      - sensor.catslair_ssl_expiry
-
-
-logbook:
-  exclude:
-    domains:
-      - yr
-      - bom
-      - moon
-      - group
-      - weblink
-      - updater
-      - automation
-      - scene
-      - zone
-      - zwave
-      - media_player
-      - input_select
-      - input_boolean
-      - flux
-      - binary_sensor
-      - sensor
-      - light
-      - switch
-    entities:
-      - binary_sensor.motion_sensor_158d000120cce2
-      - binary_sensor.motion_sensor_158d0001ae9379
-      - binary_sensor.cube_158d0001035c90
-      - sensor.illumination_286c07f0a0c6
-      - light.living_room_lights
-      - light.house_lights
-      - sensor.nsw_rfs_major_incidents
-      - sensor.geoscience_australia
-      - sensor.usgs_all_earthquakes
-     
+#lirc:
 map:
-
 sun:
+alexa:
+config:
+updater:
 
+logbook: !include logbook.yaml
 recorder: !include recorder.yaml
+
+history: !include config/history.yaml
+http: !include config/http.yaml
+frontend: !include config/frontend.yaml
+mqtt: !include config/mqtt.yaml
+mqtt_statestream: !include config/mqtt_statestream.yaml
+
+#zwave:
+#  usb_path: /dev/ttyUSB0
+
+notify:
+  - name: Facebook Notifications
+    platform: facebook
+    page_access_token: !secret fb_page_access_token
 
 google_assistant:
   project_id: !secret google_assistant_project
@@ -137,93 +51,10 @@ cloud:
         - group
         - media_player
 
-alexa:
-
-zwave:
-  usb_path: /dev/ttyUSB0
-
-notify:
-  - name: Facebook Notifications
-    platform: facebook
-    page_access_token: !secret fb_page_access_token
-
 facebook_webhook:
   verify_token: !secret fb_verify_token
   access_token: !secret fb_page_access_token
   allowed_ids: !include secret/trusted_facebook_ids.yaml
-
-#duckdns:
-#  domain: !secret domain
-#  access_token: !secret duck_access_token
-
-config:
-
-#influxdb:
-#  host: !secret mqtt_broker_host
-#  database: homeassistant
-#  default_measurement: state
-
-http:
-  api_password: !secret api_password
-  use_x_forwarded_for: true
-  cors_allowed_origins:
-    - https://google.com
-    - https://home-assistant.io
-  trusted_networks: !include secret/trusted_networks.yaml
-  ip_ban_enabled: True
-  login_attempts_threshold: 5
-
-frontend:
-#  extra_html_url:
-#    - /home/homeassistant/.homeassistant/www/custom_ui/state-card-floorplan.html
-  javascript_version: latest
-  themes:
-    day:
-      primary_color: orange
-    night:
-      primary_color: black
-
-
-updater:
-
-scene: !include scene.yaml
-intent_script: !include intent_script.yaml
-
-conversation:
-  intents: !include conversation_intent.yaml
-
-mqtt:
-  broker: !secret mqtt_broker_host
-  discovery: true
-  discovery_prefix: 'homedisco'
-  birth_message:
-    topic: 'homeassistant/status'
-    payload: 'online'
-    retain: true
-  will_message:
-    topic: 'homeassistant/status'
-    payload: 'offline'
-    retain: true
-
-mqtt_statestream:
-  base_topic: 'statestream'
-  publish_attributes: false
-  publish_timestamps: false
-  exclude:
-    domains:
-      - automation
-      - group
-      - scene
-      - zone
-      - zwave
-      - sun
-
-    entities:
-      - sensor.time
-      - sensor.time_utc
-      - sensor.internet_time
-      - sensor.cpu_temperature
-
 
 xiaomi_aqara:
   interface: !secret iot_interface
@@ -242,8 +73,6 @@ alarm_control_panel:
     delay_time: 1
     trigger_time: 60
 
-#lirc:
-
 keyboard_remote:
   device_name: 'Remote control'
   type: 'key_down'
@@ -252,31 +81,10 @@ tts:
   - platform: google
   - platform: picotts
 
-device_tracker:
-  - platform: gpslogger
-    max_gps_accuracy: 20
-
-  - platform: ping
-    hosts: !include secret/ping_hosts.yaml
-
-  - platform: bluetooth_tracker
-#  - platform: bluetooth_le_tracker
-
-  - platform: mqtt
-    devices:
-      token_chelsea: 'homeassistant/location/token_chelsea'
-      token_jared: 'homeassistant/location/token_jared'
-      token_flaps: 'homeassistant/location/token_flaps'
-      token_tenille: 'homeassistant/location/token_tenille'
-      token_daisy: 'homeassistant/location/token_daisy'
-      token_guest1: 'homeassistant/location/token_guest1'
-      token_guest2: 'homeassistant/location/token_guest2'
-      token_guest3: 'homeassistant/location/token_guest3'
-      token_guest4: 'homeassistant/location/token_guest4'
-      token_guest5: 'homeassistant/location/token_guest5'
-      token_guest6: 'homeassistant/location/token_guest6'
-
-
+python_script:
+device_tracker: !include device_tracker.yaml
+scene: !include scene.yaml
+intent_script: !include intent_script.yaml
 media_player: !include media_player.yaml
 binary_sensor: !include binary_sensor.yaml
 sensor: !include sensor.yaml
@@ -285,12 +93,14 @@ light: !include light.yaml
 automation: !include automations.yaml
 input_select: !include input_select.yaml
 input_boolean: !include input_boolean.yaml
-group: !include groups.yaml
 script: !include scripts.yaml
 panel_custom: !include panel_custom.yaml
 
+group: !include_dir_merge_named groups/
+
 zone: 
   !include_dir_merge_list zones
-        
-python_script:
+
+conversation:
+  intents: !include conversation_intent.yaml
 

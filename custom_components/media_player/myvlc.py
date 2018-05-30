@@ -89,6 +89,17 @@ class VlcDevice(MediaPlayerDevice):
 
     @property
     def state(self):
+        import vlc
+        status = self._vlc.get_state()
+
+        if (status == vlc.State.Playing) or (status == vlc.State.Opening) or (status == vlc.State.Buffering):
+            self._state = STATE_PLAYING
+        elif (status == vlc.State.Paused):
+            self._state = STATE_PAUSED
+        elif (status == vlc.State.NothingSpecial) or (status == vlc.State.Ended) or (status == vlc.State.Stopped):
+            self._state = STATE_IDLE
+
+        #_LOGGER.error("MP State: %s" % self._state);
         """Return the state of the device."""
         return self._state
 

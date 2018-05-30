@@ -3,4 +3,28 @@
 #  state_topic: homeassistant/sensor/floorplan/state
 #  name: "Floor Plan"
 
-
+- platform: bayesian
+  prior: 0.5
+  name: 'Jared Location'
+  probability_threshold: 0.9
+  observations:
+    - entity_id: device_tracker.token_jared
+      prob_given_true: 0.9
+      prob_given_false: 0.1
+      platform: 'state'
+      to_state: 'home'
+    - entity_id: device_tracker.jared_oppo
+      prob_given_true: 0.5
+      prob_given_false: 0.6
+      platform: 'state'
+      to_state: 'home'
+    - entity_id: device_tracker.jared_watch
+      prob_given_true: 0.5
+      prob_given_false: 0.6
+      platform: 'state'
+      to_state: 'home'
+    - entity_id: device_tracker.jaredf1s
+      prob_given_true: 0.5
+      prob_given_false: 0.6
+      platform: 'state'
+      to_state: 'home'

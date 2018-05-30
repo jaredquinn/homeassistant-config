@@ -10,4 +10,8 @@ awake:
   name: House Awake
   initial: on
   icon: mdi:creation
+batton:
+  name: Announcer Batton
+  initial: off
+  icon: mdi:creation
 

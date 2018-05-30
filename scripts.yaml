@@ -1,5 +1,6 @@
 
 house_wakeup:
+  alias: House Wakeup
   sequence:
 
   - service: media_player.volume_set
@@ -7,7 +8,6 @@ house_wakeup:
     data:
       entity_id: media_player.kitchen_speaker, media_player.speaker
       volume_level: 0.85
-
 
   - service: script.announce
     data:
@@ -43,12 +43,12 @@ house_wakeup:
 
 
 house_goodnight:
-  alias: Set Volume
+  alias: House Goodnight
   sequence:
 
   - service: media_player.volume_set
     data:
-      entity_id: media_player.kitchen_speaker, media_player.speaker
+      entity_id: media_player.kitchen_speaker, media_player.speaker, media_player.mpd
       volume_level: 0.45
 
   - service: script.announce
@@ -71,8 +71,6 @@ house_goodnight:
       code: 1234
       entity_id: alarm_control_panel.ha_alarm
 
-  - delay: '00:00:15'
-
   - alias: Turn off Announcements
     service: input_boolean.turn_off
     data:
@@ -86,11 +84,13 @@ announce:
       event_data_template:
         message: "{{ message }}"
         spoken: "{{ spoken }}"
-        speak_volume: "{{ speak_volume|default(80)|int }}"
+        speak_volume: "{{ speak_volume|default(0.80)|float }}"
         speak: "{{ speak|default(True) }}"
         siren: "{{ siren|default(False) }}"
         siren_volume: "{{ siren_volume|default(0.30)|float }}"
         ringtone: "{{ ringtone }}"
+        tone: "{{ tone|default(False) }}"
+        tone_sound: "{{ tone_sound }}"
         light: "{{ light|default(False) }}"
         color: "{{ color }}"
         flash: "{{ flash }}"

@@ -1,0 +1,20 @@
+
+base_topic: 'statestream'
+publish_attributes: false
+publish_timestamps: false
+exclude:
+  domains:
+    - automation
+    - group
+    - scene
+    - zone
+    - zwave
+    - sun
+
+  entities:
+    - sensor.time
+    - sensor.time_utc
+    - sensor.internet_time
+    - sensor.cpu_temperature
+
+

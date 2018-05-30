@@ -1,6 +1,9 @@
 
-- platform: myvlc
-  name: speaker
+#- platform: myvlc
+#  name: speaker
+
+- platform: mpd
+  host: /run/mpd/socket
 
 - platform: cast
   host: !secret player_cast_kitchen_ip

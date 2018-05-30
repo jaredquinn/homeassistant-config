@@ -1,21 +1,21 @@
 ---
-- platform: yr
-  name: Forecast
-  forecast: 24
-  monitored_conditions:
-    - temperature
-    - symbol
-    - precipitation
-#    - windSpeed
-    - pressure
-#    - windDirection
-    - humidity
-    - fog
-    - cloudiness
-#    - lowClouds
-#    - mediumClouds
-#    - highClouds
-#    - dewpointTemperature
+#- platform: yr
+#  name: Forecast
+#  forecast: 24
+#  monitored_conditions:
+#    - temperature
+#    - symbol
+#    - precipitation
+##    - windSpeed
+#    - pressure
+##    - windDirection
+#    - humidity
+#    - fog
+#    - cloudiness
+##    - lowClouds
+##    - mediumClouds
+##    - highClouds
+##    - dewpointTemperature
 
 - platform: bom
   station: IDN60901.94767
@@ -23,30 +23,14 @@
   monitored_conditions:
     - apparent_t
     - cloud
-#    - cloud_base_m
-#    - cloud_oktas
-    - cloud_type_id
     - cloud_type
-#    - delta_t
     - gust_kmh
-#    - gust_kt
     - air_temp
-#    - dewpt
     - press
-#    - press_qnh
-#    - press_msl
-#    - press_tend
     - rain_trace
     - rel_hum
-    - sea_state
-#    - swell_dir_worded
-#    - swell_height
-#    - swell_period
-    - vis_km
     - weather
-    - wind_dir
     - wind_spd_kmh
-#    - wind_spd_kt
 
 - platform: wunderground
   api_key: !secret wunderground_key
@@ -122,10 +106,20 @@
   unit_of_measurement: '°C'
 
 - platform: mqtt
-  state_topic: 'display/aquarium/sensor/temperature_3ffeed28/state'
+  state_topic: 'display/aquarium/sensor/temperature_28FF5DFFA1170464/state'
   name: Aquarium Temperature
   unit_of_measurement: '°C'
 
+
+- platform: mqtt
+  state_topic: 'display/aquarium/sensor/temperature_bme/state'
+  name: Lounge Temperature
+  unit_of_measurement: '°C'
+
+- platform: mqtt
+  state_topic: 'display/aquarium/sensor/pressure_bme/state'
+  name: Lounge Barometric
+  unit_of_measurement: 'hPa'
 
 - platform: statistics
   name: Aquarium Temperature Stats
@@ -158,15 +152,22 @@
     - name: magnitude
       source: title
       regexp: '^M (?P<custom_attribute>\d+.\d+) -.*'
+    - name: distfrom
+      source: title
+      regexp: '^M \d+\.\d+ - (?P<custom_attribute>\d+)km.*'
+    - name: direction 
+      source: title
+      regexp: '^M \d+\.\d+ - \d+km (?P<custom_attribute>.*) of .*'
     - name: location 
       source: title
-      regexp: '^M \d+\.\d+ - (?P<custom_attribute>.*)'
+      regexp: '^M \d+\.\d+ - .* of (?P<custom_attribute>.*)'
 
 - platform: new_georss_events
   name: BGS Worlwide Earthquakes
   url: 'http://www.bgs.ac.uk/feeds/worldSeismology.xml'
   sort_by: 'date_published'
   unit_of_measurement: 'Earthquakes'
+  radius: 300000
   categories:
     - 'EQMH'
   custom_attributes:
@@ -179,10 +180,18 @@
   url: 'http://www.ga.gov.au/earthquakes/all_recent.rss'
   sort_by: 'date_published'
   unit_of_measurement: 'Earthquakes'
-  radius: 1000
+  radius: 3000
   publish_events: true
   custom_attributes:
     - name: magnitude
       source: title
       regexp: '^Magnitude (?P<custom_attribute>\d+.\d+), .*'
 
+
+- platform: internode
+  username: test
+  password: test
+  service: 123456
+  monitored_variables:
+    - usage
+    

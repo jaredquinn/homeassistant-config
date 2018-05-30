@@ -1,53 +1,13 @@
 sensor.broadlink_sensor_temperature:
-  friendly_name: Kitchen Temperature
-media_player.kitchen_speaker:
-  google_assistant: false
-group.tab_lounge:
-  google_assistant: false
-group.tab_info:
-  google_assistant: false
-group.tab_kitchen:
-  google_assistant: false
-group.items_server:
-  google_assistant: false
-group.items_channel:
-  google_assistant: false
-group.items_living:
-  google_assistant: false
-group.items_pets:
-  google_assistant: false
-group.items_presence:
-  google_assistant: false
-group.items_bom_sydney:
-  google_assistant: false
-group.items_forecast:
-  google_assistant: false
-group.items_modes:
-  google_assistant: false
-group.other_lights_kitchen:
-  google_assistant: false
-group.other_lights_entertainment:
-  google_assistant: false
-group.lounge_lights:
-  google_assistant: false
-group.ten_forward_lights:
-  google_assistant: false
-group.items_laundry:
-  google_assistant: false
-group.entertainment_selection:
-  google_assistant: false
-group.all_switches:
-  google_assistant: false
-group.all_lights:
-  google_assistant: false
-group.all_devices:
-  google_assistant: false
-group.default_view:
-  google_assistant: false
-group.home_entertainment:
-  google_assistant: false
-group.entertainment:
-  google_assistant: true
+  friendly_name: Cat Tree Temperature
+binary_sensor.cube_158d0001035c90:
+  hidden: true
+input_boolean.batton:
+  hidden: true
+group.always_hidden:
+  hidden: true
+group.security_tokens:
+  hidden: true
 sensor.average_load_1m:
   unit_of_measurement: Load
 sensor.average_load_5m:
@@ -55,8 +15,17 @@ sensor.average_load_5m:
 sensor.illumination_286c07f0a0c6:
   friendly_name: Gateway Illumination
   google_assistant: false
+sensor.humidity_158d000222631e:
+  friendly_name: Bathroom Humidity
+  google_assistant: false
 sensor.humidity_158d0001c15683:
   friendly_name: Bedroom Humidity
+  google_assistant: false
+sensor.temperature_158d0001c15683:
+  google_assistant: false
+  friendly_name: Bedroom Temperature
+sensor.temperature_158d000222631e:
+  friendly_name: Bathroom Temperature
   google_assistant: false
 media_player.laircast:
   google_assistant: false
@@ -92,20 +61,12 @@ light.kitchen_light:
   assistant_room_hint: Kitchen
 light.kitchen_light_extra:
   assistant_room_hint: Kitchen
-light.hallway_light:
-  assistant_room_hint: Ten Forward
-light.dining_light:
-  assistant_room_hint: Ten Forward
 switch.fan:
   google_assistant_type: fan
   assistant_room_hint: Living Room
-sensor.temperature_158d0001c15683:
-  friendly_name: Bedroom Temperature
-  assistant_room_hint: Bedroom
 device_tracker.token_chelsea:
   friendly_name: V Cat
   source_type: gps
 device_tracker.token_jared:
   friendly_name: Jared
 device_tracker.token_guest1: {}
-

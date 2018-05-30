@@ -228,7 +228,7 @@ if command == 'volume':
         packets.append( sval )
 
 
-    hass.services.call('broadlink', 'send_packet_10_10_98_31', { 'packet': packets } )
+    hass.services.call('switch', 'broadlink_send_packet_10_10_98_31', { 'packet': packets } )
 
 
 
@@ -252,5 +252,5 @@ if command == 'source' or command == 'channel':
         packets = make_remote_sequence(commands['fetch'], channels[selected])
 
     if len(packets) > 0:
-        hass.services.call('broadlink', 'send_packet_10_10_98_31', { 'packet': packets } )
+        hass.services.call('switch', 'broadlink_send_packet_10_10_98_31', { 'packet': packets } )
 

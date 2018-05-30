@@ -229,7 +229,7 @@ class GeoRssServiceSensor(Entity):
             # Finally publish new events to the bus.
             if self._publish_events:
                 events_to_publish = self.filter_events_to_publish(my_events)
-                _LOGGER.warning("New events to publish: %s", events_to_publish)
+                _LOGGER.debug("New events to publish: %s", events_to_publish)
                 self.publish_events(events_to_publish)
             self._previous_events = my_events
 

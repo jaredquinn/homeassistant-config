@@ -1,0 +1,10 @@
+
+api_password: !secret api_password
+use_x_forwarded_for: true
+cors_allowed_origins:
+  - https://google.com
+  - https://home-assistant.io
+trusted_networks: !include ../secret/trusted_networks.yaml
+ip_ban_enabled: True
+login_attempts_threshold: 5
+

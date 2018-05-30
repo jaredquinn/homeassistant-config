@@ -39,8 +39,9 @@
       data_template:
         color: 'orange'
         light: true
-        ringtone: 7
-        message: "New South Wales Rural Fire Service issued a {{ trigger.event.data.category }} for {{ trigger.event.data.title }} located {{ trigger.event.data.distance }} kilometers away"
+        tone: true
+        tone_sound: "/home/homeassistant/sounds/boxing_bell.wav"
+        message: "New South Wales Rural Fire Service issued a {{ trigger.event.data.category }} for {{ trigger.event.data.title }} located {{ trigger.event.data.distance|int }} kilometers away"
 
 
 - id: usgs_alert_announcement
@@ -51,15 +52,18 @@
 
   condition:
     - condition: template
-      value_template: '{{ trigger.event.data.magnitude | float > 2.0 }}'
+      value_template: '{{ trigger.event.data.magnitude | float > 3.0 }}'
 
   action:
     - service: script.announce
       data_template:
         color: "orange"
         light: true
-        ringtone: 7
-        siren: "{{ trigger.event.data.magnitude|float > 5.0 }}"
-        message: "USGS Reporting new Earthquake of magnitude {{ trigger.event.data.magnitude }} at {{ trigger.event.data.title }}"
-
+        tone: "{{ trigger.event.data.magnitude|float > 5.0 }}"
+        tone_sound: "/home/homeassistant/sounds/chime_big_ben.wav"
+        message: >
+          USGS Earthquake reported magnitude {{ trigger.event.data.magnitude }} earthquake
+          at {{ trigger.event.data.distfrom }} kilometres 
+          {{ trigger.event.data.direction|regex_replace("E", "East ")|regex_replace("S", "South ")|regex_replace("W", "West ")|regex_replace("N", "North ") }}
+          of {{ trigger.event.data.location }}
 

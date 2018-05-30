@@ -1,0 +1,12 @@
+broker: !secret mqtt_broker_host
+discovery: true
+discovery_prefix: 'homedisco'
+birth_message:
+  topic: 'homeassistant/status'
+  payload: 'online'
+  retain: true
+will_message:
+  topic: 'homeassistant/status'
+  payload: 'offline'
+  retain: true
+

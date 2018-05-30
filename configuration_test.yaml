@@ -1,0 +1,15 @@
+homeassistant:
+  name: !secret name
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: metric
+  time_zone: !secret timezone
+ 
+sensor: 
+  - platform: internode
+    username: test
+    password: test
+    service: 123456
+    monitored_variables:
+      - usage

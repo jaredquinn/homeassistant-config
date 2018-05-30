@@ -46,7 +46,7 @@
       data_template:
         gw_mac: !secret xiaomi_mac
         ringtone_id: "{{ trigger.event.data.ringtone|int }}"
-        ringtone_vol: "{{ trigger.event.data.siren_volume|default(50)|int }}"
+        ringtone_vol: "{{ ( trigger.event.data.siren_volume|default(0.30) * 100 ) | int }}"
 
 
 - id: speak_event_light
@@ -79,41 +79,53 @@
         #flash: "{{ trigger.event.data.flash|default(None) }}"
 
 
-- id: speak_event_say
-  alias: House Speak Event Speaker
-
-  condition: 
-    condition: or
-    conditions:
-
-      - condition: template
-        value_template: "{{ trigger.event.data.critical }}"
-
-      - condition: state
-        entity_id: input_boolean.announcements
-        state: 'on'
-
-  trigger:
-    - platform: event
-      event_type: HOUSE_SPEAK
-
-  action:
-
-    - condition: template
-      value_template: "{{ trigger.event.data.speak }}"
-
-    - wait_template: "{{ is_state('media_player.speaker', 'idle') }}"
-      timeout: '00:02:00'
-
-    - delay: 00:00:02
-
-    - service: media_player.volume_set
-      entity_id: media_player.speaker
-      data_template:
-        volume_level: "{{ trigger.event.data.speak_volume|default(0.80)|float }}"
-
-    - service: tts.google_say
-      data_template:
-        entity_id: media_player.speaker
-        message: "{% if trigger.event.data.spoken %}{{ trigger.event.data.spoken }}{% else %}{{ trigger.event.data.message }}{% endif %}"
+#- id: speak_event_say
+#alias: House Speak Event Speaker
+#
+#  condition: 
+#    condition: or
+#    conditions:
+#
+#      - condition: template
+#        value_template: "{{ trigger.event.data.critical }}"
+#
+#      - condition: state
+#        entity_id: input_boolean.announcements
+#        state: 'on'
+#
+#  trigger:
+#    - platform: event
+#      event_type: HOUSE_SPEAK
+#
+#  action:
+#
+#    - condition: template
+#      value_template: "{{ trigger.event.data.speak }}"
+#
+#    - wait_template: "{{ is_state('input_boolean.batton', 'off') }}"
+#      timeout: '00:05:00'
+#
+#    - service: input_boolean.turn_on
+#      entity_id: input_boolean.batton
+#
+#    - wait_template: "{{ is_state('media_player.speaker', 'idle') }}"
+#      timeout: '00:02:00'
+#
+#    - delay: 00:00:02
+#
+#    - service: media_player.volume_set
+#      entity_id: media_player.speaker
+#      data_template:
+#        volume_level: "{{ trigger.event.data.speak_volume|default(0.80)|float }}"
+#
+#    - service: tts.google_say
+#      data_template:
+#        entity_id: media_player.speaker
+#        message: "{% if trigger.event.data.spoken %}{{ trigger.event.data.spoken }}{% else %}{{ trigger.event.data.message }}{% endif %}"
+#
+#    - wait_template: "{{ is_state('media_player.speaker', 'idle') }}"
+#      timeout: '00:02:00'
+#
+#    - service: input_boolean.turn_off
+#      entity_id: input_boolean.batton
 
