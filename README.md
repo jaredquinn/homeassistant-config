@@ -123,7 +123,13 @@ as secret_* in the filename.
 
 Internode are an Australian Internet service provider; this sensor shows the current percentage quota utilisation for the current billing period.  Additional information is supplied in the additional attributes including total bytes used, total quota, period end date and period type.  
 
-## Example Configuration
+## Installation
+
+Copy the custom_components/sensors/internode.py file to your configuration directory including the hirearchy (create custom_component/sensors if you don't already have one).
+
+## Configuration
+
+Add the following block to your configuration, with your Internode username (not including any @internode.on.net) and password and your service ID which you can find by following the instructions below.
 
 ```yaml
 sensor:
@@ -136,9 +142,10 @@ sensor:
     
 ```
 
-You can find your ServiceID by going to https://customer-webtools-api.internode.on.net/api/v1.5 and enter your Internode credentials (without any @internode.on.net) and you can find your service ID in the XML returned, where SERVICE_ID is below:
+### Getting your Service ID
 
-e.g.
+You can find your ServiceID by going to https://customer-webtools-api.internode.on.net/api/v1.5 and enter your Internode credentials (without any @internode.on.net) and you can find your service ID in the XML returned, where SERVICE_ID is shown:
+
 ```XML
 <?xml version="1.0" encoding="UTF-8"?>
 <internode>
