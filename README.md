@@ -134,4 +134,18 @@ sensor:
     
 ```
 
+You can find your ServiceID by going to https://customer-webtools-api.internode.on.net/api/v1.5 and enter your Internode credentials (without any @internode.on.net) and you can find your service ID in the XML returned, where SERVICE_ID is below:
+
+e.g.
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<internode>
+    <api>
+        <services count="1">
+            <service type="Personal_ADSL" href="/api/v1.5/SERVICE_ID">SERVICE_ID</service>
+        </services>
+    </api>
+</internode>
+```
+
 
