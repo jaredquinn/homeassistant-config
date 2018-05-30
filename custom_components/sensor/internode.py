@@ -163,7 +163,7 @@ class StartInternodeData(object):
 
         with async_timeout.timeout(REQUEST_TIMEOUT, loop=self.loop):
             req = await self.websession.get(url, auth=self.auth)
-        if req.status != 200:
+        if req.status == 401:
             _LOGGER.error("Request failed with status: %u", req.status)
             return False
 
