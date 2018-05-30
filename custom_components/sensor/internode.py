@@ -86,7 +86,7 @@ class StartInternodeSensor(Entity):
         self._icon = SENSOR_TYPES[sensor_type][2]
 
         self._state = None
-        self._state_attrs = {}
+        self._state_attrs = { "quota": "Unknown", "used": "Unknown", "traffic_unit": "bytes", "rollover": "Unknown", "plan_interval": "Unknown" }
 
     @property
     def name(self):
