@@ -121,7 +121,9 @@ as secret_* in the filename.
 
 # INTERNODE SENSOR
 
-## Example conifguration:
+Internode are an Australian Internet service provider; this sensor shows the current percentage quota utilisation for the current billing period.  Additional information is supplied in the additional attributes including total bytes used, total quota, period end date and period type.  
+
+## Example Configuration
 
 ```yaml
 sensor:
