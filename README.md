@@ -74,6 +74,7 @@ as an example.
 
 ## Custom Components
 
+* Internode Usage API (Australian ISP)  - custom_components/sensors/internode.py
 * Facebook Webhooks
 
 ## Modified Core Components
