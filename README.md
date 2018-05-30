@@ -118,3 +118,20 @@ if you wish to override your 'home' and 'work' zones, create files in the
 Additional "secret" zones are not included in this repository and are prefixed
 as secret_* in the filename.
 
+
+# INTERNODE SENSOR
+
+## Example conifguration:
+
+```yaml
+sensor:
+- platform: internode
+  username: test
+  password: test
+  service: 123456
+  monitored_variables:
+    - usage
+    
+```
+
+
