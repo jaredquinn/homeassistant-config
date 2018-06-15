@@ -69,9 +69,15 @@ alarm_control_panel:
     state_topic: homeassistant/alarm
     command_topic: homeassistant/alarm/set
     code: !secret alarm_control_code
-    pending_time: 1
-    delay_time: 1
+    pending_time: 30
+    delay_time: 20
     trigger_time: 60
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      pending_time: 0
+      delay_time: 0
+
 
 keyboard_remote:
   device_name: 'Remote control'

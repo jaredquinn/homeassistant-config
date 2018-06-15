@@ -24,7 +24,7 @@ as an example.
 * Amazon Echo Dot (via Home Assistant Cloud)
 * Xiaomi Aqara Gateway Night Light
 * Xiaomi Aqara Smart Button (x3)
-* Xiaomi Aqara Temperature & Humidity Sensor
+* Xiaomi Aqara Temperature & Humidity Sensor (x2)
 * Xiaomi Aqara Door/Window Switch
 * Xiaomi Aqara Motion Detection (x2)
 * YeeLight Color LED Light Bulb (x4)
@@ -35,11 +35,13 @@ as an example.
 * Google Chromecast
 * Roku
 * TP-Link HS100 WiFi A/C Switch
-* NodeMCU w/Submersible Temperature Sensor
-* NodeMCU Outdoor Temperator Sensor (coming soon)
-* NodeMCU RFID Scanner
-* Dangerous Prototypes USB IRToy (Infrared Recevier/Sender)
+* NodeMCU MQTT w/Submersible Temperature Sensor (Aquarium)
+* NodeMCU MQTT Lounge Room Humidity/Temperature/Pressure
+* NodeMCU MQTT Bedroom Temperature/Humidity Sensor
+* NodeMCU MQTT RFID Scan In/Out
 * ESP32 based MQTT Display Panel
+* Front Door Reed Sensor (wired to RFID Scanner)
+* Dangerous Prototypes USB IRToy (Infrared Recevier/Sender)
 * Bluetooth Remote Control (for Lights)
 * Sonic Screwdriver (coming soon)
 

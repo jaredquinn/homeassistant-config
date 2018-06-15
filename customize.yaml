@@ -19,11 +19,11 @@ sensor.humidity_158d000222631e:
   friendly_name: Bathroom Humidity
   google_assistant: false
 sensor.humidity_158d0001c15683:
-  friendly_name: Bedroom Humidity
+  friendly_name: Outside Humidity
   google_assistant: false
 sensor.temperature_158d0001c15683:
   google_assistant: false
-  friendly_name: Bedroom Temperature
+  friendly_name: Outside Temperature
 sensor.temperature_158d000222631e:
   friendly_name: Bathroom Temperature
   google_assistant: false

@@ -110,7 +110,6 @@
   name: Aquarium Temperature
   unit_of_measurement: '°C'
 
-
 - platform: mqtt
   state_topic: 'display/aquarium/sensor/temperature_bme/state'
   name: Lounge Temperature
@@ -121,10 +120,49 @@
   name: Lounge Barometric
   unit_of_measurement: 'hPa'
 
+
+- platform: mqtt
+  state_topic: 'display/bedroom/sensor/temperature_40183674/state'
+  name: Bedroom Temperature
+  unit_of_measurement: '°C'
+
+- platform: mqtt
+  state_topic: 'display/bedroom/sensor/humidity_40183674/state'
+  name: Bedroom Humidity
+  unit_of_measurement: '%'
+
 - platform: statistics
-  name: Aquarium Temperature Stats
+  name: Aquarium Temp Stats
   entity_id: sensor.aquarium_temperature
   max_age: 24:00
+  sampling_size: 3600
+
+- platform: statistics
+  name: Outside Temp Stats
+  entity_id: sensor.temperature_158d0001c15683
+  max_age: 24:00
+  sampling_size: 3600
+
+- platform: statistics
+  name: Outside Humidity Stats
+  entity_id: sensor.humidity_158d0001c15683
+  max_age: 24:00
+  sampling_size: 3600
+
+#- platform: trend
+#sensors:
+
+
+- platform: template
+  sensors:
+
+    bathroom_humidity_difference:
+      friendly_name: "Bathroom Humidity Difference to Outside"
+      value_template: "{{ states('sensor.humidity_158d000222631e')|float - states('sensor.humidity_158d0001c15683')|float }}"
+
+    shower_detected:
+      friendly_name: "Shower Detected"
+      value_template: "{% if states('sensor.bathroom_humidity_difference')|float > 17.00 %}on{% else %}off{% endif %}"
 
 - platform: new_georss_events
   name: NSW RFS Major Incidents
@@ -148,6 +186,17 @@
   categories:
     - 'Past Hour'
     - 'Past Day'
+#      2018-06-03T00:29:11.736344+10:00 miranda hass[16069]: 2018-06-03 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event usgs_all_earthquakes[L]: 
+#      category=Past Day, 
+#      title=M 4.2 - Antofagasta, Chile,
+#      date_published=None, 
+#      date_updated=time.struct_time(tm_year=2018, tm_mon=6, tm_mday=2, tm_hour=14, tm_min=27, tm_sec=20, tm_wday=5, tm_yday=153, tm_isdst=0), 
+#      distance=12502.23824075146, 
+#      id=urn:earthquake-usgs-gov:us:1000eh1j, 
+#      magnitude=4.2, 
+#      distfrom=None, direction=None, 
+#      location=None>
+
   custom_attributes:
     - name: magnitude
       source: title

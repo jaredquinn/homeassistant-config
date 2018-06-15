@@ -1,6 +1,6 @@
 
 - id: bgs_worldwide_earthquakes_alert
-  alias: BGS Worlwide Earthquakes Alert
+  lias: BGS Worlwide Earthquakes Alert
   trigger:
     - platform: event
       event_type: bgs_worldwide_earthquakes
@@ -26,6 +26,7 @@
         light: true
         ringtone: 7
         message: "Geoscience Australia reporting {% if trigger.event %}{{ trigger.event.data.title }}{% endif %}"
+
 
 - id: nsw_rfs_alert_trigger
   alias: NSW RFS Alert Announcement
@@ -60,10 +61,14 @@
         color: "orange"
         light: true
         tone: "{{ trigger.event.data.magnitude|float > 5.0 }}"
-        tone_sound: "/home/homeassistant/sounds/chime_big_ben.wav"
+        #tone_sound: "/home/homeassistant/sounds/chime_big_ben.wav"
         message: >
-          USGS Earthquake reported magnitude {{ trigger.event.data.magnitude }} earthquake
-          at {{ trigger.event.data.distfrom }} kilometres 
-          {{ trigger.event.data.direction|regex_replace("E", "East ")|regex_replace("S", "South ")|regex_replace("W", "West ")|regex_replace("N", "North ") }}
+          {% if trigger.event.data.distfrom is not none %}
+            USGS Earthquake reported magnitude {{ trigger.event.data.magnitude }} earthquake
+            at {{ trigger.event.data.distfrom }} kilometres 
+            {{ trigger.event.data.direction|regex_replace("E", "East ")|regex_replace("S", "South ")|regex_replace("W", "West ")|regex_replace("N", "North ") }}
           of {{ trigger.event.data.location }}
+          {% else %}
+            USGS Earthquake {{ trigger.event.data.title }}
+          {% endif %}
 

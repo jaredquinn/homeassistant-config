@@ -34,8 +34,6 @@
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'single'
 
-
-
   action:
     - service: light.turn_on
       data:
@@ -44,6 +42,34 @@
         brightness_pct: 10
         rgb_color: [ 255, 182, 109 ]
 
+#########################################################
+- alias: Auto Bathroom Lights Force OFF
+  hide_entity: true
+#########################################################
+  condition:
+
+    - condition: state
+      entity_id: light.bathroom_light
+      state: 'on'
+
+  trigger:
+
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "bathroom_light"
+
+    - platform: event
+      event_type: click
+      event_data:
+        transition: 3
+        entity_id: binary_sensor.switch_158d00019c9688
+        click_type: 'single'
+
+  action:
+    - service: light.turn_off
+      data:
+        transition: 2
+        entity_id: light.bathroom_light
  
 #########################################################
 - alias: Auto Bathroom Lights OFF
@@ -54,30 +80,22 @@
       entity_id: light.bathroom_light
       state: 'on'
 
+    - condition: state
+      entity_id: sensor.shower_detected
+      state: 'off'
+
   trigger:
 
     - platform: numeric_state
       entity_id: binary_sensor.motion_sensor_158d0001ae9379
       value_template: "{{states.binary_sensor.motion_sensor_158d0001ae9379.attributes['No motion since']}}"
-      above: 600
+      above: 120
 
     - platform: state
       entity_id: binary_sensor.motion_sensor_158d0001ae9379
       to: 'off'
       for:
-        minutes: 8
-
-    - platform: event
-      event_type: click
-      event_data:
-        transition: 3
-        entity_id: binary_sensor.switch_158d00019c9688
-        click_type: 'single'
-
-    - platform: mqtt
-      topic: "display/kitchen/touch/target"
-      payload: "bathroom_light"
-
+        minutes: 2
 
   action:
     - service: light.turn_off

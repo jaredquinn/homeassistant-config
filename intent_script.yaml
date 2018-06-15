@@ -35,10 +35,17 @@ TemperatureIntent:
 
   speech:
     text: >
-            The Kitchen Temperature is currently {{ states.sensor.kitchen_temperature.state }} degrees C, 
-            The Bedroom Temperature is currently {{ states.sensor.temperature_158d0001c15683.state }} degrees C with {{ states.sensor.humidity_158d0001c15683.state }} percent relative humidity.
+            My sensors indicate that on the balcony it is currently {{ states.sensor.temperature_158d0001c15683.state }} degrees C 
+            with {{ states.sensor.humidity_158d0001c15683.state }} percent relative humidity.
+            The Lounge Temperature is currently {{ states.sensor.lounge_temperature.state }} degrees C with barometric pressure of {{ states.sensor.lounge_barometric.state }} hectapascals.
+            The Aquarium water is currently at {{ states.sensor.aquarium_temperature.state }} degress C.
+            The Bedroom Temperature is currently {{ states.sensor.bedroom_temperature.state }} degrees C with {{ states.sensor.bedroom_humidity.state }} percent relative humidity.
+            The Kitchen Temperature is currently {{ states.sensor.broadlink_sensor_temperature.state }} degrees C, 
+            The Bathroom Temperature is currently {{ states.sensor.temperature_158d0001c15683.state }} degrees C with {{ states.sensor.humidity_158d0001c15683.state }} percent relative humidity.
             The Bureau of Meteorology says Sydney Airport has an air temperature of {{ states.sensor.bom_sydney_air_temp_c.state }} degrees but feels like {{ states.sensor.bom_sydney_feels_like_c.state }}.
-            An outside forecast of {{ states.sensor.forecast_temperature.state }} is expected.
+            {% if states.sensor.pws_weather_1h.state %}
+            An outside forecast in the next hour of {{ states.sensor.pws_weather_1h.state }} is expected,
+            {% endif %}
 
 
 StatusReportIntent:

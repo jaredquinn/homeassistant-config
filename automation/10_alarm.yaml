@@ -8,9 +8,12 @@
     state: 'armed_home'
 
   trigger:
-    platform: state
-    entity_id: binary_sensor.door_window_sensor_158d0001d6360a
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001d6360a
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.front_door_sensor
+      to: 'on'
 
   action:
     - service: script.announce
@@ -20,7 +23,6 @@
 
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.ha_alarm
-
 
 - id: alarm_trigger_away
   alias: 'Alarm Trigger: Away'
