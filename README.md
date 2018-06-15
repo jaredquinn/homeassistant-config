@@ -12,7 +12,7 @@ as an example.
 * Ubuntu 18.04 running on an Intel NUC
 * Mosquitto MQTT Broker
 * MariaDB (mysql) Database
-* VLC
+* MPD
 
 * Token Authentication (MQTT RFID Validator)
 
@@ -50,6 +50,7 @@ as an example.
 * PicoTTS
 * Google TTS
 * VLC Media Player
+* MPD Media Player
 
 ## Device Tracking
 
