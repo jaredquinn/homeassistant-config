@@ -10,7 +10,7 @@ views:
         # The entities card will take a list of entities and show their state.
       - type: entities
         # Title of the entities card
-        title: Example
+        title: Lights
         # The entities here will be shown in the same order as specified.
         entities:
           - light.bathroom_light
@@ -19,6 +19,13 @@ views:
           - light.kitchen_light
           - light.lounge_light
           - light.lounge_light_extra
+
+      - type: entities
+        title: Pets
+        entities:
+          - sensor.aquarium_temperature
+          - switch.fish_lamp
+          - script.fed_fish
 
       - type: entity-filter
         filter:
@@ -74,3 +81,4 @@ views:
         filter: [{}]
         card_config:
           title: All entities
+

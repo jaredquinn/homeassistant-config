@@ -95,8 +95,8 @@ automation: !include_dir_merge_list automation
 input_select: !include_dir_merge_list input/select
 input_boolean: !include_dir_merge_list input/boolean
 scene: !include_dir_merge_list scene
-script: !include_dir_merge_list scripts
-group: !include_dir_merge_named groups
+script: !include_dir_merge_list script
+group: !include_dir_merge_named group
 zone: 
   !include_dir_merge_list zones
 
