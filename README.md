@@ -34,6 +34,7 @@ as an example.
 * Broadlink SP3Mini WiFi A/C Switch (x2)
 * Google Chromecast
 * Roku
+* Kodi (Raspberry Pi)
 * TP-Link HS100 WiFi A/C Switch
 * NodeMCU MQTT w/Submersible Temperature Sensor (Aquarium)
 * NodeMCU MQTT Lounge Room Humidity/Temperature/Pressure
@@ -49,27 +50,26 @@ as an example.
 
 * PicoTTS
 * Google TTS
-* VLC Media Player
 * MPD Media Player
 
 ## Device Tracking
 
-* GPSLogger
 * Network Ping
 * MQTT Device Tracker (RFID Scanner)
+* Google Maps 
 
 ## Weather
 
 * BOM Australia
-* Forecast (NDK)
 * Weatherunderground
-* Sun
+* Sun/Moon
 
 
 ## Additional Features
 
 * MQTT HA Alarm Panel
 * Floorplan
+
 * lirc IR Remote (using IRToy)
 * Bluetooth Keyboard Remote
 * InfluxDB
