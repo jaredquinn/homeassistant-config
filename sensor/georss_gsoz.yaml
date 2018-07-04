@@ -1,0 +1,14 @@
+
+- platform: new_georss_events
+  name: Geoscience Australia
+  url: 'http://www.ga.gov.au/earthquakes/all_recent.rss'
+  sort_by: 'date_published'
+  unit_of_measurement: 'Earthquakes'
+  radius: 3000
+  publish_events: true
+  custom_attributes:
+    - name: magnitude
+      source: title
+      regexp: '^Magnitude (?P<custom_attribute>\d+.\d+), .*'
+
+

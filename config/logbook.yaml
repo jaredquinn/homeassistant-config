@@ -1,0 +1,31 @@
+exclude:
+  domains:
+    - yr
+    - bom
+    - moon
+    - group
+    - weblink
+    - updater
+    - automation
+    - scene
+    - zone
+    - zwave
+    - media_player
+    - input_select
+    - input_boolean
+    - flux
+    - binary_sensor
+    - sensor
+    - light
+    - switch
+  entities:
+    - binary_sensor.motion_sensor_158d000120cce2
+    - binary_sensor.motion_sensor_158d0001ae9379
+    - binary_sensor.cube_158d0001035c90
+    - sensor.illumination_286c07f0a0c6
+    - light.living_room_lights
+    - light.house_lights
+    - sensor.nsw_rfs_major_incidents
+    - sensor.geoscience_australia
+    - sensor.usgs_all_earthquakes
+   

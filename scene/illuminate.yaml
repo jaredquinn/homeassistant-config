@@ -1,0 +1,26 @@
+
+- name: Full Illumination
+  entities:
+    light.dining_light:
+      brightness: 255
+      state: on
+    light.hallway_light:
+      brightness: 255
+      rgb_color: [ 255, 255, 255 ]
+      state: on
+    light.kitchen_white:
+      brightness: 255
+      state: on
+    light.kitchen_colour:
+      brightness: 255
+      rgb_color: [ 255, 255, 255 ]
+      state: on
+    light.lounge_light:
+      brightness: 255
+      rgb_color: [ 255, 255, 255 ]
+      state: on
+    light.lounge_light_extra:
+      brightness: 255
+      rgb_color: [ 255, 255, 255 ]
+      state: on
+

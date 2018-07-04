@@ -1,0 +1,5 @@
+# Google Maps Integration
+#
+- platform: google_maps
+  username: !secret google_user_1
+  password: !secret google_user_1_pass

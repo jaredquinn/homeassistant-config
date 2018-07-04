@@ -1,0 +1,15 @@
+
+always_hidden:
+  name: Always Hidden
+  control: hidden
+  entities:
+    - input_boolean.batton
+    - sensor.bom_sydney_cloud
+    - sensor.bom_sydney_cloud_oktas
+    - sensor.bom_sydney_cloud_base
+    - sensor.bom_sydney_cloud_type
+    - sensor.bom_sydney_cloud_type_id
+    - sensor.bom_sydney_press
+    - sensor.bom_sydney_wind_spd_kmh
+    - sensor.bom_sydney_gust_kmh
+    - sensor.bom_sydney_rain_trace

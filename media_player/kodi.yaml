@@ -1,0 +1,3 @@
+- platform: kodi
+  name: Bedroom Kodi
+  host: !secret bedroom_kodi_ip

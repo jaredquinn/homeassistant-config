@@ -1,6 +1,6 @@
 
 - id: bgs_worldwide_earthquakes_alert
-  lias: BGS Worlwide Earthquakes Alert
+  alias: BGS Worlwide Earthquakes Alert
   trigger:
     - platform: event
       event_type: bgs_worldwide_earthquakes

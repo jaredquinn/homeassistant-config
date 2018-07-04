@@ -1,0 +1,16 @@
+
+- platform: bom
+  station: IDN60901.94767
+  name: Sydney
+  monitored_conditions:
+    - apparent_t
+    - cloud
+    - cloud_type
+    - gust_kmh
+    - air_temp
+    - press
+    - rain_trace
+    - rel_hum
+    - weather
+    - wind_spd_kmh
+

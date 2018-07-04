@@ -1,0 +1,10 @@
+
+- platform: group
+  name: House Lights
+  entities:
+    - light.dining_light
+    - light.hallway_light
+    - light.bathroom_light
+    - light.kitchen_light
+    - light.gateway_light_286c07f0a0c6
+

@@ -1,0 +1,11 @@
+
+- name: Darkness
+  entities:
+    light.lounge_light: off
+    light.lounge_light_extra: off
+    light.dining_light: off
+    light.hallway_light: off
+    light.kitchen_white: off
+    light.kitchen_colour: off
+
+

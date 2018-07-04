@@ -1,0 +1,16 @@
+# Bluetooth Tracking is no longer being used
+#####################################################################
+#- platform: bluetooth_tracker
+#  request_rssi: true
+#  track_new_devices: True
+#  new_device_defaults:
+#    hide_if_away: True
+
+#- platform: bluetooth_le_tracker
+#  device_id: hci1
+#  track_new_devices: True
+#  scan_duration: 4
+#  interval_seconds: 30
+#  new_device_defaults:
+#    hide_if_away: True
+

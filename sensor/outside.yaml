@@ -1,0 +1,13 @@
+
+- platform: statistics
+  name: Outside Temp Stats
+  entity_id: sensor.temperature_158d0001c15683
+  max_age: 24:00
+  sampling_size: 3600
+
+- platform: statistics
+  name: Outside Humidity Stats
+  entity_id: sensor.humidity_158d0001c15683
+  max_age: 24:00
+  sampling_size: 3600
+

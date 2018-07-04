@@ -1,0 +1,4 @@
+- platform: roku
+  host: !secret player_roku_ip
+  name: Lounge Roku
+

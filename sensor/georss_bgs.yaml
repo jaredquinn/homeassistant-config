@@ -1,0 +1,14 @@
+
+- platform: new_georss_events
+  name: BGS Worlwide Earthquakes
+  url: 'http://www.bgs.ac.uk/feeds/worldSeismology.xml'
+  sort_by: 'date_published'
+  unit_of_measurement: 'Earthquakes'
+  radius: 300000
+  categories:
+    - 'EQMH'
+  custom_attributes:
+    - name: magnitude
+      source: title
+      regexp: 'World Earthquake alert: M (?P<custom_attribute>\d+.\d+):.*'
+

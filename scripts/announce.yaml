@@ -1,0 +1,22 @@
+
+announce:
+  sequence:
+    - event: HOUSE_SPEAK
+      event_data_template:
+        message: "{{ message }}"
+        spoken: "{{ spoken }}"
+        speak_volume: "{{ speak_volume|default(0.80)|float }}"
+        speak: "{{ speak|default(True) }}"
+        siren: "{{ siren|default(False) }}"
+        siren_volume: "{{ siren_volume|default(0.30)|float }}"
+        ringtone: "{{ ringtone }}"
+        tone: "{{ tone|default(False) }}"
+        tone_sound: "{{ tone_sound }}"
+        light: "{{ light|default(False) }}"
+        color: "{{ color }}"
+        flash: "{{ flash }}"
+        brightness: "{{ brightness }}"
+        facebook: "{{ facebook|default(True) }}"
+        critical: "{{ critical|default(False) }}"
+
+

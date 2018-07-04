@@ -1,0 +1,8 @@
+
+- platform: time_date
+  display_options:
+    - date
+    - time
+    - time_utc
+    - beat
+

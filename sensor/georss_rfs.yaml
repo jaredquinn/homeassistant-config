@@ -1,0 +1,14 @@
+
+- platform: new_georss_events
+  name: NSW RFS Major Incidents
+  url: 'http://www.rfs.nsw.gov.au/feeds/majorIncidents.xml'
+  unit_of_measurement: 'Incidents'
+  radius: 100
+  publish_events: true
+  sort_by: 'date_published'
+  categories:
+    - 'Emergency Warning'
+    - 'Watch and Act'
+    - 'Advice'
+
+

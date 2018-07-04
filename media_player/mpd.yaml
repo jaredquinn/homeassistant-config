@@ -1,0 +1,5 @@
+# MPD via Socket
+#
+- platform: mpd
+  host: /run/mpd/socket
+

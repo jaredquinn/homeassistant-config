@@ -8,27 +8,12 @@ homeassistant:
   customize: !include customize.yaml
   customize_glob: !include customize_glob.yaml
   
-#logger:
-#  default: info
-
-#lirc:
 map:
 sun:
 alexa:
 config:
 updater:
-
-logbook: !include logbook.yaml
-recorder: !include recorder.yaml
-
-history: !include config/history.yaml
-http: !include config/http.yaml
-frontend: !include config/frontend.yaml
-mqtt: !include config/mqtt.yaml
-mqtt_statestream: !include config/mqtt_statestream.yaml
-
-#zwave:
-#  usb_path: /dev/ttyUSB0
+  include_used_components: true
 
 notify:
   - name: Facebook Notifications
@@ -78,7 +63,6 @@ alarm_control_panel:
       pending_time: 0
       delay_time: 0
 
-
 keyboard_remote:
   device_name: 'Remote control'
   type: 'key_down'
@@ -88,25 +72,35 @@ tts:
   - platform: picotts
 
 python_script:
-device_tracker: !include device_tracker.yaml
-scene: !include scene.yaml
-intent_script: !include intent_script.yaml
-media_player: !include media_player.yaml
-binary_sensor: !include binary_sensor.yaml
-sensor: !include sensor.yaml
-switch: !include switch.yaml
-light: !include light.yaml
-automation: !include automations.yaml
+
+logbook: !include config/logbook.yaml
+recorder: !include config/recorder.yaml
+history: !include config/history.yaml
+panel_custom: !include config/panel_custom.yaml
+
+http: !include config/http.yaml
+frontend: !include config/frontend.yaml
+
+mqtt: !include config/mqtt.yaml
+mqtt_statestream: !include config/mqtt_statestream.yaml
+
 input_select: !include input_select.yaml
 input_boolean: !include input_boolean.yaml
-script: !include scripts.yaml
-panel_custom: !include panel_custom.yaml
 
+light: !include_dir_merge_list light
+switch: !include_dir_merge_list switch
+device_tracker: !include_dir_merge_list device_tracker
+media_player: !include_dir_merge_list media_player
+sensor: !include_dir_merge_list sensor
+binary_sensor: !include_dir_merge_list binary_sensor
+automation: !include_dir_merge_list automation
+scene: !include_dir_merge_list scene
+script: !include_dir_merge_list scripts
 group: !include_dir_merge_named groups/
-
 zone: 
   !include_dir_merge_list zones
 
+intent_script: !include config/intent_script.yaml
 conversation:
-  intents: !include conversation_intent.yaml
+  intents: !include config/conversation_intent.yaml
 

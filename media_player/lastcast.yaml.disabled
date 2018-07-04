@@ -1,0 +1,3 @@
+- platform: cast
+  host: !secret player_cast_lounge_ip
+

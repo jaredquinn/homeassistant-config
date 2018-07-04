@@ -1,0 +1,8 @@
+
+- platform: mqtt
+  name: Front Door Sensor
+  state_topic: 'homeassistant/rfid/rfid/test_button/reed'
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: 'opening'
+

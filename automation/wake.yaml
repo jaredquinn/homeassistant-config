@@ -1,4 +1,6 @@
+
 - id: mode_change_wakeup
+  alias: Trigger Wakeup Script
   hide_entity: true
   trigger:
     - platform: state
@@ -10,6 +12,7 @@
 
 - id: mode_change_sleep
   hide_entity: true
+  alias: Trigger Goodnight Script
   trigger:
     - platform: state
       entity_id: input_boolean.awake

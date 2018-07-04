@@ -381,7 +381,7 @@ class GeoRssServiceData(object):
         # Expecting coordinates in format: (lat, lon).
         from haversine import haversine
         distance = haversine(coordinates, self._home_coordinates)
-        _LOGGER.info("Distance from %s to %s: %s km", self._home_coordinates,
+        _LOGGER.debug("Distance from %s to %s: %s km", self._home_coordinates,
                       coordinates, distance)
         return distance
 

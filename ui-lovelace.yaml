@@ -1,0 +1,76 @@
+name: Cats Lair
+views:
+    # The name of a view will be used as tab title.
+    # Might be used for other things in the future.
+  - name: Home
+    # Each view can have a different theme applied. Theme should be defined in the frontend.
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+        # The entities card will take a list of entities and show their state.
+      - type: entities
+        # Title of the entities card
+        title: Example
+        # The entities here will be shown in the same order as specified.
+        entities:
+          - light.bathroom_light
+          - light.dining_light
+          - light.hallway_light
+          - light.kitchen_light
+          - light.lounge_light
+          - light.lounge_light_extra
+
+      - type: entity-filter
+        filter:
+          - domain: device_tracker
+            state: 'home'
+        card: glance
+        card_config:
+          title: People at home
+
+      - type: glance
+        title: Alarm Status
+        entities:
+          - alarm_control_panel.ha_alarm
+          - binary_sensor.front_door_sensor
+          - binary_sensor.door_window_sensor_158d0001d6360a
+          - binary_sensor.motion_sensor_158d000120cce2        
+          - binary_sensor.motion_sensor_158d0001ae9379        
+
+#      - type: weather-forecast
+#       entity: weather.bom_sydney
+       
+      - type: entity-filter
+        filter:
+          - domain: input_boolean
+            state: 'on'
+        # This config will be passed to the card rendering the filter results
+        card_config:
+          title: Input booleans that are on
+
+    # Specify a tab_icon if you want the view tab to be an icon.
+  - tab_icon: mdi:home-assistant
+    # Name of the view. Will be used as the tooltip for tab icon
+    name: Second view
+    cards:
+      - type: media-control
+        entity: media_player.laircast
+
+      - type: media-control
+        entity: media_player.bedroom_kodi
+
+      - type: entities
+        title: General House Settings
+        entities:
+          - input_boolean.announcements
+          - input_boolean.timeofday
+          - input_boolean.awake
+
+
+  - tab_icon: mdi:settings
+    name: Debugging
+    cards:
+      - type: entity-filter
+        filter: [{}]
+        card_config:
+          title: All entities

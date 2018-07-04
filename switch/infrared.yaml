@@ -22,30 +22,3 @@
       command_on: JgBQAAABKJQTEhMSFDYTEhMSEzcUNhQSExISOBM2FBITEhMSEzcTEhM3ExITNxM3FDYTEhM3EhMTExI4ExISExMSEjgSExI4EwAFXwABKEoTAA0FAAAAAAAAAAA=
       command_off: JgBQAAABKJQTEhMSFDYTEhMSEzcUNhQSExISOBM2FBITEhMSEzcTEhM3ExITNxM3FDYTEhM3EhMTExI4ExISExMSEjgSExI4EwAFXwABKEoTAA0FAAAAAAAAAAA=
 
-- platform: tplink
-  name: Fish Lamp
-  friendly_name: Fish Lamp
-  host: !secret tplink_fish_switch_ip
-
-- platform: broadlink
-  type: 'spmini2'
-  host: !secret sp3mini2_washing_ip
-  mac: !secret sp3mini2_washing_mac
-  friendly_name: Washing Machine
-
-- platform: broadlink
-  type: 'spmini2'
-  host: !secret sp3mini2_fan_ip
-  mac: !secret sp3mini2_fan_mac
-  friendly_name: Fan
-
-- platform: flux
-  name: Flux Lights
-  lights:
-    - lights.dining_light
-    - lights.hallway_light
-    - lights.lounge_light
-    - lights.lounge_light_extra
-    - lights.kitchen_light
-
-

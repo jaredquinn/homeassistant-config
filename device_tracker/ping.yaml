@@ -1,0 +1,5 @@
+# Ping Detection of Specific Network Hosts
+#
+- platform: ping
+  hosts: !include ../secret/ping_hosts.yaml
+

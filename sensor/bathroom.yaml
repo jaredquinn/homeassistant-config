@@ -1,0 +1,11 @@
+
+- platform: template
+  sensors:
+
+    bathroom_humidity_difference:
+      friendly_name: "Bathroom Humidity Difference to Outside"
+      value_template: "{{ states('sensor.humidity_158d000222631e')|float - states('sensor.humidity_158d0001c15683')|float }}"
+
+    shower_detected:
+      friendly_name: "Shower Detected"
+      value_template: "{% if states('sensor.bathroom_humidity_difference')|float > 17.00 %}on{% else %}off{% endif %}"

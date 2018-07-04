@@ -1,0 +1,21 @@
+
+- platform: mqtt
+  state_topic: 'display/aquarium/sensor/temperature_28FF5DFFA1170464/state'
+  name: Aquarium Temperature
+  unit_of_measurement: '°C'
+
+- platform: mqtt
+  state_topic: 'display/aquarium/sensor/temperature_bme/state'
+  name: Lounge Temperature
+  unit_of_measurement: '°C'
+
+- platform: mqtt
+  state_topic: 'display/aquarium/sensor/pressure_bme/state'
+  name: Lounge Barometric
+  unit_of_measurement: 'hPa'
+
+- platform: statistics
+  name: Aquarium Temp Stats
+  entity_id: sensor.aquarium_temperature
+  max_age: 24:00
+  sampling_size: 3600

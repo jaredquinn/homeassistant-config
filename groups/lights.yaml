@@ -1,0 +1,13 @@
+
+lighting:
+  name: Lighting Control
+  control: hidden
+  entities:
+    - light.dining_light
+    - light.hallway_light
+    - light.kitchen_light
+    - light.bathroom_light
+    - light.gateway_light_286c07f0a0c6
+    - light.lounge_light
+    - light.lounge_light_extra
+

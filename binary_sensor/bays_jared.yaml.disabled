@@ -1,8 +1,4 @@
 
-#- platform: mqtt
-#  state_topic: homeassistant/sensor/floorplan/state
-#  name: "Floor Plan"
-
 - platform: bayesian
   prior: 0.5
   name: 'Jared Location'
@@ -28,11 +24,4 @@
       prob_given_false: 0.6
       platform: 'state'
       to_state: 'home'
-
-- platform: mqtt
-  name: Front Door Sensor
-  state_topic: 'homeassistant/rfid/rfid/test_button/reed'
-  payload_on: "open"
-  payload_off: "closed"
-  device_class: 'opening'
 

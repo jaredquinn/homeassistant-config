@@ -1,0 +1,25 @@
+
+- platform: new_georss_events
+  name: USGS All Earthquakes
+  url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.atom'
+  radius: 300000    
+  publish_events: true
+  sort_by: 'date_published'
+  unit_of_measurement: 'Earthquakes'
+  categories:
+    - 'Past Hour'
+    - 'Past Day'
+  custom_attributes:
+    - name: magnitude
+      source: title
+      regexp: '^M (?P<custom_attribute>\d+.\d+) -.*'
+    - name: distfrom
+      source: title
+      regexp: '^M \d+\.\d+ - (?P<custom_attribute>\d+)km.*'
+    - name: direction 
+      source: title
+      regexp: '^M \d+\.\d+ - \d+km (?P<custom_attribute>.*) of .*'
+    - name: location 
+      source: title
+      regexp: '^M \d+\.\d+ - .* of (?P<custom_attribute>.*)'
+

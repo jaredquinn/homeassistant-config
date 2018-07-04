@@ -1,0 +1,8 @@
+
+- platform: broadlink
+  host: !secret ir_blaster_ip
+  mac: !secret ir_blaster_mac
+  update_interval: 60
+  monitored_conditions:
+    - temperature
+

@@ -1,0 +1,37 @@
+
+house_goodnight:
+  alias: House Goodnight
+  sequence:
+
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.kitchen_speaker, media_player.speaker, media_player.mpd
+      volume_level: 0.45
+
+  - service: script.announce
+    data:
+      message: The Cats Lair is going to sleep.  Good night
+
+  - alias: Turn off Flux Lights
+    service: switch.turn_off
+    data:
+      entity_id: switch.flux_lights
+
+  - alias: Turn off House Lights
+    service: light.turn_off
+    data:
+      entity_id: light.house_lights
+
+  - alias: Arm Alarm
+    service: alarm_control_panel.alarm_arm_home
+    data:
+      code: 1234
+      entity_id: alarm_control_panel.ha_alarm
+
+  - alias: Turn off Announcements
+    service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.announcements
+
+
+

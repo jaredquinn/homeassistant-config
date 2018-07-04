@@ -1,0 +1,44 @@
+
+house_wakeup:
+  alias: House Wakeup
+  sequence:
+
+  - service: media_player.volume_set
+    alias: Wake Up Setting Volume
+    data:
+      entity_id: media_player.kitchen_speaker, media_player.speaker
+      volume_level: 0.85
+
+  - service: script.announce
+    data:
+      message: The Cats Lair is waking up.  Good Morning.
+
+  - service: input_boolean.turn_on
+    alias: Wake Up Turn On Annoucncements
+    data:
+      entity_id: input_boolean.announcements
+
+  - service: light.turn_on
+    alias: Wake Up Turn On Hallway
+    data:
+      entity_id: light.hallway_light
+      brightness_pct: 20
+
+  - service: light.turn_on
+    alias: Wake Up Turn On Kitchen
+    data:
+      entity_id: light.kitchen_light
+      brightness_pct: 20
+
+  - service: switch.turn_on
+    alias: Wake Up Turn On Flux
+    data:
+      entity_id: switch.flux_lights
+
+  - alias: Wake Up Disarm
+    service: alarm_control_panel.alarm_disarm
+    data:
+      entity_id: alarm_control_panel.ha_alarm
+      code: 1234
+
+

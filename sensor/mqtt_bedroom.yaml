@@ -1,0 +1,12 @@
+
+- platform: mqtt
+  state_topic: 'display/bedroom/sensor/temperature_40183674/state'
+  name: Bedroom Temperature
+  unit_of_measurement: '°C'
+
+- platform: mqtt
+  state_topic: 'display/bedroom/sensor/humidity_40183674/state'
+  name: Bedroom Humidity
+  unit_of_measurement: '%'
+
+

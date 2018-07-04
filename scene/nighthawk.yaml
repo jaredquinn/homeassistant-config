@@ -1,0 +1,20 @@
+
+- name: Nighthawk
+  entities:
+    light.dining_light:
+      state: off
+    light.hallway_light:
+      brightness: 50
+      rgb_color: [ 114, 33, 33 ]
+      state: on
+    light.kitchen_white:
+      state: off
+    light.kitchen_colour:
+      brightness: 50
+      rgb_color: [ 114, 33, 33 ]
+      state: on
+    light.lounge_light:
+      state: off
+    light.lounge_light_extra:
+      state: off
+

@@ -1,0 +1,15 @@
+
+pets:
+  name: Pets
+  control: hidden
+  entities:
+    - sensor.aquarium_temperature
+    - switch.fish_lamp
+    - automation.fed_fish
+
+laundry:
+  name: Laundry
+  control: hidden
+  entities:
+    - switch.washing_machine
+

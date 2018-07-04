@@ -1,0 +1,5 @@
+
+- platform: tplink
+  host: !secret tp_lb_kitchen_daylight_ip
+  name: Kitchen Light
+

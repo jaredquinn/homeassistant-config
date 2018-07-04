@@ -1,0 +1,14 @@
+
+
+default_view2:
+  view: yes
+  name: CatsLair
+  icon: mdi:home
+  entities:
+    - group.house_controls
+    - group.lighting
+    - group.weather
+    - group.forecast
+    - group.entertainment
+    - group.all_scenes
+

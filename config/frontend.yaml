@@ -6,5 +6,6 @@ themes:
     primary_color: orange
   night:
     primary_color: black
-
+extra_html_url:
+  - /style.html
 

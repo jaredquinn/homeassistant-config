@@ -1,0 +1,18 @@
+
+- platform: wunderground
+  api_key: !secret wunderground_key
+  monitored_conditions: 
+    - alerts
+    - feelslike_c
+    - heat_index_c
+    - solarradiation
+    - temp_c
+    - UV
+    - weather_1h
+    - weather_1d
+    - weather_1n
+    - weather_2d
+    - weather_2n
+    - weather_3d
+    - weather_3n
+

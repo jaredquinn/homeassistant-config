@@ -1,0 +1,6 @@
+
+- platform: tplink
+  name: Fish Lamp
+  friendly_name: Fish Lamp
+  host: !secret tplink_fish_switch_ip
+

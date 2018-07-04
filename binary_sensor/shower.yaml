@@ -1,0 +1,12 @@
+- platform: trend
+  sensors:
+    bathroom_humidity_trend:
+      entity_id: sensor.humidity_158d000222631e
+      friendly_name: 'Bathroom Humidity Change'
+      device_class: heat
+      min_gradient: .04166
+      sample_duration: 240 
+      max_samples: 20
+
+
+

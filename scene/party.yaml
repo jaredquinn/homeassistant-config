@@ -1,0 +1,27 @@
+
+- name: Party
+  entities:
+    light.kitchen_white:
+      state: off
+    light.hallway_light:
+      brightness: 255
+      effect: Slowdown
+      state: on
+    light.dining_light:
+      brightness: 255
+      effect: Fast Random Loop
+      state: on
+    light.kitchen_colour:
+      brightness: 255
+      effect: Fast Random Loop
+      state: on
+    light.lounge_light:
+      brightness: 255
+      effect: Fast Random Loop
+      state: on
+    light.lounge_light_extra:
+      brightness: 255
+      effect: Slowdown
+      state: on
+
+

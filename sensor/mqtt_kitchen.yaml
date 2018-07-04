@@ -1,0 +1,6 @@
+
+- platform: mqtt
+  state_topic: 'display/kitchen/sensor/temperature_3ffcaf94/state'
+  name: Display Temperature
+  unit_of_measurement: '°C'
+
