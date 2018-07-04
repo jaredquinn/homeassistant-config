@@ -1,0 +1,6 @@
+# Placeholder File
+# Home Assistant Configuration Manager uses this file to store any
+# automations created within hass.
+# 
+# This is included from automations/hass.yaml to ensure it gets
+# picked up by the directory merge

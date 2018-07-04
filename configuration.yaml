@@ -49,6 +49,10 @@ xiaomi_aqara:
       mac: !secret xiaomi_mac
       host: !secret xiaomi_ip
 
+feedreader:
+  urls:
+    - !secret dtns_patreon_feed
+
 alarm_control_panel:
   - platform: manual_mqtt
     state_topic: homeassistant/alarm
@@ -84,7 +88,6 @@ frontend: !include config/frontend.yaml
 mqtt: !include config/mqtt.yaml
 mqtt_statestream: !include config/mqtt_statestream.yaml
 
-
 light: !include_dir_merge_list light
 switch: !include_dir_merge_list switch
 device_tracker: !include_dir_merge_list device_tracker
@@ -92,14 +95,14 @@ media_player: !include_dir_merge_list media_player
 sensor: !include_dir_merge_list sensor
 binary_sensor: !include_dir_merge_list binary_sensor
 automation: !include_dir_merge_list automation
-input_select: !include_dir_merge_list input/select
-input_boolean: !include_dir_merge_list input/boolean
 scene: !include_dir_merge_list scene
+zone: !include_dir_merge_list zones
 
+input_select: !include_dir_merge_named input/select
+input_boolean: !include_dir_merge_named input/boolean
 script: !include_dir_merge_named script
 group: !include_dir_merge_named group
-zone: 
-  !include_dir_merge_list zones
+
 
 intent_script: !include config/intent_script.yaml
 conversation:

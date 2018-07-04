@@ -44,17 +44,25 @@ views:
           - binary_sensor.motion_sensor_158d000120cce2        
           - binary_sensor.motion_sensor_158d0001ae9379        
 
+      - type: entities
+        title: House Control
+        entities:
+          - input_boolean.timeofday
+          - input_boolean.announcements
+          - input_boolean.awake
+
 #      - type: weather-forecast
 #       entity: weather.bom_sydney
+#
        
-      - type: entity-filter
-        filter:
-          - domain: input_boolean
-            state: 'on'
-        # This config will be passed to the card rendering the filter results
-        card_config:
-          title: Input booleans that are on
-
+#      - type: entity-filter
+#        filter:
+#          - domain: input_boolean
+#            state: 'on'
+#        # This config will be passed to the card rendering the filter results
+#        card_config:
+#          title: Input booleans that are on
+#
     # Specify a tab_icon if you want the view tab to be an icon.
   - tab_icon: mdi:home-assistant
     # Name of the view. Will be used as the tooltip for tab icon

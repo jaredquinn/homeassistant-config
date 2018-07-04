@@ -29,6 +29,8 @@ sensor.temperature_158d000222631e:
   google_assistant: false
 media_player.laircast:
   google_assistant: false
+script.fed_fish:
+  icon: mdi:fish
 switch.tv:
   icon: mdi:television-classic
 switch.fetchtv:

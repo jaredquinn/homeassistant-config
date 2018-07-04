@@ -1,6 +1,7 @@
 #
 #########################################################
-- alias: Auto Bathroom Lights ON
+- id: autolight_bathroom_on
+  alias: Bathroom Lights Automatic ON
   hide_entity: true
 #########################################################
   condition:
@@ -9,10 +10,6 @@
       state: 'off'
 
   trigger:
-#    - platform: event
-#      event_type: motion
-#      event_data:
-#        entity_id: binary_sensor.bathroom_motion
 
     - platform: event
       event_type: motion
@@ -43,7 +40,8 @@
         rgb_color: [ 255, 182, 109 ]
 
 #########################################################
-- alias: Auto Bathroom Lights Force OFF
+- id: autolight_bathroom_off_force
+  alias: Bathroom Lights Force OFF
   hide_entity: true
 #########################################################
   condition:
@@ -72,24 +70,34 @@
         entity_id: light.bathroom_light
  
 #########################################################
-- alias: Auto Bathroom Lights OFF
-  hide_entity: true
+- id: autolight_bathroom_auto_off
+  alias: Bathroom Lights Automatic OFF
+  hide_entity: false
 #########################################################
   condition:
     - condition: state
       entity_id: light.bathroom_light
       state: 'on'
 
+    - condition: numeric_state
+      entity_id: light.bathroom_light
+      value_template: '{{ state.attributes.brightness }}'
+      below: 127
+
     - condition: state
       entity_id: sensor.shower_detected
       state: 'off'
 
+    - condition: state
+      entity_id: binary_sensor.bathroom_humidity_trend  
+      state: 'off'
+
   trigger:
 
-    - platform: numeric_state
-      entity_id: binary_sensor.motion_sensor_158d0001ae9379
-      value_template: "{{states.binary_sensor.motion_sensor_158d0001ae9379.attributes['No motion since']}}"
-      above: 120
+   #- platform: numeric_state
+   #  entity_id: binary_sensor.motion_sensor_158d0001ae9379
+   #   value_template: "{{states.binary_sensor.motion_sensor_158d0001ae9379.attributes['No motion since']}}"
+   #   above: 120
 
     - platform: state
       entity_id: binary_sensor.motion_sensor_158d0001ae9379
@@ -105,8 +113,9 @@
 
 
 #########################################################
-- alias: Auto Bathroom Bright Lights
-  hide_entity: true
+- id: autolight_bathroom_brighten
+  alias: Bathroom Lights Brighten
+  hide_entity: false
 #########################################################
   trigger:
 

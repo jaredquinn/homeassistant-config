@@ -1,0 +1,4 @@
+# Hass writes it's configured automations into the
+# main configuration direction; so we better include it here
+#
+!include ../automations.yaml
