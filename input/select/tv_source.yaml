@@ -1,0 +1,10 @@
+
+tv_source:
+  name: TV Source
+  options:
+    - 'Fetch TV'
+    - 'Chromecast'
+    - 'Roku'
+  initial: 'Fetch TV'
+  icon: mdi:target
+
