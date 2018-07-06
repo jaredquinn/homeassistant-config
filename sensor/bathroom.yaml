@@ -2,6 +2,11 @@
 - platform: template
   sensors:
 
+    bathroom_light_brightness:
+      friendly_name: Bathroom Light Brightness
+      entity_id: light.bathroom_light
+      value_template: '{{ state.attributes.brightness }}'
+
     bathroom_humidity_difference:
       friendly_name: "Bathroom Humidity Difference to Outside"
       value_template: "{{ states('sensor.humidity_158d000222631e')|float - states('sensor.humidity_158d0001c15683')|float }}"
