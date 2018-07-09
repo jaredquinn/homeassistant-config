@@ -1,0 +1,4 @@
+
+bathroom_auto_off:
+  name: Bathroom Lights Auto Off
+  initial: off
