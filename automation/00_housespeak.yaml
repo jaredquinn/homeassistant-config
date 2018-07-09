@@ -1,16 +1,15 @@
 
-
+#% speak_event_fb
+#% Send HOUSE_SPEAK events to Facebook Notifier
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 - id: speak_event_fb
   alias: House Speak Event FB
-
   condition:
     - condition: template
       value_template: '{{ trigger.event.data.facebook|default(True) }}'
-
   trigger:
     - platform: event
       event_type: HOUSE_SPEAK
-
   action:
     - service: notify.facebook_notifications
       data_template:
@@ -18,27 +17,26 @@
         target: !include ../secret/alarm_facebook_alerts.yaml
 
 
+#% speak_event_siren
+#% Send HOUSE_SPEAK events to Xiaomi Siren if Required (critical)
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 - id: speak_event_siren
   alias: House Speak Event Siren
 
   condition:
     condition: or
     conditions:
-
       - condition: template
         value_template: "{{ trigger.event.data.critical|default(False) }}"
-
       - condition: state
         entity_id: input_boolean.announcements
         state: 'on'
 
   trigger:
-
     - platform: event
       event_type: HOUSE_SPEAK
 
   action:
-
     - condition: template
       value_template: "{{ trigger.event.data.siren }}"
 
@@ -49,6 +47,10 @@
         ringtone_vol: "{{ ( trigger.event.data.siren_volume|default(0.30) * 100 ) | int }}"
 
 
+
+#% speak_event_light
+#% Send HOUSE_SPEAK events to Xiaomi Gateway Light if Required (critical)
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 - id: speak_event_light
   alias: House Speak Event Light
 
@@ -76,9 +78,10 @@
         entity_id: light.gateway_light_286c07f0a0c6
         color_name: "{{ trigger.event.data.color }}"
         brightness_pct: "{{ trigger.event.data.brightness|default(50)|int }}"
-        #flash: "{{ trigger.event.data.flash|default(None) }}"
 
 
+# PRE APPDAEMON SPEAK
+# #####################################################################################
 #- id: speak_event_say
 #alias: House Speak Event Speaker
 #
