@@ -1,6 +1,7 @@
 
 api_password: !secret api_password
 use_x_forwarded_for: true
+trusted_proxies: !include ../secret/trusted_proxies.yaml
 cors_allowed_origins:
   - https://google.com
   - https://home-assistant.io
