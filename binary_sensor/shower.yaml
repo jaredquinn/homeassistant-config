@@ -8,5 +8,38 @@
       sample_duration: 240 
       max_samples: 20
 
+- platform: bayesian
+  name: 'Shower Detection'
+  friendly_name: 'Bays Shower Check'
+  device_class: humidity
+  prior: 0.25
+  probability_threshold: 0.5
+  observations:
+      # shower on -> high probability if humidity > 94
+    - entity_id: sensor.humidity_158d000222631e
+      platform: numeric_state
+      above: 90
+      prob_given_true: 0.65 # 65% chance that if shower is on humidity is > 90
+      prob_given_false: 0.10 # 10% chance that if shower is off humidity is > 90
 
+      # shower on -> high probability if temperature > 25.5
+    - entity_id: sensor.temperature_158d000222631e    
+      platform: numeric_state
+      above: 25.5
+      prob_given_true: 0.9 # 90% chance that if shower is on t is > 25.5
+      prob_given_false: 0.3 # 30% chance that if shower is off t is > 25.5
+
+      # shower on -> probable if humidity > 80
+    - entity_id: sensor.humidity_158d000222631e
+      platform: numeric_state
+      below: 80
+      prob_given_true: 0.3 # 30% chance that if shower is on humidity is < 80
+      prob_given_false: 0.8 # 80% chance that if shower is off humidity is < 80
+
+      # shower on -> probable if bathroom light is on
+    - entity_id: sensor.bathroom_light_brightness
+      platform: numeric_state
+      above: 50
+      prob_given_true: 0.9 # 90% chance that if shower is on light is on
+      prob_given_false: 0.8 # 80% chance that if shower is off light is on
 

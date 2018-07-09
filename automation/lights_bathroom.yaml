@@ -1,35 +1,49 @@
-#
+
+# Reset the 'Auto' switch when the light is turned off
 #########################################################
-- id: autolight_bathroom_on
-  alias: Bathroom Lights Automatic ON
+- id: bathroom_light_auto_follow
+  alias: Bathroom Lights Setup Auto
   hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: light.bathroom_light
+      to: 'off'
+
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.bathroom_auto_off
+
+
+# Soft Turn On (allow auto turn off)
 #########################################################
+- id: bathroom_lights_soft_on
+  alias: Bathroom Lights Auto/Soft On
+  hide_entity: true
+
   condition:
     - condition: state
       entity_id: light.bathroom_light
       state: 'off'
 
   trigger:
-
+      # Bathroom Motion Sensor
     - platform: event
       event_type: motion
       event_data:
         entity_id: binary_sensor.motion_sensor_158d0001ae9379
 
-    - platform: mqtt
-      topic: "display/kitchen/touch/target"
-      payload: "bathroom_light"
-
-    - platform: event
-      event_type: keyboard_remote_command_received
-      event_data:
-        key_code: 60
-
+      # Bathroom Light Switch
     - platform: event
       event_type: click
       event_data:
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'single'
+
+      # Bathroom MQTT Switch
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "bathroom_light"
 
   action:
     - service: light.turn_on
@@ -39,86 +53,29 @@
         brightness_pct: 10
         rgb_color: [ 255, 182, 109 ]
 
-#########################################################
-- id: autolight_bathroom_off_force
-  alias: Bathroom Lights Force OFF
-  hide_entity: true
-#########################################################
-  condition:
-
-    - condition: state
-      entity_id: light.bathroom_light
-      state: 'on'
-
-  trigger:
-
-    - platform: mqtt
-      topic: "display/kitchen/touch/target"
-      payload: "bathroom_light"
-
-    - platform: event
-      event_type: click
-      event_data:
-        transition: 3
-        entity_id: binary_sensor.switch_158d00019c9688
-        click_type: 'single'
-
-  action:
-    - service: light.turn_off
+    - service: input_boolean.turn_on
       data:
-        transition: 2
-        entity_id: light.bathroom_light
- 
-#########################################################
-- id: autolight_bathroom_auto_off
-  alias: Bathroom Lights Automatic OFF
-  hide_entity: false
-#########################################################
-  condition:
-    - condition: state
-      entity_id: light.bathroom_light
-      state: 'on'
-
-    - condition: numeric_state
-      entity_id: light.bathroom_light
-      value_template: '{{ state.attributes.brightness }}'
-      below: 127
-
-    - condition: state
-      entity_id: sensor.shower_detected
-      state: 'off'
-
-    - condition: state
-      entity_id: binary_sensor.bathroom_humidity_trend  
-      state: 'off'
-
-  trigger:
-
-   #- platform: numeric_state
-   #  entity_id: binary_sensor.motion_sensor_158d0001ae9379
-   #   value_template: "{{states.binary_sensor.motion_sensor_158d0001ae9379.attributes['No motion since']}}"
-   #   above: 120
-
-    - platform: state
-      entity_id: binary_sensor.motion_sensor_158d0001ae9379
-      to: 'off'
-      for:
-        minutes: 2
-
-  action:
-    - service: light.turn_off
-      data:
-        transition: 2
-        entity_id: light.bathroom_light
+        entity_id: input_boolean.bathroom_auto_off
 
 
+# Hard Turn On (don't allow auto turn off)
 #########################################################
 - id: autolight_bathroom_brighten
   alias: Bathroom Lights Brighten
-  hide_entity: false
-#########################################################
-  trigger:
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.bathroom_light
+      state: 'off'
 
+  trigger:
+      # IR Remote
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 60
+
+      # Long Press Button
     - platform: event
       event_type: click
       event_data:
@@ -132,5 +89,84 @@
         entity_id: light.bathroom_light
         brightness_pct: 100
         rgb_color: [ 255, 200, 182 ]
+
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.bathroom_auto_off
+
+
+# Lights Off - Manual Button Press
+##########################################################
+- id: bathroom_lights_force_off
+  alias: Bathroom Lights Force Off
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: light.bathroom_light
+      state: 'on'
+
+  trigger:
+    - platform: mqtt
+      topic: "display/kitchen/touch/target"
+      payload: "bathroom_light"
+
+    - platform: event
+      event_type: keyboard_remote_command_received
+      event_data:
+        key_code: 60
+
+    - platform: event
+      event_type: click
+      event_data:
+        transition: 3
+        entity_id: binary_sensor.switch_158d00019c9688
+        click_type: 'single'
+
+  action:
+    - service: light.turn_off
+      data:
+        transition: 2
+        entity_id: light.bathroom_light
+
+
+# Automated Offs 
+#########################################################
+- id: bathroom_lights_auto_off
+  alias: Bathroom Lights Automatic Off
+  hide_entity: false
+  condition:
+    - condition: state
+      entity_id: light.bathroom_light
+      state: 'on'
+
+    - condition: state
+      entity_id: input_boolean.bathroom_auto_off
+      state: 'on'
+
+#    - condition: state
+#      entity_id: sensor.shower_detected
+#      state: 'off'
+#
+#    - condition: state
+#      entity_id: binary_sensor.bathroom_humidity_trend  
+#      state: 'off'
+
+  trigger:
+
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_sensor_158d0001ae9379
+      value_template: "{{ states.binary_sensor.motion_sensor_158d0001ae9379.attributes['No motion since'] }}"
+      above: 120
+
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d0001ae9379
+      to: 'off'
+      for: '00:02:00'
+
+  action:
+    - service: light.turn_off
+      data:
+        transition: 2
+        entity_id: light.bathroom_light
 
 

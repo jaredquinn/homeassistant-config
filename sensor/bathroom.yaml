@@ -5,12 +5,10 @@
     bathroom_light_brightness:
       friendly_name: Bathroom Light Brightness
       entity_id: light.bathroom_light
-      value_template: '{{ state.attributes.brightness }}'
+      value_template: "{{ state_attr('light.bathroom_light', 'brightness')|float }}"
+      #value_template: "{{ states.light.bathroom_light.attributes.brightness|default:0 }}"
 
     bathroom_humidity_difference:
       friendly_name: "Bathroom Humidity Difference to Outside"
       value_template: "{{ states('sensor.humidity_158d000222631e')|float - states('sensor.humidity_158d0001c15683')|float }}"
 
-    shower_detected:
-      friendly_name: "Shower Detected"
-      value_template: "{% if states('sensor.bathroom_humidity_difference')|float > 17.00 %}on{% else %}off{% endif %}"
