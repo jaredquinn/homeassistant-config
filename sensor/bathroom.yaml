@@ -4,11 +4,17 @@
 
     bathroom_light_brightness:
       friendly_name: Bathroom Light Brightness
+      unit_of_measurement: '%'
       entity_id: light.bathroom_light
       value_template: "{{ state_attr('light.bathroom_light', 'brightness')|float }}"
-      #value_template: "{{ states.light.bathroom_light.attributes.brightness|default:0 }}"
 
     bathroom_humidity_difference:
       friendly_name: "Bathroom Humidity Difference to Outside"
+      unit_of_measurement: 'hPa'
       value_template: "{{ states('sensor.humidity_158d000222631e')|float - states('sensor.humidity_158d0001c15683')|float }}"
 
+    bathroon_motion:
+      friendly_name: "Bathroom Motion"
+      unit_of_measurement: 's'
+      entity_id: binary_sensor.motion_sensor_158d0001ae9379
+      value_template: '{{ state_attr("binary_sensor.motion_sensor_158d0001ae9379", "No motion since") }}'
