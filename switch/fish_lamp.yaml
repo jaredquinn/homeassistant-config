@@ -1,6 +1,13 @@
 
-- platform: tplink
+#- platform: tplink
+#  name: Fish Lamp
+#  friendly_name: Fish Lamp
+#  host: !secret tplink_fish_switch_ip
+
+- platform: broadlink
   name: Fish Lamp
+  type: 'spmini2'
+  host: !secret sp3mini2_fan_ip
+  mac: !secret sp3mini2_fan_mac
   friendly_name: Fish Lamp
-  host: !secret tplink_fish_switch_ip
 
