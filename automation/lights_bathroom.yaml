@@ -11,8 +11,7 @@
 
   action:
     - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.bathroom_auto_off
+      entity_id: input_boolean.bathroom_auto_off
 
 
 # Soft Turn On (allow auto turn off)
@@ -54,8 +53,7 @@
         rgb_color: [ 255, 182, 109 ]
 
     - service: input_boolean.turn_on
-      data:
-        entity_id: input_boolean.bathroom_auto_off
+      entity_id: input_boolean.bathroom_auto_off
 
 
 # Hard Turn On (don't allow auto turn off)
@@ -63,11 +61,6 @@
 - id: autolight_bathroom_brighten
   alias: Bathroom Lights Brighten
   hide_entity: true
-  condition:
-    - condition: state
-      entity_id: light.bathroom_light
-      state: 'off'
-
   trigger:
       # IR Remote
     - platform: event
@@ -91,8 +84,7 @@
         rgb_color: [ 255, 200, 182 ]
 
     - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.bathroom_auto_off
+      entity_id: input_boolean.bathroom_auto_off
 
 
 # Lights Off - Manual Button Press
@@ -124,16 +116,22 @@
 
   action:
     - service: light.turn_off
-      data:
-        transition: 2
-        entity_id: light.bathroom_light
+      entity_id: light.bathroom_light
 
 
-# Automated Offs 
+#
+# Auto Off
 #########################################################
 - id: bathroom_lights_auto_off
-  alias: Bathroom Lights Automatic Off
+  alias: Bathroom Lights - No Movement
   hide_entity: false
+
+
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.bathroon_motion
+      above: 300
+
   condition:
     - condition: state
       entity_id: light.bathroom_light
@@ -144,29 +142,50 @@
       state: 'on'
 
 #    - condition: state
-#      entity_id: sensor.shower_detected
-#      state: 'off'
-#
-#    - condition: state
 #      entity_id: binary_sensor.bathroom_humidity_trend  
 #      state: 'off'
 
+  action:
+    - service: notify.facebook_notifications
+      data_template:
+        message: "Checking Bathroom Light for Turn Off"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+    - condition: state
+      entity_id: sensor.shower_detected
+      state: 'off'
+
+    - service: notify.facebook_notifications
+      data_template:
+        message: "No Shower Detected. Turning Off"
+        target: !include ../secret/alarm_facebook_alerts.yaml
+
+    - service: light.turn_off
+      entity_id: light.bathroom_light
+
+
+# Force Off if Light has been on for 30 minutes 
+# without motion
+#########################################################
+- id: bathroom_lights_left_on
+  alias: Bathroom Lights - Left On
+  hide_entity: true
   trigger:
-
     - platform: numeric_state
-      entity_id: binary_sensor.motion_sensor_158d0001ae9379
-      value_template: "{{ states.binary_sensor.motion_sensor_158d0001ae9379.attributes['No motion since'] }}"
-      above: 120
+      entity_id: sensor.bathroon_motion
+      above: 1800
 
-    - platform: state
-      entity_id: binary_sensor.motion_sensor_158d0001ae9379
-      to: 'off'
-      for: '00:02:00'
+  condition:
+    - condition: state
+      entity_id: light.bathroom_light
+      state: 'on'
 
   action:
     - service: light.turn_off
-      data:
-        transition: 2
-        entity_id: light.bathroom_light
+      entity_id: light.bathroom_light
 
+    - service: notify.facebook_notifications
+      data_template:
+        message: "Force Absolute Turning off bathroom light after 30 minutes no motion"
+        target: !include ../secret/alarm_facebook_alerts.yaml
 
