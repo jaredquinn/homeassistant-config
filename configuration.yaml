@@ -55,10 +55,6 @@ xiaomi_aqara:
       mac: !secret xiaomi_mac
       host: !secret xiaomi_ip
 
-feedreader:
-  urls:
-    - !secret dtns_patreon_feed
-
 alarm_control_panel:
   - platform: manual_mqtt
     state_topic: homeassistant/alarm
