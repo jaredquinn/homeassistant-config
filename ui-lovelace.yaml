@@ -1,7 +1,5 @@
-name: Cats Lair
+name: Cats Lair 
 views:
-    # The name of a view will be used as tab title.
-    # Might be used for other things in the future.
   - name: Home
     # Each view can have a different theme applied. Theme should be defined in the frontend.
     theme: dark-mode
@@ -28,21 +26,32 @@ views:
           - script.fed_fish
 
       - type: entity-filter
-        filter:
-          - domain: device_tracker
-            state: 'home'
+        entities:
+          - device_tracker.token_jared
+          - device_tracker.token_chelsea
+          - device_tracker.token_flaps
+        state_filter:
+          - 'home'
         card: glance
-        card_config:
-          title: People at home
+        name: People at home
 
       - type: glance
         title: Alarm Status
         entities:
           - alarm_control_panel.ha_alarm
-          - binary_sensor.front_door_sensor
+          - binary_sensor.front_door
           - binary_sensor.door_window_sensor_158d0001d6360a
           - binary_sensor.motion_sensor_158d000120cce2        
           - binary_sensor.motion_sensor_158d0001ae9379        
+
+      - type: glance
+        title: Bathroom Status
+        entities:
+          - sensor.bathroom_light_brightness
+          - sensor.bathroom_humidity_difference
+          - sensor.bathroom_motion
+          - binary_sensor.bathroom_humidity_trend
+          - binary_sensor.shower_detection
 
       - type: entities
         title: House Control
@@ -82,11 +91,11 @@ views:
           - input_boolean.awake
 
 
-  - tab_icon: mdi:settings
-    name: Debugging
-    cards:
-      - type: entity-filter
-        filter: [{}]
-        card_config:
-          title: All entities
+  #- tab_icon: mdi:settings
+  #  name: Debugging
+  #  cards:
+  #    - type: entity-filter
+  #      filter: [{}]
+  #      card_config:
+  #        title: All entities
 
