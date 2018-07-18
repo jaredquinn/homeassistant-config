@@ -137,22 +137,23 @@
       entity_id: light.bathroom_light
       state: 'on'
 
-    - condition: state
-      entity_id: input_boolean.bathroom_auto_off
-      state: 'on'
-
 #    - condition: state
 #      entity_id: binary_sensor.bathroom_humidity_trend  
 #      state: 'off'
 
   action:
+
+    - condition: state
+      entity_id: input_boolean.bathroom_auto_off
+      state: 'on'
+
     - service: notify.facebook_notifications
       data_template:
         message: "Checking Bathroom Light for Turn Off"
         target: !include ../secret/alarm_facebook_alerts.yaml
 
     - condition: state
-      entity_id: sensor.shower_detected
+      entity_id: binary_sensor.shower_detection
       state: 'off'
 
     - service: notify.facebook_notifications
