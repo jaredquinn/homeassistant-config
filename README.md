@@ -33,8 +33,9 @@ as an example.
 * Broadlink RM2 Pro WiFi Infra-Red Blaster
 * Broadlink SP3Mini WiFi A/C Switch (x2)
 * Google Chromecast
-* Roku
+* Roku Streaming Stick
 * Kodi (Raspberry Pi)
+* Kodi (RetroOrangePi on an OrangePi One)
 * TP-Link HS100 WiFi A/C Switch
 * NodeMCU MQTT w/Submersible Temperature Sensor (Aquarium)
 * NodeMCU MQTT Lounge Room Humidity/Temperature/Pressure
@@ -46,6 +47,7 @@ as an example.
 * Dangerous Prototypes USB IRToy (Infrared Recevier/Sender)
 * Bluetooth Remote Control (for Lights)
 * Sonic Screwdriver (coming soon)
+* BLE / Zigbee OrangePi Zero
 
 ## TTS and Extras
 
