@@ -10,7 +10,7 @@
 
     bathroom_humidity_difference:
       friendly_name: "Bathroom Humidity Difference to Outside"
-      unit_of_measurement: 'hPa'
+      unit_of_measurement: '%'
       value_template: "{{ states('sensor.humidity_158d000222631e')|float - states('sensor.humidity_158d0001c15683')|float }}"
 
     bathroon_motion:
