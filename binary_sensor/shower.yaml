@@ -10,7 +10,7 @@
 
 - platform: bayesian
   name: 'Shower Detection'
-  friendly_name: 'Bays Shower Check'
+  friendly_name: 'Shower Detection (Bays)'
   device_class: humidity
   prior: 0.25
   probability_threshold: 0.5
