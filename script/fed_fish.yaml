@@ -1,6 +1,6 @@
 
 fed_fish:
-  alias: 'Feed Fish Action'
+  alias: 'Fed Fish'
   sequence:
     - service: automation.trigger
       entity_id: automation.fed_fish
