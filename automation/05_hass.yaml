@@ -11,6 +11,7 @@
     - service: script.announce
       data_template:
          message: "Home Assistant is now Online"
+         speak: true
 
 # Only ever gets partially runned, will fix this one day.
 - id: ha_shutdown
@@ -23,3 +24,5 @@
     - service: script.announce
       data_template:
          message: "Home Assistant is going Offline"
+         speak: true
+
