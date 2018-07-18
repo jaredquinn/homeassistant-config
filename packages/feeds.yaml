@@ -1,0 +1,31 @@
+# RSS Podcast Alerting function Packages
+# @CCOSTAN (https://github.com/CCOSTAN/Home-AssistantConfig)
+##########################################################################
+
+feedreader:
+    urls:
+      - https://hasspodcast.io/feed/podcast #HA Podcast Feed
+      - !secret dtns_patreon_feed           #DTNS Patreon Feed (secret)
+
+automation:
+
+  - alias: New RSS Notification
+    trigger:
+      platform: event
+      event_type: feedreader
+
+    action:
+      - service: notify.facebook_notifications
+        data_template:
+          target: !include ../secret/alarm_facebook_alerts.yaml
+          #message: "New RSS Item - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d%b%Y', true) }} {{trigger.event.data.title}}"
+          message: "{{ trigger }}"
+          data:
+            url: "{{trigger.event.data.link}}"
+
+      - service: persistent_notification.create
+        data_template:
+          title: "{{trigger.event.data.title}}"
+          message: "New RSS item available - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d%b%Y', true) }}"
+          notification_id: "update_available"
+
