@@ -8,6 +8,9 @@ homeassistant:
   customize: !include customize.yaml
   customize_glob: !include customize_glob.yaml
   packages: !include_dir_named packages
+  auth_providers:
+    - type: homeassistant
+    - type: legacy_api_password
 
 logger:
   default: warning
@@ -84,7 +87,20 @@ recorder: !include config/recorder.yaml
 history: !include config/history.yaml
 panel_custom: !include config/panel_custom.yaml
 
-http: !include config/http.yaml
+auth:
+http:
+  api_password: !secret api_password
+  use_x_forwarded_for: true
+  trusted_proxies: !include secret/trusted_proxies.yaml
+  #  cors_allowed_origins:
+  #  - https://google.com
+  #  - https://home-assistant.io
+  trusted_networks: !include secret/trusted_networks.yaml
+  ip_ban_enabled: True
+  login_attempts_threshold: 5
+
+
+
 frontend: !include config/frontend.yaml
 
 mqtt: !include config/mqtt.yaml
@@ -110,3 +126,34 @@ intent_script: !include config/intent_script.yaml
 conversation:
   intents: !include config/conversation_intent.yaml
 
+weather:
+  - platform: bom
+    name: Observatory Hill
+    station: IDN60901.94768
+    monitored_conditions:
+      - apparent_t
+      - cloud
+      - cloud_base_m
+      - cloud_oktas
+      - cloud_type_id
+      - cloud_type
+      - delta_t
+      - gust_kmh
+      - gust_kt
+      - air_temp
+      - dewpt
+      - press
+      - press_qnh
+      - press_msl
+      - press_tend
+      - rain_trace
+      - rel_hum
+      - sea_state
+      - swell_dir_worded
+      - swell_height
+      - swell_period
+      - vis_km
+      - weather
+      - wind_dir
+      - wind_spd_kmh
+      - wind_spd_kt
