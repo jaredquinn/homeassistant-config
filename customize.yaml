@@ -16,8 +16,7 @@ sensor.illumination_286c07f0a0c6:
   friendly_name: Gateway Illumination
   google_assistant: false
 sensor.humidity_158d000222631e:
-  friendly_name: Bathroom Humidity
-  google_assistant: false
+  friendly_name: Bath Humidity
 sensor.humidity_158d0001c15683:
   friendly_name: Outside Humidity
   google_assistant: false
@@ -25,7 +24,7 @@ sensor.temperature_158d0001c15683:
   google_assistant: false
   friendly_name: Outside Temperature
 sensor.temperature_158d000222631e:
-  friendly_name: Bathroom Temperature
+  friendly_name: Bath Temp
   google_assistant: false
 media_player.laircast:
   google_assistant: false
@@ -63,6 +62,11 @@ switch.fan:
 device_tracker.token_chelsea:
   friendly_name: V Cat
   source_type: gps
+device_tracker.token_guest3:
+  friendly_name: Purple
+  name: Purple
+device_tracker.token_guest5:
+  friendly_name: Nick
 device_tracker.token_jared:
   friendly_name: Jared
 device_tracker.token_guest1: {}
