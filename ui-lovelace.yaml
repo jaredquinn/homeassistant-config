@@ -1,81 +1,179 @@
 name: Cats Lair 
 views:
+
   - name: Home
-    # Each view can have a different theme applied. Theme should be defined in the frontend.
+    title: Main Controls
     theme: dark-mode
-    # The cards to show on this view.
+
     cards:
-        # The entities card will take a list of entities and show their state.
-      - type: entities
-        # Title of the entities card
-        title: Lights
-        # The entities here will be shown in the same order as specified.
-        entities:
-          - light.bathroom_light
-          - light.dining_light
-          - light.hallway_light
-          - light.kitchen_light
-          - light.lounge_light
-          - light.lounge_light_extra
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: House Control
+            show_header_toggle: false
+            entities:
+              - input_boolean.timeofday
+              - input_boolean.announcements
+              - input_boolean.awake
+
+          - type: entities
+            title: House Lights
+            entities:
+              - light.bathroom_light
+              - light.dining_light
+              - light.hallway_light
+              - light.kitchen_light
+              - light.gateway_light_286c07f0a0c6
+
+          - type: entities
+            title: Living Room Lights
+            entities:
+              - light.lounge_light
+              - light.lounge_light_extra
+
+      - type: vertical-stack
+        cards:
+
+          - type: entities
+            title: Pets
+            show_header_toggle: false
+            entities:
+              - sensor.aquarium_temperature
+              - sensor.aquarium_temp_stats_mean
+              - switch.fish_lamp
+              - script.fed_fish
+
+          - type: entities
+            entities:
+              - entity: switch.flux_lights
+              - entity: input_boolean.bathroom_auto_off
+              - entity: switch.washing_machine
+
+      - type: vertical-stack
+        cards:
+
+          - type: glance
+            title: Alarm Status
+            entities:
+              - alarm_control_panel.ha_alarm
+              - binary_sensor.front_door
+              - binary_sensor.door_window_sensor_158d0001d6360a
+              - binary_sensor.motion_sensor_158d000120cce2        
+              - binary_sensor.motion_sensor_158d0001ae9379        
+
+          - type: entity-filter
+            entities:
+              - device_tracker.token_jared
+              - device_tracker.token_chelsea
+              - device_tracker.token_flaps
+              - device_tracker.token_guest3
+              - device_tracker.token_guest5
+            state_filter:
+              - 'home'
+            card:
+              type: glance
+
+
+        cards:
+          - type: entities
+            title: Main Entertainment
+            entities:
+              - input_select.tv_channel
+              - input_select.tv_source
+          - type: glance
+            entities:
+              - switch.audio
+              - switch.tv_soniq
+              - switch.av_pioneer
+              - switch.stb_fetch
+              - switch.fan
 
       - type: entities
-        title: Pets
         entities:
-          - sensor.aquarium_temperature
-          - switch.fish_lamp
-          - script.fed_fish
+          - sensor.date
+          - sensor.time
+          - sensor.time_utc
+          - sensor.internet_time
 
-      - type: entity-filter
+
+  - name: Weather
+    title: Weather
+    cards:
+      - type: weather-forecast
+        entity: weather.bom_observatory_hill
+        
+      - type: glance
         entities:
-          - device_tracker.token_jared
-          - device_tracker.token_chelsea
-          - device_tracker.token_flaps
-        state_filter:
-          - 'home'
-        card: glance
-        name: People at home
+          - entity: sensor.pws_weather_1h
+          - entity: sensor.pws_weather_1d 
+          - entity: sensor.pws_weather_1n
+          - entity: sensor.pws_weather_2d
+          - entity: sensor.pws_weather_2n
+
+      - type: vertical-stack
+        cards:
+          - type: glance
+            entities:
+              - entity: sensor.pws_alerts
+                name: Alerts
+              - entity: sensor.pws_heat_index_c
+                name: Heat Index
+              - entity: sensor.pws_solarradiation
+                name: Solar Rad
+              - entity: sensor.pws_feelslike_c
+                name: Feels Like
+
+          - type: glance
+            title: Sydney Airport
+            entities:
+              - entity: sensor.bom_sydney_air_temp_c
+                name: Air Temp
+              - entity: sensor.bom_sydney_relative_humidity
+                name: Rel Humid
+              - entity: sensor.bom_sydney_feels_like_c
+                name: Feels Like
+              - entity: sensor.pws_uv
+                name: UV
+
 
       - type: glance
-        title: Alarm Status
         entities:
-          - alarm_control_panel.ha_alarm
-          - binary_sensor.front_door
-          - binary_sensor.door_window_sensor_158d0001d6360a
-          - binary_sensor.motion_sensor_158d000120cce2        
-          - binary_sensor.motion_sensor_158d0001ae9379        
-
-      - type: glance
-        title: Bathroom Status
-        entities:
-          - sensor.bathroom_light_brightness
-          - sensor.bathroom_humidity_difference
-          - sensor.bathroom_motion
-          - binary_sensor.bathroom_humidity_trend
-          - binary_sensor.shower_detection
+          - entity: sensor.bom_sydney_rain_today
+            name: Rain Today
+          - entity: sensor.bom_sydney_pressure_mb
+            name: Pressure
+          - entity: sensor.bom_sydney_wind_speed_kmh
+            name: Wind Speed
+          - entity: sensor.bom_sydney_wind_gust_kmh
+            name: Wind Gust
 
       - type: entities
-        title: House Control
         entities:
-          - input_boolean.timeofday
-          - input_boolean.announcements
-          - input_boolean.awake
+          - sensor.bom_sydney_weather
+          - sensor.bom_sydney_cloud
+          - sensor.bom_sydney_cloud_type
 
-#      - type: weather-forecast
-#       entity: weather.bom_sydney
-#
-       
-#      - type: entity-filter
-#        filter:
-#          - domain: input_boolean
-#            state: 'on'
-#        # This config will be passed to the card rendering the filter results
-#        card_config:
-#          title: Input booleans that are on
-#
-    # Specify a tab_icon if you want the view tab to be an icon.
-  - tab_icon: mdi:home-assistant
-    # Name of the view. Will be used as the tooltip for tab icon
-    name: Second view
+      - type: history-graph
+        entities:
+          - sensor.aquarium_temperature    
+          - sensor.bedroom_temperature    
+          - sensor.broadlink_sensor_temperature
+          - sensor.lounge_temperature
+          - sensor.pws_temp_c
+          - sensor.temperature_158d0001c15683
+          - sensor.temperature_158d000222631e
+
+      - type: entities
+        entities:
+          - sun.sun
+          - sensor.moon
+
+
+        
+  - name: Media
+    title: Media
+
     cards:
       - type: media-control
         entity: media_player.laircast
@@ -83,19 +181,137 @@ views:
       - type: media-control
         entity: media_player.bedroom_kodi
 
+      - type: media-control
+        entity: media_player.lounge_roku
+
+      - type: media-control
+        entity: media_player.kitchen_speaker
+
+      - type: media-control
+        entity: media_player.mpd
+
+  - name: Status
+    title: Status Report
+    cards:
+
       - type: entities
-        title: General House Settings
         entities:
-          - input_boolean.announcements
-          - input_boolean.timeofday
-          - input_boolean.awake
+          - sensor.date
+          - sensor.time
+          - sensor.time_utc
+          - sensor.internet_time
+
+      - type: entities
+        title: Internet
+        entities:
+          - sensor.speedtest_download
+          - sensor.speedtest_upload
+          - sensor.speedtest_ping
+
+      - type: history-graph
+        entities:
+          - sensor.processor_use
+          - sensor.memory_free
 
 
-  #- tab_icon: mdi:settings
-  #  name: Debugging
-  #  cards:
-  #    - type: entity-filter
-  #      filter: [{}]
-  #      card_config:
-  #        title: All entities
+      - type: glance
+        title: Miranda
+        entities:
+          - entity: sensor.processor_use
+          - entity: sensor.memory_use
+          - entity: sensor.memory_free
+          - entity: sensor.swap_use
+          - entity: sensor.swap_free
+          - entity: sensor.load_1m
+          - entity: sensor.load_5m
+          - entity: sensor.load_15m
+          - entity: sensor.cpu_temperature
+          - entity: sensor.cpu_speed
+          - entity: sensor.catslair_ssl_expiry
+          
+      - type: glance
+        title: Storage
+        entities:
+          - entity: sensor.disk_use_percent_
+            name: '/'
+          - entity: sensor.disk_use_percent_mntmediaa
+            name: "/mnt/media-a"
+          - entity: sensor.disk_use_percent_mntmediab
+            name: "/mnt/media-b"
+
+      - type: glance
+        title: Balcony
+        entities:
+          - entity: sensor.temperature_158d0001c15683
+            name: Temperature
+          - entity: sensor.outside_temp_stats_mean
+            name: Mean Temp
+          - entity:  sensor.humidity_158d0001c15683
+            name: Humidity
+          - entity:  sensor.outside_humidity_stats_mean
+            name: Mean Humid
+
+      - type: glance
+        title: Lounge
+        entities:
+          - entity: light.lounge_light
+          - entity: light.lounge_light_extra
+          - entity: sensor.lounge_temperature
+          - entity: sensor.lounge_barometric
+
+      - type: glance
+        title: Bedroom
+        entities:
+          - entity: sensor.bedroom_temperature
+            name: Temperature
+          - entity: sensor.bedroom_humidity
+            name: Humidity
+
+      - type: vertical-stack
+        cards:
+          - type: glance
+            title: Bathroom
+            entities:
+              - entity: light.bathroom_light
+                name: Light
+              - entity: input_boolean.bathroom_auto_off
+                name: Auto-Mode
+              - entity: binary_sensor.motion_sensor_158d0001ae9379
+                name: Motion?
+              - entity: sensor.bathroon_motion    
+                name: Duration
+              - entity: sensor.bathroom_light_brightness
+                name: Brightness
+              - entity: sensor.bathroom_humidity_difference
+                name: Humid Diff
+              - entity: binary_sensor.bathroom_humidity_trend
+                name: Humid Trend
+              - entity: binary_sensor.shower_detection
+                name: Shower?
+              - entity: sensor.humidity_158d000222631e
+                name: Humidity
+              - entity: sensor.temperature_158d000222631e
+                name: Temperature
+
+      - type: vertical-stack
+        cards:
+           
+          - type: glance
+            title: NSW Rural Fire Service
+            entities:
+              - entity: sensor.nsw_rfs_major_incidents_emergency_warning
+                name: Emergency
+              - entity: sensor.nsw_rfs_major_incidents_watch_and_act
+                name: Watch
+              - entity: sensor.nsw_rfs_major_incidents_advice
+                name: Advice
+
+          - type: glance
+            title: Geoscience
+            entities:
+              - entity: sensor.geoscience_australia_any
+              - entity: sensor.bgs_worldwide_earthquake_eqmh
+              - entity: sensor.usgs_all_earthquakes_past_day
+              - entity: sensor.usgs_all_earthquakes_past_hour
+
 
