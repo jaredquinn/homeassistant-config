@@ -124,8 +124,7 @@
 #########################################################
 - id: bathroom_lights_auto_off
   alias: Bathroom Lights - No Movement
-  hide_entity: false
-
+  hide_entity: true
 
   trigger:
     - platform: numeric_state
@@ -137,12 +136,7 @@
       entity_id: light.bathroom_light
       state: 'on'
 
-#    - condition: state
-#      entity_id: binary_sensor.bathroom_humidity_trend  
-#      state: 'off'
-
   action:
-
     - condition: state
       entity_id: input_boolean.bathroom_auto_off
       state: 'on'

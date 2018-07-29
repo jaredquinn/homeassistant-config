@@ -3,7 +3,7 @@
   hide_entity: true
   trigger:
     - platform: state
-      entity_id: device_tracker.token_chelsea, device_tracker.token_jared, device_tracker.token_flaps
+      entity_id: device_tracker.token_chelsea, device_tracker.token_jared, device_tracker.token_flaps, device_tracker.token_guest3, device_tracker.token_guest5
       to: 'home'
 
   action:
@@ -18,7 +18,7 @@
   hide_entity: true
   trigger:
     - platform: state
-      entity_id: device_tracker.token_guest1, device_tracker.token_guest2, device_tracker.token_guest3, device_tracker.guest4, device_tracker.guest5, device_tracker.guest6
+      entity_id: device_tracker.token_guest1, device_tracker.token_guest2, device_tracker.guest4, device_tracker.guest6
       to: 'home'
 
   action:
