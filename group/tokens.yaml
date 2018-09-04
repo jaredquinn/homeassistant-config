@@ -5,8 +5,9 @@ active_security_tokens:
     - device_tracker.token_jared
     - device_tracker.token_chelsea
     - device_tracker.token_flaps
-    - device_tracker.token_guest3
-    - device_tracker.token_guest5
+    - device_tracker.token_bella
+    - device_tracker.token_purple
+    - device_tracker.token_nick
 
 security_tokens:
   name: Security Tokens
@@ -15,9 +16,10 @@ security_tokens:
     - device_tracker.token_jared
     - device_tracker.token_chelsea
     - device_tracker.token_flaps
+    - device_tracker.token_bella
+    - device_tracker.token_purple
+    - device_tracker.token_nick
     - device_tracker.token_guest1
     - device_tracker.token_guest2
-    - device_tracker.token_guest3
-    - device_tracker.token_guest4
     - device_tracker.token_guest6
 

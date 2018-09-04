@@ -24,3 +24,7 @@ all_recent.atom
 entity_registry.yaml
 OZW_Log.txt
 get-pip.py
+.storage
+.google_maps_location_sharing.cookies
+*.bak
+feedreader.pickle

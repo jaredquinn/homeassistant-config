@@ -1,0 +1,7 @@
+- platform: bom
+  name: Perisher Valley
+  station: IDN60903.94915
+
+- platform: bom
+  name: Observatory Hill
+  station: IDN60901.94768

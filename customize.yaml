@@ -59,16 +59,16 @@ light.kitchen_light_extra:
 switch.fan:
   google_assistant_type: fan
   assistant_room_hint: Living Room
+binary_sensor.front_door_sensor:
+  friendly_name: Front Door
 device_tracker.token_chelsea:
   friendly_name: V Cat
   source_type: gps
-device_tracker.token_guest3:
+device_tracker.token_purple:
   friendly_name: Purple
-  name: Purple
-device_tracker.token_guest5:
+device_tracker.token_bella:
+  friendly_name: Bella
+device_tracker.token_nick:
   friendly_name: Nick
 device_tracker.token_jared:
   friendly_name: Jared
-device_tracker.token_guest1: {}
-binary_sensor.front_door_sensor:
-  friendly_name: Front Door

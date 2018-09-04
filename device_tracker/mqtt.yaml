@@ -5,11 +5,11 @@
     token_flaps: 'homeassistant/location/token_flaps'
     token_tenille: 'homeassistant/location/token_tenille'
     token_daisy: 'homeassistant/location/token_daisy'
+    token_bella: 'homeassistant/location/token_bella'
+    token_nick: 'homeassistant/location/token_nick'
+    token_purple: 'homeassistant/location/token_purple'
     token_guest1: 'homeassistant/location/token_guest1'
     token_guest2: 'homeassistant/location/token_guest2'
-    token_guest3: 'homeassistant/location/token_guest3'
-    token_guest4: 'homeassistant/location/token_guest4'
-    token_guest5: 'homeassistant/location/token_guest5'
     token_guest6: 'homeassistant/location/token_guest6'
 
 

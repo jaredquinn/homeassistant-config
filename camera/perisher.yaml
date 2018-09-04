@@ -1,0 +1,16 @@
+- platform: generic
+  still_image_url: https://www.perisher.com.au/images/cams/Xv8Big.jpg
+  name: Perisher V8
+
+- platform: generic
+  still_image_url: https://www.perisher.com.au/images/cams/XsmigginBig.jpg
+  name: Perisher Smiggins
+
+- platform: generic
+  still_image_url: https://www.perisher.com.au/images/cams/XhappyBig.jpg
+  name: Perisher Happy Valley
+
+- platform: generic
+  still_image_url: https://www.perisher.com.au/images/cams/XsummitBig.jpg
+  name: Perisher Blue Cow
+
