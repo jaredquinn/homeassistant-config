@@ -1,13 +1,15 @@
 
+
 lighting:
-  name: Lighting Control
+  name: Main Lighting
   control: hidden
   entities:
+    - light.lounge_light
+    - light.extra_light
     - light.dining_light
     - light.hallway_light
-    - light.kitchen_light
     - light.bathroom_light
+    - light.kitchen_light
+    - switch.range
     - light.gateway_light_286c07f0a0c6
-    - light.lounge_light
-    - light.lounge_light_extra
 
