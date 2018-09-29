@@ -15,6 +15,9 @@
       transition: 2000
 
     !secret yee_lounge_extra_ip:
-      name: Lounge Light Extra
+      name: Extra Light
       transition: 2000
 
+    !secret yee_bedroom_ip:
+      name: Bedroom Light
+      transition: 2000

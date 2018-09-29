@@ -79,13 +79,13 @@
 
 
 #########################################################
-- id: lounge_light_extra_off
+- id: extra_light_off
   alias: Lounge Lights Extra OFF
 #########################################################
   hide_entity: true
   condition:
     - condition: state
-      entity_id: light.lounge_light_extra
+      entity_id: light.extra_light
       state: 'on'
 
   trigger:
@@ -102,22 +102,22 @@
 
     - platform: mqtt
       topic: "display/kitchen/touch/target"
-      payload: "lounge_light_extra"
+      payload: "extra_light"
 
   action:
     - service: light.turn_off
       data:
-        entity_id: light.lounge_light_extra
+        entity_id: light.extra_light
 
 
 #########################################################
-- id: lounge_light_extra_on
+- id: extra_light_on
   alias: Lounge Lights Extra ON
 #########################################################
   hide_entity: true
   condition:
     - condition: state
-      entity_id: light.lounge_light_extra
+      entity_id: light.extra_light
       state: 'off'
 
   trigger:
@@ -134,12 +134,12 @@
 
     - platform: mqtt
       topic: "display/kitchen/touch/target"
-      payload: "lounge_light_extra"
+      payload: "extra_light"
 
   action:
     - service: light.turn_on
       data:
-        entity_id: light.lounge_light_extra
+        entity_id: light.extra_light
         rgb_color: [ 255, 145, 108 ]
         brightness_pct: 30
 
@@ -173,13 +173,13 @@
 
 
 #########################################################
-- id: lounge_light_extra_bright
+- id: extra_light_bright
   alias: Lounge Lights Extra Bright
 #########################################################
   hide_entity: true
   condition:
     - condition: state
-      entity_id: light.lounge_light_extra
+      entity_id: light.extra_light
       state: 'on'
 
   trigger:
@@ -193,7 +193,7 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.lounge_light_extra
+        entity_id: light.extra_light
         brightness_pct: 100
         rgb_color: [  255, 226, 145 ]
 

@@ -19,7 +19,7 @@
       brightness: 255
       effect: Fast Random Loop
       state: on
-    light.lounge_light_extra:
+    light.extra_light:
       brightness: 255
       effect: Slowdown
       state: on

@@ -15,6 +15,6 @@
       state: on
     light.lounge_light:
       state: off
-    light.lounge_light_extra:
+    light.extra_light:
       state: off
 

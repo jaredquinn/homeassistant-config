@@ -6,5 +6,6 @@
     - light.hallway_light
     - light.bathroom_light
     - light.kitchen_light
+    - light.range
     - light.gateway_light_286c07f0a0c6
 
