@@ -17,6 +17,12 @@ views:
   icon: mdi:play-network
   cards: !include ui/media.yaml
 
+- name: snow
+  id: view_SNOW
+  TITLE: Snow
+  icon: mdi:snowflake
+  cards: !include ui/snow.yaml
+
 - name: Status
   title: Status Report
   icon: mdi:speedometer

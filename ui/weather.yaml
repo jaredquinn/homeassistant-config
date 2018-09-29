@@ -68,8 +68,6 @@
     - sun.sun
     - sensor.moon
 
-- type: weather-forecast
-  entity: weather.bom_perisher_valley
   
 
 

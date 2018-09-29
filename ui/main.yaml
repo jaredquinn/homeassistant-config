@@ -11,17 +11,23 @@
     - type: entities
       title: House Lights
       entities:
+        - light.bedroom_light
         - light.bathroom_light
         - light.dining_light
         - light.hallway_light
-        - light.kitchen_light
+
+    - type: entities
+      title: Kitchen Lights
+      entities:
         - light.gateway_light_286c07f0a0c6
+        - light.kitchen_light
+        - switch.range
 
     - type: entities
       title: Living Room Lights
       entities:
         - light.lounge_light
-        - light.lounge_light_extra
+        - light.extra_light
 
 - type: vertical-stack
   cards:

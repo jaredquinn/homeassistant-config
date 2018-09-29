@@ -59,7 +59,7 @@
   entities:
     - entity: light.lounge_light
       name: Light
-    - entity: light.lounge_light_extra
+    - entity: light.extra_light
       name: Light 2
     - entity: sensor.lounge_temperature
       name: Temp

@@ -1,0 +1,35 @@
+
+- type: picture-glance
+  title: Perisher V8
+  entities:
+    - camera.perisher_smiggins
+  camera_image: camera.perisher_smiggins
+
+- type: picture-glance
+  title: Perisher Happy Valley
+  entities:
+    - camera.perisher_happy_valley
+  camera_image: camera.perisher_happy_valley
+
+- type: picture-glance
+  title: Perisher Blue Cow
+  entities:
+    - camera.perisher_blue_cow
+  camera_image: camera.perisher_blue_cow
+
+- type: picture-glance
+  title: Perisher V8
+  entities:
+    - camera.perisher_v8
+  camera_image: camera.perisher_v8
+
+- type: weather-forecast
+  entity: weather.bom_perisher_valley
+
+- type: entities
+  entities:
+    - sun.sun
+
+- type: history-graph
+  entities:
+    - weather.bom_perisher_valley
