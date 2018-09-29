@@ -17,5 +17,6 @@
 - platform: statistics
   name: Aquarium Temp Stats
   entity_id: sensor.aquarium_temperature
-  max_age: 24:00
-  sampling_size: 3600
+  max_age:
+    hours: 24
+  sampling_size: 7200

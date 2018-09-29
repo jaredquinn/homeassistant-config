@@ -2,6 +2,11 @@
 - platform: template
   sensors:
 
+    perisher_temp:
+      friendly_name: Perisher Temperature
+      entity_id: weather.bom_perisher_valley
+      value_template: "{{ state_attr('weather.bom_perisher_valley', 'temperature')|float }}"
+
     bathroom_light_brightness:
       friendly_name: Bathroom Light Brightness
       unit_of_measurement: '%'

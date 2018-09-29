@@ -12,7 +12,7 @@ groups:
       - light.kitchen_light
       - light.bathroom_light
       - light.lounge_light
-      - light.lounge_light_extra
+      - light.extra_light
       - light.gateway_light_286c07f0a0c6
       - switch.fish_lamp
       - switch.audio

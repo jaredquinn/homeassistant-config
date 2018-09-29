@@ -5,7 +5,7 @@
     - lights.dining_light
     - lights.hallway_light
     - lights.lounge_light
-    - lights.lounge_light_extra
+    - lights.extra_light
     - lights.kitchen_light
 
 

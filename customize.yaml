@@ -1,13 +1,17 @@
 sensor.broadlink_sensor_temperature:
   friendly_name: Cat Tree Temperature
+input_boolean.announcements:
+  icon: mdi:voice
 binary_sensor.cube_158d0001035c90:
   hidden: true
 input_boolean.batton:
   hidden: true
 group.always_hidden:
   hidden: true
+  google_assistant: false
 group.security_tokens:
   hidden: true
+  google_assistant: false
 sensor.average_load_1m:
   unit_of_measurement: Load
 sensor.average_load_5m:
@@ -50,11 +54,9 @@ light.gateway_light_286c07f0a0c6:
   assistant_room_hint: Kitchen
 light.lounge_light:
   assistant_room_hint: Living Room
-light.lounge_light_extra:
+light.extra_light:
   assistant_room_hint: Living Room
 light.kitchen_light:
-  assistant_room_hint: Kitchen
-light.kitchen_light_extra:
   assistant_room_hint: Kitchen
 switch.fan:
   google_assistant_type: fan

@@ -6,6 +6,6 @@
 #  friendly_name: Fan
 
 - platform: tplink
-  name: Fan
-  friendly_name: Fan
+  name: Range
+  friendly_name: Range
   host: !secret tplink_fish_switch_ip
