@@ -10,7 +10,7 @@ announce:
         siren: "{{ siren|default(False) }}"
         siren_volume: "{{ siren_volume|default(0.30)|float }}"
         ringtone: "{{ ringtone }}"
-        tone: "{{ tone|default(False) }}"
+        tone: "{{ tone|default(True) }}"
         tone_sound: "{{ tone_sound }}"
         light: "{{ light|default(False) }}"
         color: "{{ color }}"

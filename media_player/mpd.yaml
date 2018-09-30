@@ -1,5 +1,6 @@
 # MPD via Socket
 #
-- platform: mpd
+- platform: mpd_announce
   host: /run/mpd/socket
+  force_queue: True
 
