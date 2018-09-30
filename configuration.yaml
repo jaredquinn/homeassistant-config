@@ -17,7 +17,7 @@ homeassistant:
 logger:
   default: warning
   logs:
-    homeassistant.components.automation: info
+    homeassistant.components.automation: debug
     homeassistant.components: error
     homeassistant.components.http.ban: warning
   
