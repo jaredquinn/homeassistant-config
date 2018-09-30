@@ -1,13 +1,6 @@
+
 - type: vertical-stack
   cards:
-    - type: entities
-      title: House Control
-      show_header_toggle: false
-      entities:
-        - input_boolean.timeofday
-        - input_boolean.announcements
-        - input_boolean.awake
-
     - type: entities
       title: House Lights
       entities:
@@ -28,6 +21,17 @@
       entities:
         - light.lounge_light
         - light.extra_light
+
+- type: vertical-stack
+  cards:
+    - type: entities
+      title: House Control
+      show_header_toggle: false
+      entities:
+        - input_boolean.timeofday
+        - input_boolean.announcements
+        - input_boolean.awake
+
 
 - type: vertical-stack
   cards:
@@ -71,20 +75,6 @@
       card:
         type: glance
 
-- type: vertical-stack
-  cards:
-    - type: entities
-      title: Main Entertainment
-      entities:
-        - input_select.tv_channel
-        - input_select.tv_source
-    - type: glance
-      entities:
-        - switch.audio
-        - switch.tv_soniq
-        - switch.av_pioneer
-        - switch.stb_fetch
-        - switch.fan
 
 - type: entities
   entities:

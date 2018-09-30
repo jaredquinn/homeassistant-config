@@ -1,0 +1,19 @@
+# Only ever gets partially runned, will fix this one day.
+- id: ha_shutdown
+  alias: HA Shutdown
+  hide_entity: true
+  trigger:
+    - platform: homeassistant
+      event: shutdown
+  action:
+    - service: media_player.play_media
+      data_template:
+        media_content_type: 'music'
+        media_content_id: 'file:///home/homeassistant/sounds/offline.mp3'
+        enqueue: False
+    - service: script.announce
+      data_template:
+         message: "Home Assistant is going Offline"
+         speak: False
+    - delay: '00:00:15'
+

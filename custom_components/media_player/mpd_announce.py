@@ -304,7 +304,9 @@ class MpdDevice(MediaPlayerDevice):
             self._muted = mute
 
     def play_media(self, media_type, media_id, **kwargs):
-        """Send the media player the command for playing a playlist."""
+
+        _LOGGER.error("Media: %s %s" % ( media_type, media_id ) )
+
         if self.force == False:
             self._client.clear()
 

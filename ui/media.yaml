@@ -1,16 +1,50 @@
 
-- type: media-control
-  entity: media_player.laircast
+- type: vertical-stack
+  cards:
+    - type: entities
+      title: Main Entertainment
+      entities:
+        - input_select.tv_channel
+        - input_select.tv_source
+    - type: glance
+      entities:
+        - switch.audio
+        - switch.tv_soniq
+        - switch.av_pioneer
+        - switch.stb_fetch
+        - switch.fan
 
-- type: media-control
-  entity: media_player.bedroom_kodi
+- type: entities
+  title: Bedroom Media
+  entities:
 
-- type: media-control
-  entity: media_player.lounge_roku
+  - type: custom:mini-media-player
+    entity: media_player.bedroom_kodi
+    group: true
 
-- type: media-control
-  entity: media_player.kitchen_speaker
 
-- type: media-control
-  entity: media_player.mpd
+- type: entities
+  title: Lounge Media
 
+  entities:
+
+  - type: custom:mini-media-player
+    entity: media_player.laircast
+    group: true
+
+  - type: custom:mini-media-player
+    entity: media_player.lounge_roku
+    group: true
+
+- type: entities
+  title: Speakers
+
+  entities:
+
+  - type: custom:mini-media-player
+    entity: media_player.mpd
+    group: true
+
+  - type: custom:mini-media-player
+    entity: media_player.kitchen_speaker
+    group: true

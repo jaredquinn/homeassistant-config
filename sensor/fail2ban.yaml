@@ -1,0 +1,5 @@
+- platform: fail2ban
+  scan_interval: 00:01:00
+  jails:
+  - sshd
+  - hass

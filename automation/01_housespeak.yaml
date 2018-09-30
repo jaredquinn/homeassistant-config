@@ -1,4 +1,3 @@
-
 #% speak_event_fb
 #% Send HOUSE_SPEAK events to TTS
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,7 +28,7 @@
       data_template:
         entity_id: media_player.mpd
         media_content_type: 'music'
-        media_content_id: "file://{{ trigger.event.data.tone_sound|default('/home/homeassistant/sounds/computerbeep_75.mp3') }}"
+        media_content_id: 'file://{{ trigger.event.data.tone_sound }}'
         enqueue: True
 
     - service: tts.google_say

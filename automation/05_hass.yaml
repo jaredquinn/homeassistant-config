@@ -1,6 +1,3 @@
-# START STOP
-#
-# StarDate comes from custom patch to sensor.time_date
 - id: ha_startup
   alias: HA Startup
   hide_entity: true
@@ -11,18 +8,4 @@
     - service: script.announce
       data_template:
          message: "Home Assistant is now Online"
-         speak: true
-
-# Only ever gets partially runned, will fix this one day.
-- id: ha_shutdown
-  alias: HA Shutdown
-  hide_entity: true
-  trigger:
-    - platform: homeassistant
-      event: shutdown
-  action:
-    - service: script.announce
-      data_template:
-         message: "Home Assistant is going Offline"
-         speak: true
 

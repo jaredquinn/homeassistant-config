@@ -11,7 +11,7 @@ announce:
         siren_volume: "{{ siren_volume|default(0.30)|float }}"
         ringtone: "{{ ringtone }}"
         tone: "{{ tone|default(True) }}"
-        tone_sound: "{{ tone_sound }}"
+        tone_sound: "{{ tone_sound|default('/home/homeassistant/sounds/computerbeep_75.mp3') }}"
         light: "{{ light|default(False) }}"
         color: "{{ color }}"
         flash: "{{ flash }}"

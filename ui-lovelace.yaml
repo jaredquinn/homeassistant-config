@@ -1,4 +1,11 @@
+title: CatsLair
+
+resources:
+  - url: /local/mini-media-player.js?ver=0.12a
+    type: module
+
 name: Cats Lair 
+
 views: 
 - name: main
   id: main
