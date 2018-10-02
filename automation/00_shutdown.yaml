@@ -7,6 +7,7 @@
       event: shutdown
   action:
     - service: media_player.play_media
+      entity_id: media_player.house_announcer
       data_template:
         media_content_type: 'music'
         media_content_id: 'file:///home/homeassistant/sounds/offline.mp3'
@@ -15,5 +16,5 @@
       data_template:
          message: "Home Assistant is going Offline"
          speak: False
-    - delay: '00:00:15'
+    - delay: '00:00:20'
 
