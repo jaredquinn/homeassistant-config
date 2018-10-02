@@ -26,14 +26,14 @@
 
     - service: media_player.play_media
       data_template:
-        entity_id: media_player.mpd
+        entity_id: media_player.house_announcer
         media_content_type: 'music'
         media_content_id: 'file://{{ trigger.event.data.tone_sound }}'
         enqueue: True
 
     - service: tts.google_say
       data_template:
-        entity_id: media_player.mpd
+        entity_id: media_player.house_announcer
         message: "{% if trigger.event.data.spoken %}{{ trigger.event.data.spoken }}{% else %}{{ trigger.event.data.message }}{% endif %}"
 
 
