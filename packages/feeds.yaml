@@ -3,9 +3,9 @@
 ##########################################################################
 
 feedreader:
-    urls:
-      - https://hasspodcast.io/feed/podcast #HA Podcast Feed
-      - !secret dtns_patreon_feed           #DTNS Patreon Feed (secret)
+  urls:
+    - https://hasspodcast.io/feed/podcast #HA Podcast Feed
+    - !secret dtns_patreon_feed       #DTNS Patreon Feed (secret)
 
 automation:
 
