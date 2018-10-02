@@ -1,0 +1,62 @@
+input_select:
+  radio_station:
+    name: Radio Station
+    initial: 'OFF'
+    options:
+      - "OFF"
+      - "ABC NewsRadio"
+      - "ABC Radio National"
+      - "ABC Grand Stand"
+      - "triple j"
+      - "triple j Unearthed"
+      - "Double J"
+
+automation:
+
+  - alias: Radio Station Change
+    trigger:
+      - platform: state
+        entity_id: input_select.radio_station
+
+    condition:
+      - condition: template
+        value_template: "{{ not is_state('input_selection.radio_station', 'OFF') }}"
+
+    action:
+      - service: media_player.play_media
+        data_template:
+          entity_id: media_player.house_radio
+          media_content_type: 'music'
+          media_content_id: >
+            {% if is_state('input_select.radio_station', 'ABC NewsRadio') %} http://live-radio01.mediahubaustralia.com/PBW/mp3/
+            {% elif is_state('input_select.radio_station', 'ABC Radio National') %} http://live-radio01.mediahubaustralia.com/2RNW/mp3/
+            {% elif is_state('input_select.radio_station', 'ABC Grand Stand') %} http://live-radio01.mediahubaustralia.com/GSDW/mp3/
+            {% elif is_state('input_select.radio_station', 'triple j') %} http://live-radio01.mediahubaustralia.com/2TJW/mp3/
+            {% elif is_state('input_select.radio_station', 'triple j Unearthed') %} http://live-radio01.mediahubaustralia.com/UNEW/mp3/
+            {% elif is_state('input_select.radio_station', 'Double J') %} http://live-radio01.mediahubaustralia.com/DJDW/mp3/
+            {% endif %}
+          enqueue: False
+
+
+  - alias: Radio Station Reset
+    trigger:
+      - platform: state
+        entity_id: media_player.house_radio
+        from: 'playing'
+
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.radio_station
+          option: 'OFF'
+
+
+  - alias: Radio Station Off
+    trigger:
+      - platform: state
+        entity_id: input_select.radio_station
+        to: 'OFF'
+    action:
+      - service: media_player.stop
+        entity_id: media_player.house_radio
+
