@@ -40,11 +40,17 @@
   title: Speakers
 
   entities:
+  - entity: input_select.radio_station
 
   - type: custom:mini-media-player
-    entity: media_player.mpd
+    entity: media_player.house_announcer
+    group: true
+
+  - type: custom:mini-media-player
+    entity: media_player.house_radio
     group: true
 
   - type: custom:mini-media-player
     entity: media_player.kitchen_speaker
     group: true
+
