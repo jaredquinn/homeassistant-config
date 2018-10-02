@@ -25,12 +25,17 @@
       topic: "display/kitchen/touch/target"
       payload: "dining_light"
 
-    # Kitchen Button
+    #- platform: event
+    #  event_type: click
+    #  event_data:
+    #    entity_id: binary_sensor.switch_158d0001243e26
+    #    click_type: 'double' (now bedroom)
+
     - platform: event
       event_type: click
       event_data:
-        entity_id: binary_sensor.switch_158d0001243e26
-        click_type: 'double'
+        entity_id: binary_sensor.wall_switch_left_158d00027c1251
+        click_type: single
 
   action:
     - service: light.turn_off
@@ -64,12 +69,11 @@
       topic: "display/kitchen/touch/target"
       payload: "dining_light"
 
-    # Kitchen Button
     - platform: event
       event_type: click
       event_data:
-        entity_id: binary_sensor.switch_158d0001243e26
-        click_type: 'double'
+        entity_id: binary_sensor.wall_switch_left_158d00027c1251
+        click_type: single
 
 
   action:
@@ -92,11 +96,13 @@
       state: 'on'
 
   trigger:
+
     - platform: event
       event_type: click
       event_data:
-        entity_id: binary_sensor.switch_158d0001243e26
+        entity_id: binary_sensor.wall_switch_left_158d00027c1251
         click_type: 'long_click_press'
+
 
   action:
     - service: light.turn_on

@@ -1,90 +1,70 @@
 
 #########################################################
-- id: kitchen_auto_light_off
-  alias: Kitchen Light OFF
+- id: bedroom_light_off
+  alias: Bedroom Light OFF
 #########################################################
   hide_entity: true
   condition:
     - condition: state
-      entity_id: light.kitchen_light
+      entity_id: light.bedroom_light
       state: 'on'
 
   trigger:
     - platform: event
-      event_type: ir_command_received
-      event_data:
-        button_name: KITCHEN
-
-    - platform: event
-      event_type: keyboard_remote_command_received
-      event_data:
-        key_code: 60
-
-    - platform: event
       event_type: click
       event_data:
-        entity_id: binary_sensor.wall_switch_right_158d00027c1251
+        entity_id: binary_sensor.switch_158d0001243e26
         click_type: single
 
     - platform: mqtt
       topic: "display/kitchen/touch/target"
-      payload: "kitchen_light"
+      payload: "bedroom_light"
 
   action:
     - service: light.turn_off
       data:
-        entity_id: light.kitchen_light
+        entity_id: light.bedroom_light
 
 
 #########################################################
-- id: kitchen_auto_light_on
-  alias: Kitchen Light ON
+- id: bedroom_light_on
+  alias: Bedroom Light ON
 #########################################################
   hide_entity: true
   condition:
     - condition: state
-      entity_id: light.kitchen_light
+      entity_id: light.bedroom_light
       state: 'off'
 
   trigger:
 
     - platform: event
-      event_type: ir_command_received
-      event_data:
-        button_name: KITCHEN
-
-    - platform: event
-      event_type: keyboard_remote_command_received
-      event_data:
-        key_code: 60
-
-    - platform: event
       event_type: click
       event_data:
-        entity_id: binary_sensor.wall_switch_right_158d00027c1251
+        entity_id: binary_sensor.switch_158d0001243e26
         click_type: single
 
     - platform: mqtt
       topic: "display/kitchen/touch/target"
-      payload: "kitchen_light"
+      payload: "bedroom_light"
 
   action:
     - service: light.turn_on
       data:
-        entity_id: light.kitchen_light
+        entity_id: light.bedroom_light
         brightness_pct: 10
         rgb_color: [  255, 226, 145 ]
 
 
 #########################################################
-- id: kitchen_light_bright
-  alias: Kitchen Light Bright
+- id: bedroom_light_bright
+  alias: Bedroom Light Bright
 #########################################################
   hide_entity: true
 
   condition:
     - condition: state
-      entity_id: light.kitchen_light
+      entity_id: light.bedroom_light
       state: 'on'
 
   trigger:
@@ -92,13 +72,13 @@
     - platform: event
       event_type: click
       event_data:
-        entity_id: binary_sensor.wall_switch_right_158d00027c1251
+        entity_id: binary_sensor.switch_158d0001243e26
         click_type: 'long_click_press'
 
   action:
     - service: light.turn_on
       data:
-        entity_id: light.kitchen_light
+        entity_id: light.bedroom_light
         brightness_pct: 100
         rgb_color: [  255, 226, 145 ]
 

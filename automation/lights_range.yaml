@@ -1,0 +1,57 @@
+
+#########################################################
+- id: range_auto_light_off
+  alias: Range Light OFF
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: switch.range
+      state: 'on'
+
+  trigger:
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.wall_switch_right_158d00027c1251
+        click_type: double
+
+    - platform: mqtt
+      topic: "display/range/touch/target"
+      payload: "range_light"
+
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.range
+
+
+#########################################################
+- id: range_auto_light_on
+  alias: Range Light ON
+#########################################################
+  hide_entity: true
+  condition:
+    - condition: state
+      entity_id: switch.range
+      state: 'off'
+
+  trigger:
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.wall_switch_right_158d00027c1251
+        click_type: double
+
+    - platform: mqtt
+      topic: "display/range/touch/target"
+      payload: "range_light"
+
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.range
+
+
