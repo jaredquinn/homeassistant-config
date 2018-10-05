@@ -7,6 +7,27 @@ You can find it at https://www.home-assistant.io/.
 My Home Assistant Configuration is a work in progress and is subject to change on a whim.  It's here for your inspiration or for use
 as an example. 
 
+## Main Page
+
+![Main Page](doc/images/Page1.png)
+
+## Weather Page
+
+![Weather Page](doc/images/Page2.png)
+
+## Media Page
+
+![Media Page](doc/images/Page3.png)
+
+## Snow Page
+
+![Snow Page](doc/images/Page4.png)
+
+## Status Page
+
+![Status Page](doc/images/Page5.png)
+
+
 ## Software Ecosystem
 
 * Ubuntu 18.04 running on an Intel NUC
