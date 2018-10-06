@@ -68,6 +68,8 @@
         - device_tracker.token_jared
         - device_tracker.token_chelsea
         - device_tracker.token_flaps
+        - device_tracker.token_bella
+        - device_tracker.token_tenille
         - device_tracker.token_guest3
         - device_tracker.token_guest5
       state_filter:

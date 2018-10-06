@@ -36,21 +36,32 @@
     entity: media_player.lounge_roku
     group: true
 
-- type: entities
-  title: Speakers
+- type: vertical-stack
+  title: House Announcement/Radio
+  cards:
 
-  entities:
-  - entity: input_select.radio_station
+    - type: entities
+      entities:
 
-  - type: custom:mini-media-player
-    entity: media_player.house_announcer
-    group: true
+        - entity: input_boolean.radio
 
-  - type: custom:mini-media-player
-    entity: media_player.house_radio
-    group: true
+        - entity: input_select.radio_station
 
-  - type: custom:mini-media-player
-    entity: media_player.kitchen_speaker
-    group: true
+        - type: custom:mini-media-player
+          entity: media_player.house_radio
+          group: true
+
+        - type: custom:mini-media-player
+          entity: media_player.house_announcer
+          group: true
+
+        - type: custom:mini-media-player
+          entity: media_player.kitchen_speaker
+          group: true
+
+    - type: glance
+      entities:
+        - entity: input_boolean.radio_output_echo
+        - entity: input_boolean.radio_output_bathroom
+
 
