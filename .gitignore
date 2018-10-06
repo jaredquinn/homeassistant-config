@@ -8,6 +8,7 @@ secrets.yaml
 .cloud
 .uuid
 *.log
+*.log.*
 *.db
 *.db*
 *.sqlite
@@ -28,3 +29,4 @@ get-pip.py
 .google_maps_location_sharing.cookies
 *.bak
 feedreader.pickle
+old-groups

@@ -45,10 +45,11 @@ as an example.
 * Amazon Echo Dot (via Home Assistant Cloud)
 * Xiaomi Aqara Gateway Night Light
 * Xiaomi Aqara Smart Button (x3)
+* Xiaomi Aqara Dual Button v2
 * Xiaomi Aqara Temperature & Humidity Sensor (x2)
 * Xiaomi Aqara Door/Window Switch
-* Xiaomi Aqara Motion Detection (x2)
-* YeeLight Color LED Light Bulb (x4)
+* Xiaomi Aqara Motion Detection (x3)
+* YeeLight Color LED Light Bulb (x5)
 * TP-Link Color LED Light Bulb
 * TP-Link White LED Light Bulb
 * Broadlink RM2 Pro WiFi Infra-Red Blaster
@@ -73,7 +74,8 @@ as an example.
 
 * PicoTTS
 * Google TTS
-* MPD Media Player
+* MPD Media Player - Announcements
+* MPD Media Player - House Radio
 
 ## Device Tracking
 
@@ -86,7 +88,6 @@ as an example.
 * BOM Australia
 * Weatherunderground
 * Sun/Moon
-
 
 ## Additional Features
 
