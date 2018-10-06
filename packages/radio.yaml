@@ -1,26 +1,42 @@
 input_select:
   radio_station:
     name: Radio Station
-    initial: 'OFF'
     options:
-      - "OFF"
-      - "ABC NewsRadio"
+      - "ABC Sydney"
+      - "ABC Newcastle"
+      - "WSFM"
+      - "Nova Sydney"
       - "ABC Radio National"
       - "ABC Grand Stand"
+      - "ABC NewsRadio"
       - "triple j"
       - "triple j Unearthed"
       - "Double J"
+      - "Ambient Radio"
+
+input_boolean:
+  radio:
+    name: Radio
+    initial: 'ON'
+  radio_output_bathroom:
+    name: Bathroom Radio
+    initial: 'ON'
+  radio_output_echo:
+    name: Echo Radio
+    initial: 'ON'
+
+shell_command:
+  mpd_bt_output: '/home/homeassistant/.homeassistant/mpd_bt_speaker.sh {{ action }} {{ speaker }}'
 
 automation:
-
   - alias: Radio Station Change
     trigger:
       - platform: state
         entity_id: input_select.radio_station
 
-    condition:
-      - condition: template
-        value_template: "{{ not is_state('input_selection.radio_station', 'OFF') }}"
+      - platform: state
+        entity_id: input_boolean.radio
+        to: 'on'
 
     action:
       - service: media_player.play_media
@@ -29,6 +45,11 @@ automation:
           media_content_type: 'music'
           media_content_id: >
             {% if is_state('input_select.radio_station', 'ABC NewsRadio') %} http://live-radio01.mediahubaustralia.com/PBW/mp3/
+            {% elif is_state('input_select.radio_station', 'Ambient Radio') %} http://uk2.internet-radio.com:31491/
+            {% elif is_state('input_select.radio_station', 'WSFM') %} http://icecast.arn.com.au/1017.mp3
+            {% elif is_state('input_select.radio_station', 'Nova Sydney') %} http://streaming.novaentertainment.com.au/nova1069
+            {% elif is_state('input_select.radio_station', 'ABC Sydney') %} http://live-radio01.mediahubaustralia.com/2LRW/mp3/
+            {% elif is_state('input_select.radio_station', 'ABC Newcastle') %} http://live-radio01.mediahubaustralia.com/2NEWW/mp3/
             {% elif is_state('input_select.radio_station', 'ABC Radio National') %} http://live-radio01.mediahubaustralia.com/2RNW/mp3/
             {% elif is_state('input_select.radio_station', 'ABC Grand Stand') %} http://live-radio01.mediahubaustralia.com/GSDW/mp3/
             {% elif is_state('input_select.radio_station', 'triple j') %} http://live-radio01.mediahubaustralia.com/2TJW/mp3/
@@ -37,26 +58,159 @@ automation:
             {% endif %}
           enqueue: False
 
+      - service: script.announce
+        data_template:
+          message: "{{ trigger.to_state.state }}"
+          tone_sound: "/home/homeassistant/sounds/scanner.wav"
+          facebook: false
 
-  - alias: Radio Station Reset
+
+  - alias: Radio Enable MPD on Connection
     trigger:
-      - platform: state
-        entity_id: media_player.house_radio
-        from: 'playing'
-
+      - platform: event
+        event_type: keyboard_remote_connected
+        event_data:
+          device_name: "00:58:56:4C:C0:91"
     action:
-      - service: input_select.select_option
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.radio_output_bathroom
+      - service: shell_command.mpd_bt_output
         data:
-          entity_id: input_select.radio_station
-          option: 'OFF'
+          action: connect
+          speaker: bath-announce
 
+  - alias: Radio Disable MPD on Connection
+    trigger:
+      - platform: event
+        event_type: keyboard_remote_disconnected
+        event_data:
+          device_name: "00:58:56:4C:C0:91"
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.radio_output_bathroom
+      - service: shell_command.mpd_bt_output
+        data:
+          action: disconnect
+          speaker: bath-announce
 
-  - alias: Radio Station Off
+  - alias: Radio Next Station
+    trigger:
+      - platform: event
+        event_type: keyboard_remote_command_received
+        event_data:
+          key_code: 165
+          device_name: "00:58:56:4C:C0:91"
+    action: 
+      - service: input_select.select_next
+        entity_id: input_select.radio_station
+
+  - alias: Radio Next Station
+    trigger:
+      - platform: event
+        event_type: keyboard_remote_command_received
+        event_data:
+          key_code: 163
+          device_name: "00:58:56:4C:C0:91"
+    action: 
+      - service: input_select.select_previous
+        entity_id: input_select.radio_station
+
+  - alias: House Radio Play/Pause
+    trigger:
+      - platform: event
+        event_type: keyboard_remote_command_received
+        event_data:
+          key_code: 201
+          device_name: "00:58:56:4C:C0:91"
+    action: 
+      - service: media_player.media_play_pause
+        entity_id: media_player.house_radio
+
+  - alias: Radio Station OFF
     trigger:
       - platform: state
-        entity_id: input_select.radio_station
-        to: 'OFF'
+        entity_id: input_boolean.radio
+        to: 'off'
     action:
-      - service: media_player.stop
+      - service: media_player.media_stop
         entity_id: media_player.house_radio
+
+#################################################
+# ECHO Radio Output
+
+  - alias: Toggle Echo ON
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_boolean.radio_output_echo
+        to: 'on'
+    action:
+      - service: shell_command.mpd_bt_output
+        data:
+          action: connect
+          speaker: echo
+
+  - alias: Toggle Echo OFF
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_boolean.radio_output_echo
+        to: 'off'
+    action:
+      - service: shell_command.mpd_bt_output
+        data:
+          action: disconnect
+          speaker: echo
+
+ # Bathroom Radio Output
+ #######################################################
+  - alias: Toggle Bathroom ON
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_boolean.radio_output_bathroom
+        to: 'on'
+    action:
+      - service: shell_command.mpd_bt_output
+        data:
+          action: connect
+          speaker: bathroom
+
+  - alias: Toggle Bathroom OFF
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_boolean.radio_output_bathroom
+        to: 'off'
+    action:
+      - service: shell_command.mpd_bt_output
+        data:
+          action: disconnect
+          speaker: bathroom
+
+
+ # Both Radios are OFF Stop Playback
+ #######################################################
+  - alias: Both Radios Are OFF
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_boolean.radio_output_bathroom
+        to: 'off'
+      - platform: state
+        entity_id: input_boolean.radio_output_echo
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+        - platform: state
+          entity_id: input_boolean.radio_output_bathroom
+          state: 'off'
+        - platform: state
+          entity_id: input_boolean.radio_output_echo
+          state: 'off'
+    action:
+      - service: media_player.media_stop
+        entity_id: media_player.house_radio
+
 
