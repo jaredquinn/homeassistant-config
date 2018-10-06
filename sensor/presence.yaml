@@ -1,6 +1,13 @@
 - platform: mqtt_room
-  device_id: 'ff:ff:c1:00:25:13'
+  device_id: 'ffffc1002513'
   name: 'iTAG 1'
+  state_topic: 'room_presence'
+  timeout: 5
+  away_timeout: 30
+
+- platform: mqtt_room
+  device_id: '0058564CC091'
+  name: 'Bathroom Speaker'
   state_topic: 'room_presence'
   timeout: 5
   away_timeout: 30
