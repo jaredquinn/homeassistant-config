@@ -71,9 +71,19 @@ alarm_control_panel:
       pending_time: 0
       delay_time: 0
 
+geo_location:
+  - name: Sydney Traffic
+    platform: geo_json_events
+    url: !secret traffic_url
+    radius: 50
+
 keyboard_remote:
-  device_name: 'Remote control'
-  type: 'key_down'
+  - device_name: 'Remote control'
+    type: 'key_down'
+  - device_name: '00:58:56:4C:C0:91'
+    type: 'key_up'
+  - device_name: '78:E1:03:49:78:07'
+    type: 'key_up'
 
 tts:
   - platform: google
@@ -104,6 +114,7 @@ frontend: !include config/frontend.yaml
 
 mqtt: !include config/mqtt.yaml
 mqtt_statestream: !include config/mqtt_statestream.yaml
+mqtt_eventstream: !include config/mqtt_eventstream.yaml
 
 light: !include_dir_merge_list light
 switch: !include_dir_merge_list switch

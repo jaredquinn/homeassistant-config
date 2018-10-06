@@ -1,0 +1,5 @@
+publish_topic: 'eventstream'
+subscribe_topic: 'eventlisten'
+ignore_event:
+  - state_changed
+  - call_service
