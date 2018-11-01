@@ -104,7 +104,7 @@ automation:
       - service: input_select.select_next
         entity_id: input_select.radio_station
 
-  - alias: Radio Next Station
+  - alias: Radio Previous Station
     trigger:
       - platform: event
         event_type: keyboard_remote_command_received
@@ -203,10 +203,10 @@ automation:
     condition:
       condition: and
       conditions:
-        - platform: state
+        - condition: state
           entity_id: input_boolean.radio_output_bathroom
           state: 'off'
-        - platform: state
+        - condition: state
           entity_id: input_boolean.radio_output_echo
           state: 'off'
     action:
