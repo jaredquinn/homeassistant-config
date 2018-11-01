@@ -63,15 +63,16 @@ StatusReportIntent:
             End. of. Cats Lair. Status Report.
 
 StatusOfIntent:
-
   speech:
     text: >
       {%- for state in states -%}
-      {%- if state.name == Thing -%}
-      {{ state.friendly_name }} is currently {{ state.state }}
-      {%- endif %}
+              {%- if state.name.lower() == Thing.lower() -%}
+              {{ state.name }} is currently {{ state.state }}
+              {%- elif loop.last -%}
+              Cannot find {{ Thing }}, maybe you're looking for something else?
+              {%- endif %}
       {%- else %}
-      Cannot find {{ Thing }}, maybe you're looking for something else?
+              Something went wrong.
       {%- endfor %}
 
 ActivateSceneIntent:
@@ -95,6 +96,17 @@ ActivateSceneIntent:
     - service: scene.turn_on
       data_template:
         entity_id: scene.{{ Scene | replace(" ", "_") }}
+
+SpeakIntent:
+  speech:
+    text: "Saying {{thing}} on House Announcer"
+  action:
+    - service: script.announce
+      data_template:
+        speak: true
+        facebook: true
+        message: "{{thing}}"
+
 
 change_channel:
   speech:
