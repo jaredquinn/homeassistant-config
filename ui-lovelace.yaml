@@ -11,26 +11,411 @@ views:
   id: main
   title: Control
   icon: mdi:star
-  cards: !include ui/main.yaml
+  cards: 
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: House Lights
+        entities:
+          - light.bedroom_light
+          - light.bathroom_light
+          - light.dining_light
+          - light.hallway_light
+
+      - type: entities
+        title: Kitchen Lights
+        entities:
+          - light.gateway_light_286c07f0a0c6
+          - light.kitchen_light
+          - switch.range
+
+      - type: entities
+        title: Living Room Lights
+        entities:
+          - light.lounge_light
+          - light.extra_light
+          - light.door_strip
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: House Control
+        show_header_toggle: false
+        entities:
+          - input_boolean.timeofday
+          - input_boolean.announcements
+          - input_boolean.awake
+
+
+  - type: vertical-stack
+    cards:
+
+      - type: entities
+        title: Pets
+        show_header_toggle: false
+        entities:
+          - sensor.aquarium_temperature
+          - sensor.aquarium_temp_stats_mean
+          - switch.fish_lamp
+          - script.fed_fish
+
+      - type: entities
+        entities:
+          - entity: switch.flux_lights
+          - entity: input_boolean.bathroom_auto_off
+          - entity: switch.washing_machine
+
+  - type: vertical-stack
+    cards:
+
+      - type: glance
+        title: Alarm Status
+        entities:
+          - alarm_control_panel.ha_alarm
+          - binary_sensor.front_door
+          - binary_sensor.door_window_sensor_158d0001d6360a
+          - binary_sensor.motion_sensor_158d000120cce2        
+          - binary_sensor.motion_sensor_158d0001ae9379        
+
+      - type: entity-filter
+        entities:
+          - device_tracker.token_jared
+          - device_tracker.token_chelsea
+          - device_tracker.token_flaps
+          - device_tracker.token_bella
+          - device_tracker.token_tenille
+          - device_tracker.token_guest3
+          - device_tracker.token_guest5
+        state_filter:
+          - 'home'
+        card:
+          type: glance
+
+
+  - type: entities
+    entities:
+      - sensor.date
+      - sensor.time
+      - sensor.time_utc
+      - sensor.internet_time
 
 - name: Weather
   title: Weather
   icon: mdi:cloud
-  cards: !include ui/weather.yaml
+  cards: 
 
+  - type: weather-forecast
+    entity: weather.bom_observatory_hill
+
+  - type: glance
+    entities:
+      - entity: sensor.pws_weather_1h
+      - entity: sensor.pws_weather_1d 
+      - entity: sensor.pws_weather_1n
+      - entity: sensor.pws_weather_2d
+      - entity: sensor.pws_weather_2n
+
+  - type: vertical-stack
+    cards:
+      - type: glance
+        entities:
+          - entity: sensor.pws_alerts
+            name: Alerts
+          - entity: sensor.pws_heat_index_c
+            name: Heat Index
+          - entity: sensor.pws_solarradiation
+            name: Solar Rad
+          - entity: sensor.pws_feelslike_c
+            name: Feels Like
+
+      - type: glance
+        title: Sydney Airport
+        entities:
+          - entity: sensor.bom_sydney_air_temp_c
+            name: Air Temp
+          - entity: sensor.bom_sydney_relative_humidity
+            name: Rel Humid
+          - entity: sensor.bom_sydney_feels_like_c
+            name: Feels Like
+          - entity: sensor.pws_uv
+            name: UV
+
+
+  - type: glance
+    entities:
+      - entity: sensor.bom_sydney_rain_today
+        name: Rain Today
+      - entity: sensor.bom_sydney_pressure_mb
+        name: Pressure
+      - entity: sensor.bom_sydney_wind_speed_kmh
+        name: Wind Speed
+      - entity: sensor.bom_sydney_wind_gust_kmh
+        name: Wind Gust
+
+  - type: entities
+    entities:
+      - sensor.bom_sydney_weather
+      - sensor.bom_sydney_cloud
+      - sensor.bom_sydney_cloud_type
+
+  - type: history-graph
+    entities:
+      - sensor.aquarium_temperature    
+      - sensor.bedroom_temperature    
+      - sensor.broadlink_sensor_temperature
+      - sensor.lounge_temperature
+      - sensor.pws_temp_c
+      - sensor.temperature_158d0001c15683
+      - sensor.temperature_158d000222631e
+
+  - type: entities
+    entities:
+      - sun.sun
+      - sensor.moon
+
+    
 - name: media
   id: view_media
   title: Media
   icon: mdi:play-network
-  cards: !include ui/media.yaml
+  cards: 
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Main Entertainment
+        entities:
+          - input_select.tv_channel
+          - input_select.tv_source
+      - type: glance
+        entities:
+          - switch.audio
+          - switch.tv_soniq
+          - switch.av_pioneer
+          - switch.stb_fetch
+          - switch.fan
+
+  - type: entities
+    title: Bedroom Media
+    entities:
+
+    - type: custom:mini-media-player
+      entity: media_player.bedroom_kodi
+      group: true
+
+
+  - type: entities
+    title: Lounge Media
+
+    entities:
+
+    - type: custom:mini-media-player
+      entity: media_player.laircast
+      group: true
+
+    - type: custom:mini-media-player
+      entity: media_player.lounge_roku
+      group: true
+
+  - type: vertical-stack
+    title: House Announcement/Radio
+    cards:
+
+      - type: entities
+        entities:
+
+          - entity: input_boolean.radio
+
+          - entity: input_select.radio_station
+
+          - type: custom:mini-media-player
+            entity: media_player.house_radio
+            group: true
+
+          - type: custom:mini-media-player
+            entity: media_player.house_announcer
+            group: true
+
+          - type: custom:mini-media-player
+            entity: media_player.kitchen_speaker
+            group: true
+
+      - type: glance
+        entities:
+          - entity: input_boolean.radio_output_echo
+          - entity: input_boolean.radio_output_bathroom
 
 - name: snow
   id: view_SNOW
   TITLE: Snow
   icon: mdi:snowflake
-  cards: !include ui/snow.yaml
+  cards: 
+
+  - type: picture-glance
+    title: Perisher V8
+    entities:
+      - camera.perisher_smiggins
+    camera_image: camera.perisher_smiggins
+
+  - type: picture-glance
+    title: Perisher Happy Valley
+    entities:
+      - camera.perisher_happy_valley
+    camera_image: camera.perisher_happy_valley
+
+  - type: picture-glance
+    title: Perisher Blue Cow
+    entities:
+      - camera.perisher_blue_cow
+    camera_image: camera.perisher_blue_cow
+
+  - type: picture-glance
+    title: Perisher V8
+    entities:
+      - camera.perisher_v8
+    camera_image: camera.perisher_v8
+
+  - type: weather-forecast
+    entity: weather.bom_perisher_valley
+
+  - type: entities
+    entities:
+      - sun.sun
+
+  - type: history-graph
+    entities:
+      - weather.bom_perisher_valley
+
 
 - name: Status
   title: Status Report
   icon: mdi:speedometer
-  cards: !include ui/status.yaml
+  cards: 
+  - type: entities
+    entities:
+      - sensor.date
+      - sensor.time
+      - sensor.time_utc
+      - sensor.internet_time
+
+  - type: entities
+    title: Internet
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+
+  - type: history-graph
+    entities:
+      - sensor.processor_use
+      - sensor.memory_free
+
+
+  - type: glance
+    title: Miranda
+    entities:
+      - entity: sensor.memory_use
+      - entity: sensor.memory_free
+      - entity: sensor.swap_use
+      - entity: sensor.swap_free
+      - entity: sensor.catslair_ssl_expiry
+        name: SSL Expiry
+      - entity: sensor.cpu_speed
+      - entity: sensor.processor_use
+        name: CPU Util
+      - entity: sensor.cpu_temperature
+        name: CPU Temp
+      - entity: sensor.load_1m
+      - entity: sensor.load_5m
+      - entity: sensor.disk_use_percent_
+        name: '/'
+      - entity: sensor.disk_use_percent_mntmediaa
+        name: "media-a"
+      - entity: sensor.disk_use_percent_mntmediab
+        name: "media-b"
+
+  - type: glance
+    title: Balcony
+    entities:
+      - entity: sensor.temperature_158d0001c15683
+        name: Temperature
+      - entity: sensor.outside_temp_stats_mean
+        name: Mean Temp
+      - entity:  sensor.humidity_158d0001c15683
+        name: Humidity
+      - entity:  sensor.outside_humidity_stats_mean
+        name: Mean Humid
+
+  - type: glance
+    title: Lounge
+    entities:
+      - entity: light.lounge_light
+        name: Light
+      - entity: light.extra_light
+        name: Light 2
+      - entity: sensor.lounge_temperature
+        name: Temp
+      - entity: sensor.lounge_barometric
+        name: Bar Pres
+
+  - type: glance
+    title: Bedroom
+    entities:
+      - entity: light.bedroom_light
+        name: Light
+      - entity: binary_sensor.switch_158d0001243e26
+        name: Button
+      - entity: sensor.bedroom_temperature
+        name: Temperature
+      - entity: sensor.bedroom_humidity
+        name: Humidity
+      - entity: binary_sensor.motion_sensor_158d0001b172a7
+        name: Motion
+
+  - type: vertical-stack
+    cards:
+      - type: glance
+        title: Bathroom
+        entities:
+          - entity: light.bathroom_light
+            name: Light
+          - entity: input_boolean.bathroom_auto_off
+            name: Auto-Mode
+          - entity: binary_sensor.motion_sensor_158d0001ae9379
+            name: Motion?
+          - entity: sensor.bathroon_motion    
+            name: Duration
+          - entity: sensor.bathroom_light_brightness
+            name: Brightness
+          - entity: sensor.bathroom_humidity_difference
+            name: Humid Diff
+          - entity: binary_sensor.bathroom_humidity_trend
+            name: Humid Trend
+          - entity: binary_sensor.shower_detection
+            name: Shower?
+          - entity: sensor.humidity_158d000222631e
+            name: Humidity
+          - entity: sensor.temperature_158d000222631e
+            name: Temperature
+
+  - type: vertical-stack
+    cards:
+       
+      - type: glance
+        title: NSW Rural Fire Service
+        entities:
+          - entity: sensor.nsw_rfs_major_incidents_emergency_warning
+            name: Emergency
+          - entity: sensor.nsw_rfs_major_incidents_watch_and_act
+            name: Watch
+          - entity: sensor.nsw_rfs_major_incidents_advice
+            name: Advice
+
+      - type: glance
+        title: Geoscience
+        entities:
+          - entity: sensor.geoscience_australia_any
+          - entity: sensor.bgs_worldwide_earthquake_eqmh
+          - entity: sensor.usgs_all_earthquakes_past_day
+          - entity: sensor.usgs_all_earthquakes_past_hour
+
+
