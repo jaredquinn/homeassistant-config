@@ -1,11 +1,6 @@
 #  extra_html_url:
 #    - /home/homeassistant/.homeassistant/www/custom_ui/state-card-floorplan.html
 javascript_version: latest
-themes:
-  day:
-    primary_color: orange
-  night:
-    primary_color: black
 extra_html_url:
   - /style.html
 

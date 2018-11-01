@@ -10,21 +10,24 @@ homeassistant:
   customize_glob: !include customize_glob.yaml
   packages: !include_dir_named packages
   auth_providers:
+    - type: legacy_api_password
     - type: homeassistant
     - type: trusted_networks
-    - type: legacy_api_password
 
 logger:
   default: warning
   logs:
     homeassistant.components.automation: debug
     homeassistant.components: error
+    homeassistant.components.binary_sensor.xiaomi_aqara: debug
     homeassistant.components.http.ban: warning
   
 map:
 sun:
-alexa:
+
 config:
+
+
 updater:
   include_used_components: true
 
@@ -33,21 +36,11 @@ notify:
     platform: facebook
     page_access_token: !secret fb_page_access_token
 
-google_assistant: !include google_assistant.yaml
-
-cloud:
-  alexa:
-    filter:
-      exclude_domains:
-        - automation
-        - sensor
-        - group
-        - media_player
-
 facebook_webhook:
   verify_token: !secret fb_verify_token
   access_token: !secret fb_page_access_token
   allowed_ids: !include secret/trusted_facebook_ids.yaml
+
 
 xiaomi_aqara:
   interface: !secret iot_interface
@@ -87,6 +80,7 @@ keyboard_remote:
 
 tts:
   - platform: google
+    base_url: !secret url
   - platform: picotts
 
 python_script:
@@ -97,20 +91,20 @@ history: !include config/history.yaml
 panel_custom: !include config/panel_custom.yaml
 
 auth:
+
 http:
   api_password: !secret api_password
   use_x_forwarded_for: true
   trusted_proxies: !include secret/trusted_proxies.yaml
-  #  cors_allowed_origins:
-  #  - https://google.com
-  #  - https://home-assistant.io
+  cors_allowed_origins:
+    - https://google.com
+    - https://home-assistant.io
   trusted_networks: !include secret/trusted_networks.yaml
   ip_ban_enabled: True
   login_attempts_threshold: 5
 
-
-
 frontend: !include config/frontend.yaml
+cloud: !include config/cloud.yaml
 
 mqtt: !include config/mqtt.yaml
 mqtt_statestream: !include config/mqtt_statestream.yaml
@@ -130,12 +124,12 @@ input_select: !include_dir_merge_named input/select
 input_boolean: !include_dir_merge_named input/boolean
 script: !include_dir_merge_named script
 group: !include_dir_merge_named group
-
 camera: !include_dir_merge_list camera
+weather: !include config/weather.yaml
 
 intent_script: !include config/intent_script.yaml
 conversation:
   intents: !include config/conversation_intent.yaml
+hangouts: !include config/hangouts.yaml
 
-weather: !include config/weather.yaml
 
