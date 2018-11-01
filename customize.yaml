@@ -51,7 +51,6 @@ binary_sensor.switch_158d00019de7b4:
 binary_sensor.switch_158d00019c9688: {}
 light.gateway_light_286c07f0a0c6:
   friendly_name: Gateway Light
-  assistant_room_hint: Kitchen
 light.lounge_light:
   assistant_room_hint: Living Room
 light.extra_light:
