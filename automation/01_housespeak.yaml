@@ -54,6 +54,23 @@
         message: "{{ trigger.event.data.message }}"
         target: !include ../secret/alarm_facebook_alerts.yaml
 
+#% speak_event_hangouts
+#% Send HOUSE_SPEAK events to Hangouts Notifier
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+- id: speak_event_hangouts
+  alias: House Speak Event Hangouts
+  condition:
+    - condition: template
+      value_template: '{{ trigger.event.data.facebook|default(True) }}'
+  trigger:
+    - platform: event
+      event_type: HOUSE_SPEAK
+  action:
+    - service: hangouts.send_message
+      data_template:
+        message:
+          - text: "{{ trigger.event.data.message }}"
+        target: !include ../secret/alarm_hangouts_alerts.yaml
 
 #% speak_event_siren
 #% Send HOUSE_SPEAK events to Xiaomi Siren if Required (critical)

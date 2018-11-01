@@ -72,9 +72,8 @@
     - service: light.turn_on
       data:
         entity_id: light.lounge_light
-        brightness_pct: 30
+        brightness: 23 
         rgb_color: [ 255, 200, 145 ]
-
 
 
 
@@ -140,8 +139,8 @@
     - service: light.turn_on
       data:
         entity_id: light.extra_light
-        rgb_color: [ 255, 145, 108 ]
-        brightness_pct: 30
+        rgb_color: [ 162, 71, 255 ]
+        brightness: 74 
 
 
 
@@ -168,8 +167,7 @@
       data:
         entity_id: light.lounge_light
         brightness_pct: 100
-        #rgb_color: [  255, 226, 145 ]
-        rgb_color: [ 255, 200, 145 ]
+        rgb_color: [ 255, 255, 255 ]
 
 
 #########################################################
@@ -195,7 +193,7 @@
       data:
         entity_id: light.extra_light
         brightness_pct: 100
-        rgb_color: [  255, 226, 145 ]
+        rgb_color: [  255, 255, 255 ]
 
 
 #########################################################
@@ -221,5 +219,5 @@
       data:
         entity_id: light.living_room_lights
         brightness_pct: 100
-        rgb_color: [ 255, 200, 145 ]
+        rgb_color: [ 255, 255, 255 ]
 

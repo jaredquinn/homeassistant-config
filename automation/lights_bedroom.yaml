@@ -1,4 +1,3 @@
-
 #########################################################
 - id: bedroom_light_off
   alias: Bedroom Light OFF
@@ -52,8 +51,28 @@
     - service: light.turn_on
       data:
         entity_id: light.bedroom_light
-        brightness_pct: 10
-        rgb_color: [  255, 226, 145 ]
+        brightness_pct: 50
+        rgb_color: [ 255, 200, 145 ]
+
+#########################################################
+- id: bedroom_light_on_secondary
+  alias: Bedroom Light Secondary ON
+#########################################################
+  hide_entity: true
+  trigger:
+
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001243e26
+        click_type: double
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_light
+        brightness_pct: 50
+        effect: slowdown
 
 
 #########################################################
@@ -61,14 +80,12 @@
   alias: Bedroom Light Bright
 #########################################################
   hide_entity: true
-
   condition:
     - condition: state
       entity_id: light.bedroom_light
       state: 'on'
 
   trigger:
-
     - platform: event
       event_type: click
       event_data:
@@ -80,6 +97,5 @@
       data:
         entity_id: light.bedroom_light
         brightness_pct: 100
-        rgb_color: [  255, 226, 145 ]
-
+        rgb_color: [ 255, 255, 255 ]
 

@@ -8,7 +8,6 @@
     - platform: state
       entity_id: light.bathroom_light
       to: 'off'
-
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.bathroom_auto_off
@@ -26,13 +25,7 @@
       state: 'off'
 
   trigger:
-      # Bathroom Motion Sensor
-    - platform: event
-      event_type: motion
-      event_data:
-        entity_id: binary_sensor.motion_sensor_158d0001ae9379
 
-      # Bathroom Light Switch
     - platform: event
       event_type: click
       event_data:
@@ -49,12 +42,38 @@
       data:
         transition: 2
         entity_id: light.bathroom_light
-        brightness_pct: 10
-        rgb_color: [ 255, 182, 109 ]
+        brightness: 50
+        rgb_color: [ 255, 226, 217 ]
+
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.bathroom_auto_off
+
+# Soft Turn On (allow auto turn off)
+#########################################################
+- id: bathroom_lights_motion_on
+  alias: Bathroom Lights Motion On
+  hide_entity: true
+  trigger:
+    - platform: event
+      event_type: motion
+      event_data:
+        entity_id: binary_sensor.motion_sensor_158d0001ae9379
+
+  condition:
+    - condition: state
+      entity_id: light.bathroom_light
+      state: 'off'
+
+  action:
+    - service: light.turn_on
+      data:
+        transition: 2
+        entity_id: light.bathroom_light
+        brightness: 20
+        rgb_color: [ 255, 181, 108 ]
 
     - service: input_boolean.turn_on
       entity_id: input_boolean.bathroom_auto_off
-
 
 # Hard Turn On (don't allow auto turn off)
 #########################################################
@@ -78,10 +97,10 @@
   action:
     - service: light.turn_on
       data:
-        transition: 3
         entity_id: light.bathroom_light
-        brightness_pct: 100
-        rgb_color: [ 255, 200, 182 ]
+        transition: 2
+        brightness: 255
+        rgb_color: [ 255, 226, 217 ]
 
     - service: input_boolean.turn_off
       entity_id: input_boolean.bathroom_auto_off
@@ -110,14 +129,14 @@
     - platform: event
       event_type: click
       event_data:
-        transition: 3
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'single'
 
   action:
     - service: light.turn_off
-      entity_id: light.bathroom_light
-
+      data:
+        entity_id: light.bathroom_light
+        transition: 2
 
 #
 # Auto Off
@@ -140,10 +159,6 @@
     - condition: state
       entity_id: input_boolean.bathroom_auto_off
       state: 'on'
-
-    - condition: state
-      entity_id: binary_sensor.shower_detection
-      state: 'off'
 
     - service: light.turn_off
       entity_id: light.bathroom_light
