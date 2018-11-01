@@ -21,6 +21,7 @@
       entities:
         - light.lounge_light
         - light.extra_light
+        - light.door_strip
 
 - type: vertical-stack
   cards:
