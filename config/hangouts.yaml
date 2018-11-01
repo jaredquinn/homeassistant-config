@@ -1,0 +1,37 @@
+
+intents:
+  HangoutsHelp:
+    sentences:
+      - "Hangout[s] Help"
+      - "Help [for] hangout[s]"
+      - "[Supported] sentence[s]"
+  AMAZON.HelpIntent:
+    sentences:
+      - "Help [me]"
+  AlertIntent:
+    sentences:
+      - "[Current] [House] Alert[s]"
+  TemperatureIntent:
+    sentences:
+      - "[What] [is] [the] [Current] [House] Temperature[s]"
+  StatusReportIntent:
+    sentences:
+      - "[House] Status [Report]"
+  StatusOfIntent:
+    sentences:
+      - "[what] [is] [the] Status of {Thing}[s]"
+      - "[is] [are] {Thing}[s] on?"
+      - "{Thing}[s] status"
+  change_channel:
+    sentences:
+      - "Change [channel] [to] {channel}[s]"
+  SpeakIntent:
+    sentences:
+      - "say {thing}[s] [now]"
+  ActiveSceneIntent:
+    sentences:
+      - "Engange {Scene} [now]"
+      - "{Scene}[s] mood"
+
+default_conversations: !include ../secret/hangout_conversations.yaml
+    

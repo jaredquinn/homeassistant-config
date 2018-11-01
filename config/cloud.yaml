@@ -1,0 +1,52 @@
+alexa:
+  filter:
+    exclude_domains:
+      - automation
+      - sensor
+      - group
+      - media_player
+
+google_actions:
+  filter:
+    exclude_domains:
+      - automation
+      - sensor
+      - group
+      - media_player
+  entity_config:
+    light.kitchen_light:
+      room: Kitchen
+    switch.range:
+      room: Kitchen
+    switch.fish_lamp:
+      name: Fish Lamp
+      aliases:
+        - Aquarium
+        - Fish Tank
+      room: Pets
+    light.bathroom_light:
+      room: Bathroom
+    light.bedroom_light:
+      room: Bedroom
+    switch.bathroom_radio:
+      room: Bathroom
+    light.door_strip:
+      room: Balcony
+    light.extra_light:
+      room: Living Room
+    light.lounge_light:
+      room: Living Room
+    switch.stb_fetch: 
+      room: Entertainment
+    switch.tv_soniq:
+      room: Entertainment
+    switch.av_pioneer:
+      room: Entertainment
+    light.hallway_light:
+      room: Dining
+    light.dining_light:
+      room: Dining
+    switch.audio:
+      room: Living Room
+
+
