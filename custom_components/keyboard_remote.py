@@ -3,6 +3,10 @@ Receive signals from a keyboard and use it as a remote control.
 
 For more details about this platform, please refer to the documentation at
 https://home-assistant.io/components/keyboard_remote/
+
+These changes have been reflected in the pull request
+https://github.com/home-assistant/home-assistant/pull/18078 to be incorporated
+into the official code base
 """
 # pylint: disable=import-error
 import threading
