@@ -63,6 +63,7 @@ as an example.
 * NodeMCU MQTT Lounge Room Humidity/Temperature/Pressure
 * NodeMCU MQTT Bedroom Temperature/Humidity Sensor
 * NodeMCU MQTT RFID Scan In/Out
+* NodeMCU MQTT FastLED LED Strip (WS2811 3m 90 LED 2A)
 * ESP32 based MQTT Display Panel
 * Front Door Reed Sensor (wired to RFID Scanner)
 * Dangerous Prototypes USB IRToy (Infrared Recevier/Sender)

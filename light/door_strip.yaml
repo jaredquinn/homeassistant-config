@@ -1,0 +1,48 @@
+- platform: mqtt
+
+  name: Door Strip
+  unique_id: fastled01
+  optimistic: true
+
+  #fastled01/status/effect Confetti
+  #fastled01/status/power on
+  #fastled01/status/status online
+  #fastled01/status/status online
+
+  command_topic: fastled01/command/power
+  payload_off: 0
+  payload_on: 1
+
+  state_topic: fastled01/status
+  state_value_template: "{{ value_json.state }}"
+
+  brightness_command_topic: fastled01/command/brightness
+  brightness_state_topic: fastled01/status
+  brightness_value_template: "{{ value_json.state }}"
+  brightness_scale: 100
+
+  rgb_command_topic: fastled01/command/rgb
+  rgb_state_topic: fastled01/status
+  rgb_value_template: "{{ value_json.color }}"
+  rgb_command_template: "{{ red }},{{ green }},{{ blue }}"
+
+  effect_command_topic: fastled01/command/pattern
+  effect_state_topic: fastled01/status
+  effect_value_template: "{{ value_json.effect }}"
+  effect_list:
+    - Color Waves
+    - Color Changer
+    - Palette Test
+    - Pride
+    - Rainbow
+    - Rainbow With Glitter
+    - Confetti
+    - Sinelon
+    - Juggle
+    - BPM
+    - Fire
+    - Lightning
+    - Solid Color
+
+#fastled01/status {"power":1,"brightness":62,"effect":"Pride","hue_id":183,"pallete_id":26}
+#
