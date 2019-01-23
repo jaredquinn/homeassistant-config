@@ -30,3 +30,4 @@
       data_template:
         command: "source"
         selected: "{{ trigger.to_state.state }}"
+

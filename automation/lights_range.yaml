@@ -12,7 +12,7 @@
   trigger:
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.wall_switch_right_158d00027c1251
         click_type: double
@@ -40,7 +40,7 @@
   trigger:
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.wall_switch_right_158d00027c1251
         click_type: double

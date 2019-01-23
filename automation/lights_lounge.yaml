@@ -21,7 +21,7 @@
         key_code: 28
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019de7b4 
         click_type: single
@@ -59,7 +59,7 @@
         key_code: 28
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019de7b4 
         click_type: single
@@ -72,8 +72,8 @@
     - service: light.turn_on
       data:
         entity_id: light.lounge_light
-        brightness: 23 
-        rgb_color: [ 255, 200, 145 ]
+        color_temp: 314
+        brightness: 100
 
 
 
@@ -94,7 +94,7 @@
         button_name: LOUNGE_EXTRA
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019de7b4 
         click_type: 'double'
@@ -126,7 +126,7 @@
         button_name: LOUNGE_EXTRA
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019de7b4 
         click_type: 'double'
@@ -139,7 +139,7 @@
     - service: light.turn_on
       data:
         entity_id: light.extra_light
-        rgb_color: [ 162, 71, 255 ]
+        color_temp: 314
         brightness: 74 
 
 
@@ -156,7 +156,7 @@
 
   trigger:
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019de7b4 
         click_type: 'long_click_press'
@@ -166,8 +166,8 @@
     - service: light.turn_on
       data:
         entity_id: light.lounge_light
+        color_temp: 314
         brightness_pct: 100
-        rgb_color: [ 255, 255, 255 ]
 
 
 #########################################################
@@ -182,7 +182,7 @@
 
   trigger:
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019de7b4 
         click_type: 'long_click_press'
@@ -193,7 +193,7 @@
       data:
         entity_id: light.extra_light
         brightness_pct: 100
-        rgb_color: [  255, 255, 255 ]
+        color_temp: 314
 
 
 #########################################################
@@ -208,7 +208,7 @@
 
   trigger:
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019de7b4 
         click_type: 'long_click_press'

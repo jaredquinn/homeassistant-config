@@ -23,3 +23,11 @@ security_tokens:
     - device_tracker.token_guest2
     - device_tracker.token_guest6
 
+presence_jared:
+  name: Jared
+  entities:
+    - device_tracker.google_maps_115620344348341532807
+    - device_tracker.token_jared
+    - device_tracker.10101029_cc2d83126115
+
+

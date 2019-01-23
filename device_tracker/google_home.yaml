@@ -1,0 +1,7 @@
+#- platform: googlehome
+#  host: !secret google_home_ip 
+#  track_new_devices: false
+#  hide_if_away: false
+#  new_device_defaults:
+#    track_new_devices: false
+#    hide_if_away: false

@@ -1,0 +1,16 @@
+
+- id: change_announce_state_on
+  alias: Announcement Toggle Announcement
+
+  trigger:
+    platform: state
+    entity_id: input_boolean.announcements
+
+  action:
+    - service: script.announce
+      data_template:
+        tone: true
+        tone_sound: "/home/homeassistant/sounds/chime.wav"
+        message: "House Audio Announcements are now {{ trigger.to_state.state }}"
+
+

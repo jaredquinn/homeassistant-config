@@ -1,5 +1,5 @@
 
 - platform: tplink
   host: !secret tp_lb_hallway_ip
-  name: Hallway Light
+  name: Bathroom Light
 

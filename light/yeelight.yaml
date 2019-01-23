@@ -7,7 +7,7 @@
       transition: 2000
 
     !secret yee_bathroom_ip:
-      name: Bathroom Light
+      name: Hallway Light
       transition: 2000
 
     !secret yee_lounge_ip:

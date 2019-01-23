@@ -26,13 +26,13 @@
       payload: "dining_light"
 
     #- platform: event
-    #  event_type: click
+    #  event_type: xiaomi_aqara.click
     #  event_data:
     #    entity_id: binary_sensor.switch_158d0001243e26
     #    click_type: 'double' (now bedroom)
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.wall_switch_left_158d00027c1251
         click_type: single
@@ -70,7 +70,7 @@
       payload: "dining_light"
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.wall_switch_left_158d00027c1251
         click_type: single
@@ -81,8 +81,8 @@
       data:
         transition: 2
         entity_id: light.dining_light
-        brightness_pct: 10
-        rgb_color: [  255, 173, 145 ]
+        brightness_pct: 30
+        color_temp: 314
 
 
 #########################################################
@@ -98,7 +98,7 @@
   trigger:
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.wall_switch_left_158d00027c1251
         click_type: 'long_click_press'
@@ -110,7 +110,7 @@
         transition: 2
         entity_id: light.dining_light
         brightness_pct: 100
-        rgb_color: [  255, 173, 145 ]
+        color_temp: 314
 
 # Chelsea Preferred
 # min_mireds: 153

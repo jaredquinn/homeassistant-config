@@ -10,6 +10,7 @@ exclude:
     - zone
     - zwave
     - sun
+    - geo_location
 
   entities:
     - sensor.time

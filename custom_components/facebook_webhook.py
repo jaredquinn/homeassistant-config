@@ -91,6 +91,7 @@ class WebhookIntentsView(http.HomeAssistantView):
 
             for msg in entry.get('messaging'):
                 sender = msg.get('sender', {'id': None}).get('id', None)
+                _LOGGER.error('INCOMING MESSAGE FROM %s' % sender)
 
                 if sender in allowed: 
                     message = msg.get('message')

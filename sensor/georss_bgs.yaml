@@ -1,6 +1,6 @@
 
 - platform: new_georss_events
-  name: BGS Worlwide Earthquakes
+  name: BGS Worldwide Earthquakes
   url: 'http://www.bgs.ac.uk/feeds/worldSeismology.xml'
   sort_by: 'date_published'
   unit_of_measurement: 'Earthquakes'

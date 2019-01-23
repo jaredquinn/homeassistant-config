@@ -28,7 +28,7 @@
 
     # Bathroom Button
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'double'
@@ -61,7 +61,7 @@
 
     # Bathroom Button
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'double'
@@ -74,7 +74,7 @@
     - service: light.turn_on
       data:
         entity_id: light.hallway_light
-        color_name: white
+        color_temp: 314
         brightness_pct: 100
 
 

@@ -25,9 +25,8 @@
       state: 'off'
 
   trigger:
-
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'single'
@@ -42,8 +41,8 @@
       data:
         transition: 2
         entity_id: light.bathroom_light
-        brightness: 50
-        rgb_color: [ 255, 226, 217 ]
+        brightness: 40
+        color_temp: 323
 
     - service: input_boolean.turn_off
       entity_id: input_boolean.bathroom_auto_off
@@ -55,7 +54,7 @@
   hide_entity: true
   trigger:
     - platform: event
-      event_type: motion
+      event_type: xiaomi_aqara.motion
       event_data:
         entity_id: binary_sensor.motion_sensor_158d0001ae9379
 
@@ -70,10 +69,11 @@
         transition: 2
         entity_id: light.bathroom_light
         brightness: 20
-        rgb_color: [ 255, 181, 108 ]
+        color_temp: 323
 
     - service: input_boolean.turn_on
       entity_id: input_boolean.bathroom_auto_off
+
 
 # Hard Turn On (don't allow auto turn off)
 #########################################################
@@ -89,7 +89,7 @@
 
       # Long Press Button
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'long_click_press'
@@ -98,9 +98,8 @@
     - service: light.turn_on
       data:
         entity_id: light.bathroom_light
-        transition: 2
         brightness: 255
-        rgb_color: [ 255, 226, 217 ]
+        color_temp: 323
 
     - service: input_boolean.turn_off
       entity_id: input_boolean.bathroom_auto_off
@@ -127,7 +126,7 @@
         key_code: 60
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d00019c9688
         click_type: 'single'

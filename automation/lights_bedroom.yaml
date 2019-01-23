@@ -10,7 +10,7 @@
 
   trigger:
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d0001243e26
         click_type: single
@@ -38,7 +38,7 @@
   trigger:
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d0001243e26
         click_type: single
@@ -52,7 +52,7 @@
       data:
         entity_id: light.bedroom_light
         brightness_pct: 50
-        rgb_color: [ 255, 200, 145 ]
+        color_temp: 314
 
 #########################################################
 - id: bedroom_light_on_secondary
@@ -62,7 +62,7 @@
   trigger:
 
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d0001243e26
         click_type: double
@@ -87,7 +87,7 @@
 
   trigger:
     - platform: event
-      event_type: click
+      event_type: xiaomi_aqara.click
       event_data:
         entity_id: binary_sensor.switch_158d0001243e26
         click_type: 'long_click_press'
@@ -97,5 +97,5 @@
       data:
         entity_id: light.bedroom_light
         brightness_pct: 100
-        rgb_color: [ 255, 255, 255 ]
+        color_temp: 314
 

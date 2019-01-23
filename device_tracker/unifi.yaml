@@ -1,0 +1,8 @@
+- platform: unifi
+  host: catslair39.duckdns.org
+  port: 2443
+  username: !secret unifi_user
+  password: !secret unifi_pass
+  verify_ssl: true
+
+

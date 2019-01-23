@@ -3,6 +3,8 @@ title: CatsLair
 resources:
   - url: /local/mini-media-player.js?ver=0.12a
     type: module
+  - url: /local/group-card/group-card.js?ver=1
+    type: module
 
 name: Cats Lair 
 
@@ -28,6 +30,7 @@ views:
           - light.gateway_light_286c07f0a0c6
           - light.kitchen_light
           - switch.range
+          - sensor.illumination_286c07f0a0c6
 
       - type: entities
         title: Living Room Lights
@@ -91,6 +94,11 @@ views:
         card:
           type: glance
 
+  - type: glance
+    entities:
+      - entity: sensor.next_launch
+      - entity: sensor.lauch_timer
+
 
   - type: entities
     entities:
@@ -98,6 +106,79 @@ views:
       - sensor.time
       - sensor.time_utc
       - sensor.internet_time
+      - sensor.nextsunset
+      - sensor.nextsunrise
+
+# TAB
+- name: media
+  id: view_media
+  title: Media
+  icon: mdi:play-network
+  cards: 
+
+  - type: entities
+    title: Bedroom Media
+    entities:
+
+    - type: custom:mini-media-player
+      entity: media_player.bedroom_kodi
+      group: true
+
+
+  - type: entities
+    title: Lounge Media
+
+    entities:
+
+    - type: custom:mini-media-player
+      entity: media_player.laircast
+      group: true
+
+    - type: custom:mini-media-player
+      entity: media_player.lounge_roku
+      group: true
+
+  - type: vertical-stack
+    title: House Announcement/Radio
+    cards:
+
+      - type: entities
+        entities:
+
+          - entity: input_boolean.radio
+
+          - entity: input_select.radio_station
+
+          - type: custom:mini-media-player
+            entity: media_player.house_radio
+            group: true
+
+          - type: custom:mini-media-player
+            entity: media_player.house_announcer
+            group: true
+
+          - type: custom:mini-media-player
+            entity: media_player.kitchen_speaker
+            group: true
+
+      - type: glance
+        entities:
+          - entity: input_boolean.radio_output_echo
+          - entity: input_boolean.radio_output_bathroom
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Main Entertainment
+        entities:
+          - input_select.tv_channel
+          - input_select.tv_source
+      - type: glance
+        entities:
+          - switch.audio
+          - switch.tv_soniq
+          - switch.av_pioneer
+          - switch.stb_fetch
 
 - name: Weather
   title: Weather
@@ -114,6 +195,8 @@ views:
       - entity: sensor.pws_weather_1n
       - entity: sensor.pws_weather_2d
       - entity: sensor.pws_weather_2n
+      - entity: sensor.pws_weather_3d
+
 
   - type: vertical-stack
     cards:
@@ -174,118 +257,6 @@ views:
       - sensor.moon
 
     
-- name: media
-  id: view_media
-  title: Media
-  icon: mdi:play-network
-  cards: 
-  - type: vertical-stack
-    cards:
-      - type: entities
-        title: Main Entertainment
-        entities:
-          - input_select.tv_channel
-          - input_select.tv_source
-      - type: glance
-        entities:
-          - switch.audio
-          - switch.tv_soniq
-          - switch.av_pioneer
-          - switch.stb_fetch
-          - switch.fan
-
-  - type: entities
-    title: Bedroom Media
-    entities:
-
-    - type: custom:mini-media-player
-      entity: media_player.bedroom_kodi
-      group: true
-
-
-  - type: entities
-    title: Lounge Media
-
-    entities:
-
-    - type: custom:mini-media-player
-      entity: media_player.laircast
-      group: true
-
-    - type: custom:mini-media-player
-      entity: media_player.lounge_roku
-      group: true
-
-  - type: vertical-stack
-    title: House Announcement/Radio
-    cards:
-
-      - type: entities
-        entities:
-
-          - entity: input_boolean.radio
-
-          - entity: input_select.radio_station
-
-          - type: custom:mini-media-player
-            entity: media_player.house_radio
-            group: true
-
-          - type: custom:mini-media-player
-            entity: media_player.house_announcer
-            group: true
-
-          - type: custom:mini-media-player
-            entity: media_player.kitchen_speaker
-            group: true
-
-      - type: glance
-        entities:
-          - entity: input_boolean.radio_output_echo
-          - entity: input_boolean.radio_output_bathroom
-
-- name: snow
-  id: view_SNOW
-  TITLE: Snow
-  icon: mdi:snowflake
-  cards: 
-
-  - type: picture-glance
-    title: Perisher V8
-    entities:
-      - camera.perisher_smiggins
-    camera_image: camera.perisher_smiggins
-
-  - type: picture-glance
-    title: Perisher Happy Valley
-    entities:
-      - camera.perisher_happy_valley
-    camera_image: camera.perisher_happy_valley
-
-  - type: picture-glance
-    title: Perisher Blue Cow
-    entities:
-      - camera.perisher_blue_cow
-    camera_image: camera.perisher_blue_cow
-
-  - type: picture-glance
-    title: Perisher V8
-    entities:
-      - camera.perisher_v8
-    camera_image: camera.perisher_v8
-
-  - type: weather-forecast
-    entity: weather.bom_perisher_valley
-
-  - type: entities
-    entities:
-      - sun.sun
-
-  - type: history-graph
-    entities:
-      - weather.bom_perisher_valley
-
-
 - name: Status
   title: Status Report
   icon: mdi:speedometer
@@ -308,6 +279,7 @@ views:
     entities:
       - sensor.processor_use
       - sensor.memory_free
+      - sensor.ha_installed_version
 
 
   - type: glance
@@ -414,8 +386,54 @@ views:
         title: Geoscience
         entities:
           - entity: sensor.geoscience_australia_any
-          - entity: sensor.bgs_worldwide_earthquake_eqmh
+          - entity: sensor.bgs_worldwide_earthquakes_eqmh
           - entity: sensor.usgs_all_earthquakes_past_day
           - entity: sensor.usgs_all_earthquakes_past_hour
+
+
+  - type: custom:group-card
+    group: group.all_devices
+
+
+- name: snow
+  id: view_SNOW
+  title: Snow
+  icon: mdi:snowflake
+  cards: 
+
+  - type: picture-glance
+    title: Perisher V8
+    entities:
+      - camera.perisher_smiggins
+    camera_image: camera.perisher_smiggins
+
+  - type: picture-glance
+    title: Perisher Happy Valley
+    entities:
+      - camera.perisher_happy_valley
+    camera_image: camera.perisher_happy_valley
+
+  - type: picture-glance
+    title: Perisher Blue Cow
+    entities:
+      - camera.perisher_blue_cow
+    camera_image: camera.perisher_blue_cow
+
+  - type: picture-glance
+    title: Perisher V8
+    entities:
+      - camera.perisher_v8
+    camera_image: camera.perisher_v8
+
+  - type: weather-forecast
+    entity: weather.bom_perisher_valley
+
+  - type: entities
+    entities:
+      - sun.sun
+
+  - type: history-graph
+    entities:
+      - weather.bom_perisher_valley
 
 

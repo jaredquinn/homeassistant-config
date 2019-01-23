@@ -29,3 +29,11 @@ exclude:
     - sensor.geoscience_australia
     - sensor.usgs_all_earthquakes
    
+    - device_tracker.10101029_72ed3e7d51e6
+    - device_tracker.10101029_5c38a1a8ab58
+    - device_tracker.10101029_65366347f3ee
+    - device_tracker.10101029_ffffc211df5b # iTAG
+    - device_tracker.10101029_ac7ba15c0228 # Aristotle
+
+
+

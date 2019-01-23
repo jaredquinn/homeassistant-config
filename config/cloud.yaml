@@ -13,6 +13,8 @@ google_actions:
       - sensor
       - group
       - media_player
+    include_entities:
+      - media_player.bedroom_kodi
   entity_config:
     light.kitchen_light:
       room: Kitchen

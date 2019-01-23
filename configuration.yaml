@@ -10,12 +10,12 @@ homeassistant:
   customize_glob: !include customize_glob.yaml
   packages: !include_dir_named packages
   auth_providers:
-    - type: legacy_api_password
     - type: homeassistant
-    - type: trusted_networks
+    - type: legacy_api_password
+#    - type: trusted_networks
 
 logger:
-  default: warning
+  default: info
   logs:
     homeassistant.components.automation: debug
     homeassistant.components: error
@@ -26,7 +26,6 @@ map:
 sun:
 
 config:
-
 
 updater:
   include_used_components: true
@@ -40,7 +39,6 @@ facebook_webhook:
   verify_token: !secret fb_verify_token
   access_token: !secret fb_page_access_token
   allowed_ids: !include secret/trusted_facebook_ids.yaml
-
 
 xiaomi_aqara:
   interface: !secret iot_interface
@@ -64,11 +62,11 @@ alarm_control_panel:
       pending_time: 0
       delay_time: 0
 
-geo_location:
-  - name: Sydney Traffic
-    platform: geo_json_events
-    url: !secret traffic_url
-    radius: 50
+#geo_location:
+#  - name: Sydney Traffic
+#    platform: geo_json_events
+#    url: !secret traffic_url
+#    radius: 50
 
 keyboard_remote:
   - device_name: 'Remote control'
@@ -81,7 +79,7 @@ keyboard_remote:
 tts:
   - platform: google
     base_url: !secret url
-  - platform: picotts
+#  - platform: picotts
 
 python_script:
 
@@ -131,5 +129,4 @@ intent_script: !include config/intent_script.yaml
 conversation:
   intents: !include config/conversation_intent.yaml
 hangouts: !include config/hangouts.yaml
-
 
